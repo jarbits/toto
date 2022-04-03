@@ -45,7 +45,7 @@ class AdvanceMenuController extends Controller
             SELECT DISTINCT(s_person) FROM rawsurvey AS T
             WHERE 1=1
             AND T.s_region = '".$req->Region."'
-            AND T.s_region = '".$req->Category."'
+            AND T.s_category = '".$req->Category."'
         ");
         foreach ($Set as $key => $value) {
             array_push($Data, ['key'=>$value->s_person, 'value'=>$value->s_person]);
