@@ -50,4 +50,9 @@ Route::group([
     Route::get('/statistics/getChart13', 'StatisticsController@getChart13');    //Q6 回答9的比例
     Route::get('/statistics/getChart14', 'StatisticsController@getChart14');    //Q7 回答1的比例
     Route::get('/statistics/getTable1', 'StatisticsController@getTable1');
+
+    Route::get('/regionLV1', 'AdvanceMenuController@regionLV1');
+    Route::get('/categoryLV2', 'AdvanceMenuController@categoryLV2');
+    Route::get('/personLV3', 'AdvanceMenuController@personLV3');
+
 });

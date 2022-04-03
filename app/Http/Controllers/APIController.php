@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Services\FormulaService;
 use App\RawSurvey;
 use DateTime;
 use Carbon\Carbon;
@@ -10,28 +11,34 @@ use DB;
 
 class APIController extends Controller
 {
-    protected $DayDiff;
+    public $FormulaService;
     public function __construct(Request $req)
     {
-        $StartDate = strtotime($req->StartTime);
-        $EndDate = strtotime($req->EndTime);
-        $this->DayDiff = ($EndDate - $StartDate) / (60 * 60 * 24);
+        $this->FormulaService = new FormulaService();
     }
 
     /**
      * 取得發送數
      * endpoint: /api/get-post-num?StartTime=2022-02-11&EndTime=2022-02-22
-     * parameter
-     * 1. StartTime
-     * 2. EndTime
      */
     public function getPostNum(Request $req)
     {
-        $RawSurvey = RawSurvey::where("start_time", ">=", $req->StartTime)
-                              ->where("end_time", "<", $req->EndTime)
-                              ->get();
+        $NowYear = date('Y', strtotime($req->StartTime));
+        $NowMonth = date('m', strtotime($req->StartTime));
+        $EndMonth = date('m', strtotime($req->EndTime));
+        
+        $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
+        $D2 = date('Y-m-d', strtotime($NowYear.'-'.($EndMonth).'-01 00:00:00'));
+
+        $Qs = $this->FormulaService->getAllQSet(
+            $D1, 
+            $D2, 
+            $req->Region,
+            $req->Category,
+            $req->Person
+        );
         $Data = [
-            'value' => count($RawSurvey)
+            'value' => count($Qs)
         ];
         return json_encode($Data);
     }
@@ -39,17 +46,25 @@ class APIController extends Controller
     /**
      * 取得回覆數
      * endpoint: /api/get-resp-num?StartTime=2022-02-11&EndTime=2022-02-22
-     * parameter
-     * 1. StartTime
-     * 2. EndTime
      */
     public function getRespNum(Request $req)
     {
-        $RawData = RawSurvey::where("start_time", ">=", $req->StartTime)
-                              ->where("end_time", "<", $req->EndTime)
-                              ->get();
+        $NowYear = date('Y', strtotime($req->StartTime));
+        $NowMonth = date('m', strtotime($req->StartTime));
+        $EndMonth = date('m', strtotime($req->EndTime));
+        
+        $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
+        $D2 = date('Y-m-d', strtotime($NowYear.'-'.($EndMonth).'-01 00:00:00'));
+
+        $Qs = $this->FormulaService->getAllQSet(
+            $D1, 
+            $D2, 
+            $req->Region,
+            $req->Category,
+            $req->Person
+        );
         $Data = [
-            'value' => count($RawData)
+            'value' => count($Qs)
         ];
         return json_encode($Data);
     }
@@ -57,25 +72,23 @@ class APIController extends Controller
     /**
      * 取得低分數量
      * endpoint: /api/get-low-score-num?StartTime=2022-02-11&EndTime=2022-02-22
-     * parameter
-     * 1. StartTime
-     * 2. EndTime
      */
     public function getLScoreNum(Request $req)
     {
-        $LowScore = DB::select("SELECT * FROM rawsurvey AS T
-                                WHERE 1=1
-                                AND (T.cklow_score LIKE '%Q1%'
-                                OR T.cklow_score LIKE '%Q2%'
-                                OR T.cklow_score LIKE '%Q3%'
-                                OR T.cklow_score LIKE '%Q5%'
-                                OR T.cklow_score LIKE '%Q9%'
-                                OR T.cklow_score LIKE '%Q10%'
-                                OR T.cklow_score LIKE '%Q11%'
-                                OR T.cklow_score LIKE '%Q12%'
-                                OR T.cklow_score LIKE '%Q13%')
-                                AND T.start_time >= '".$req->StartTime."' AND T.end_time < '".$req->EndTime."'");
-                   
+        $NowYear = date('Y', strtotime($req->StartTime));
+        $NowMonth = date('m', strtotime($req->StartTime));
+        $EndMonth = date('m', strtotime($req->EndTime));
+        
+        $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
+        $D2 = date('Y-m-d', strtotime($NowYear.'-'.($EndMonth).'-01 00:00:00'));
+
+        $LowScore = $this->FormulaService->getLScoreSet(
+            $D1, 
+            $D2, 
+            $req->Region,
+            $req->Category,
+            $req->Person
+        );
         $Data = [
             'value' => count($LowScore)
         ];
@@ -85,9 +98,6 @@ class APIController extends Controller
     /**
      * 取得滿意度(Q1)百分比Pie Chart
      * endpoint: /api/get-q1-rate?StartTime=2022-02-11&EndTime=2022-02-22
-     * parameter
-     * 1. StartTime
-     * 2. EndTime
      */
     public function getQ1Rate(Request $req)
     {
@@ -96,18 +106,27 @@ class APIController extends Controller
         $EndMonth = date('m', strtotime($req->EndTime));
         
         $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
-        $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
-        
-        $Q1s = RawSurvey::where("q1", ">=", "4")
-                              ->where("start_time", ">=", $D1)
-                              ->where("end_time", "<", $D2)
-                              ->get();
-        $Qs = RawSurvey::where("start_time", ">=", $D1)
-                            ->where("end_time", "<", $D2)
-                            ->get();
+        $D2 = date('Y-m-d', strtotime($NowYear.'-'.($EndMonth).'-01 00:00:00'));
+
+        $Q1s = $this->FormulaService->getQ1big4Set(
+            $D1, 
+            $D2, 
+            $req->Region,
+            $req->Category,
+            $req->Person
+        );
+
+        $Qs = $this->FormulaService->getAllQSet(
+            $D1, 
+            $D2, 
+            $req->Region,
+            $req->Category,
+            $req->Person
+        );
                             
         $Q1Num = count($Q1s);
         $RawSurveyNum = count($Qs);
+
         $Q1Rate = 0;
         try {
             $Q1Rate = round($Q1Num/$RawSurveyNum, 2)*100;
@@ -126,9 +145,6 @@ class APIController extends Controller
     /**
      * 取得滿意度(Q1)百分比Chart(滿意度)
      * endpoint: /api/get-q1-rate-chart?StartTime=2022-02-11&EndTime=2022-02-22
-     * parameter
-     * 1. StartTime
-     * 2. EndTime
      */
     public function getQ1RateChart(Request $req)
     {
@@ -144,14 +160,21 @@ class APIController extends Controller
         {
             $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
             $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
-            $Q1s = RawSurvey::where("q1", ">=", "4")
-                    ->where("start_time", ">=", $D1)
-                    ->where("end_time", "<", $D2)
-                    ->get();
+            $Q1s = $this->FormulaService->getQ1big4Set(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
 
-            $Qs = RawSurvey::where("start_time", ">=", $D1)
-                    ->where("end_time", "<", $D2)
-                    ->get();
+            $Qs = $this->FormulaService->getAllQSet(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
 
             $Q1Num = count($Q1s);
             $RawSurveyNum = count($Qs);
@@ -180,9 +203,6 @@ class APIController extends Controller
     /**
      * 取得滿意度(Q1)為5分的百分比(感動率)
      * endpoint: /api/get-q1-five-rate-chart?StartTime=2022-02-11&EndTime=2022-02-22
-     * parameter
-     * 1. StartTime
-     * 2. EndTime
      */
     public function getQ1FiveRateChart(Request $req)
     {
@@ -198,14 +218,23 @@ class APIController extends Controller
         {
             $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
             $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
-            $Q1s = RawSurvey::where("q1", "=", "5")
-                              ->where("start_time", ">=", $D1)
-                              ->where("end_time", "<", $D2)
-                              ->get();
 
-            $Qs = RawSurvey::where("start_time", ">=", $D1)
-                              ->where("end_time", "<", $D2)
-                              ->get();
+            $Q1s = $this->FormulaService->getQ1is5Set(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
+
+            $Qs = $this->FormulaService->getAllQSet(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
+
             $Q1Num = count($Q1s);
             $RawSurveyNum = count($Qs);
             $Q1Rate = 0;
@@ -232,9 +261,6 @@ class APIController extends Controller
     /**
      * 取得Q13計算該題目分數各項資料占筆的平均0-6,7-8,9-10(NPS Bar)
      * endpoint: /api/get-nps-bar-chart?StartTime=2022-02-11&EndTime=2022-02-22
-     * parameter
-     * 1. StartTime
-     * 2. EndTime
      */
     public function getNPSBarChart(Request $req)
     {
@@ -254,39 +280,54 @@ class APIController extends Controller
         {
             $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
             $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
+            
+            $Qs = $this->FormulaService->getQ13less6Set(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
 
-            $Qs = RawSurvey::where("q13", "<=", "6")
-                              ->where("start_time", ">=", $D1)
-                              ->where("end_time", "<", $D2)
-                              ->get();
+            $p0_6Bar = $this->FormulaService->getQ13_0_6Set(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
 
-            $p0_6Bar = RawSurvey::where("q13", ">=", "0")
-                              ->where("q13", "<=", "6")
-                              ->where("start_time", ">=", $D1)
-                              ->where("end_time", "<", $D2)
-                              ->get();
+            $p7_8Bar = $this->FormulaService->getQ13_7_8Set(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
 
-            $p7_8Bar = RawSurvey::where("q13", ">=", "7")
-                                ->where("q13", "<=", "8")
-                                ->where("start_time", ">=", $D1)
-                                ->where("end_time", "<", $D2)
-                                ->get();
+            $p9_10Bar = $this->FormulaService->getQ13big9Set(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
 
-            $p9_10Bar = RawSurvey::where("q13", ">=", "9")
-                                ->where("start_time", ">=", $D1)
-                                ->where("end_time", "<", $D2)
-                                ->get();
-
-            $p0_6Line = RawSurvey::where("q13", ">=", "0")
-                                ->where("q13", "<=", "6")
-                                ->where("start_time", ">=", $D1)
-                                ->where("end_time", "<", $D2)
-                                ->get();
+            $p0_6Line = $this->FormulaService->getQ13_0_6Set(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
   
-            $p9_10Line = RawSurvey::where("q13", ">=", "9")
-                                ->where("start_time", ">=", $D1)
-                                ->where("end_time", "<", $D2)
-                                ->get();
+            $p9_10Line = $this->FormulaService->getQ13big9Set(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
 
             $RawSurveyNum = count($Qs);
 
@@ -333,9 +374,6 @@ class APIController extends Controller
     /**
      * 取得正負評價數
      * endpoint: /api/get-comments-bar-chart?StartTime=2022-02-11&EndTime=2022-02-22
-     * parameter
-     * 1. StartTime
-     * 2. EndTime
      */
     public function getCommentsChart(Request $req)
     {
@@ -355,37 +393,37 @@ class APIController extends Controller
             $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
             $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
 
-            $LowScore = DB::select("SELECT * FROM rawsurvey AS T
-                                    WHERE 1=1
-                                    AND (T.cklow_score LIKE '%Q1%'
-                                    OR T.cklow_score LIKE '%Q2%'
-                                    OR T.cklow_score LIKE '%Q3%'
-                                    OR T.cklow_score LIKE '%Q5%'
-                                    OR T.cklow_score LIKE '%Q9%'
-                                    OR T.cklow_score LIKE '%Q10%'
-                                    OR T.cklow_score LIKE '%Q11%'
-                                    OR T.cklow_score LIKE '%Q12%'
-                                    OR T.cklow_score LIKE '%Q13%')
-                                    AND T.start_time >= '".$D1."' AND T.end_time < '".$D2."'");
+            $LowScore = $this->FormulaService->getLScoreSet(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
             
-            $Comments = RawSurvey::whereNotNull("rq14")
-                                ->where("rq14", ">=", 1000)
-                                ->where("rq14", "<", 9999)
-                                ->where("start_time", ">=", $D1)
-                                ->where("end_time", "<", $D2)
-                                ->get();
+            $Comments = $this->FormulaService->getRQ14_1000_9999Set(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
 
-            $NoComments = RawSurvey::whereNotNull("rq14")
-                                ->where("rq14", "=", 9999)
-                                ->where("start_time", ">=", $D1)
-                                ->where("end_time", "<", $D2)
-                                ->get();
+            $NoComments = $this->FormulaService->getRQ14is9999Set(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
 
-            $HighScore = RawSurvey::whereNotNull("rq14")
-                                ->where("rq14", "<=", 999)
-                                ->where("start_time", ">=", $D1)
-                                ->where("end_time", "<", $D2)
-                                ->get();
+            $HighScore = $this->FormulaService->getRQ14less999Set(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
 
             array_push($LowScoreVec, count($LowScore) );
             array_push($CommentsVec, count($Comments) );
@@ -414,9 +452,6 @@ class APIController extends Controller
     /**
      * 低分示警件數
      * endpoint: /api/get-lowscore-bar-chart?StartTime=2022-02-11&EndTime=2022-02-22
-     * parameter
-     * 1. StartTime
-     * 2. EndTime
      */
     public function getLowScoreChart(Request $req)
     {
@@ -433,18 +468,13 @@ class APIController extends Controller
             $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
             $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
 
-            $LowScore = DB::select("SELECT * FROM rawsurvey AS T
-                                    WHERE 1=1
-                                    AND (T.cklow_score LIKE '%Q1%'
-                                    OR T.cklow_score LIKE '%Q2%'
-                                    OR T.cklow_score LIKE '%Q3%'
-                                    OR T.cklow_score LIKE '%Q5%'
-                                    OR T.cklow_score LIKE '%Q9%'
-                                    OR T.cklow_score LIKE '%Q10%'
-                                    OR T.cklow_score LIKE '%Q11%'
-                                    OR T.cklow_score LIKE '%Q12%'
-                                    OR T.cklow_score LIKE '%Q13%')
-                                    AND T.start_time >= '".$D1."' AND T.end_time < '".$D2."'");
+            $LowScore = $this->FormulaService->getLScoreSet(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
             
             array_push($LowScoreVec, count($LowScore) );
             array_push($Calender, date('Y/m', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00')));
@@ -467,10 +497,6 @@ class APIController extends Controller
     /**
      * 簡訊數相關
      * endpoint: /api/get-sms-bar-chart?StartTime=2022-02-11&EndTime=2022-02-22&SendNum=1000
-     * parameter
-     * 1. StartTime
-     * 2. EndTime
-     * 3. 填入總數(SendNum)
      */
     public function getSMSChart(Request $req)
     {
@@ -490,26 +516,24 @@ class APIController extends Controller
             $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
             $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
 
-            $RawData = RawSurvey::where("start_time", ">=", $D1)
-                              ->where("end_time", "<", $D2)
-                              ->get();
+            $RawData = $this->FormulaService->getAllQSet(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
             
             $UselessNum = intval($req->SendNum) - count($RawData);
 
-            $LowScore = DB::select("SELECT * FROM rawsurvey AS T
-                                    WHERE 1=1
-                                    AND (T.cklow_score LIKE '%Q1%'
-                                    OR T.cklow_score LIKE '%Q2%'
-                                    OR T.cklow_score LIKE '%Q3%'
-                                    OR T.cklow_score LIKE '%Q5%'
-                                    OR T.cklow_score LIKE '%Q9%'
-                                    OR T.cklow_score LIKE '%Q10%'
-                                    OR T.cklow_score LIKE '%Q11%'
-                                    OR T.cklow_score LIKE '%Q12%'
-                                    OR T.cklow_score LIKE '%Q13%')
-                                    AND T.start_time >= '".$D1."' AND T.end_time < '".$D2."'");
+            $LowScore = $this->FormulaService->getLScoreSet(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
             
-                              
             array_push($LowScoreVec, count($LowScore) );
             array_push($UselessNumVec, $UselessNum );
             array_push($UsefulNumVec, 0);
@@ -535,9 +559,6 @@ class APIController extends Controller
     /**
      * 取得Q13計算該題目分數各項資料占筆的平均0-6,7-8,9-10(NPS Pie)
      * endpoint: /api/get-nps-pie-chart?StartTime=2022-02-11&EndTime=2022-02-22
-     * parameter
-     * 1. StartTime
-     * 2. EndTime
      */
     public function getNPSPieChart(Request $req)
     {
@@ -547,25 +568,37 @@ class APIController extends Controller
         $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
         $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
 
-        $Qs = RawSurvey::where("start_time", ">=", $D1)
-                        ->where("end_time", "<", $D2)
-                        ->get();
+        $Qs = $this->FormulaService->getAllQSet(
+            $D1, 
+            $D2, 
+            $req->Region,
+            $req->Category,
+            $req->Person
+        );
 
-        $p0_6Bar = RawSurvey::where("q13", "<=", 6)
-                            ->where("start_time", ">=", $D1)
-                            ->where("end_time", "<", $D2)
-                            ->get();
+        $p0_6Bar = $this->FormulaService->getQ13_0_6Set(
+            $D1, 
+            $D2, 
+            $req->Region,
+            $req->Category,
+            $req->Person
+        );
 
-        $p7_8Bar = RawSurvey::where("q13", ">=", 7)
-                            ->where("q13", "<=", 8)
-                            ->where("start_time", ">=", $D1)
-                            ->where("end_time", "<", $D2)
-                            ->get();
+        $p7_8Bar = $this->FormulaService->getQ13_7_8Set(
+            $D1, 
+            $D2, 
+            $req->Region,
+            $req->Category,
+            $req->Person
+        );
 
-        $p9_10Bar = RawSurvey::where("q13", ">=", 9)
-                            ->where("start_time", ">=", $D1)
-                            ->where("end_time", "<", $D2)
-                            ->get();
+        $p9_10Bar = $this->FormulaService->getQ13big9Set(
+            $D1, 
+            $D2, 
+            $req->Region,
+            $req->Category,
+            $req->Person
+        );
 
         $RawSurveyNum = count($Qs);
         $p0_6BarRate = 0;
@@ -609,9 +642,6 @@ class APIController extends Controller
     /**
      * 取得滿意度(Q1)為5分的百分比(感動率Pie Chart)
      * endpoint: /api/get-q1-five-rate-pie-chart?StartTime=2022-02-11&EndTime=2022-02-22
-     * parameter
-     * 1. StartTime
-     * 2. EndTime
      */
     public function getQ1FiveRatePieChart(Request $req)
     {
@@ -621,14 +651,21 @@ class APIController extends Controller
         $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
         $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
         
-        $Q1s = RawSurvey::where("q1", "=", "5")
-                        ->where("start_time", ">=", $D1)
-                        ->where("end_time", "<", $D2)
-                        ->get();
+        $Q1s = $this->FormulaService->getQ1is5Set(
+            $D1, 
+            $D2, 
+            $req->Region,
+            $req->Category,
+            $req->Person
+        );
 
-        $Qs = RawSurvey::where("start_time", ">=", $D1)
-                              ->where("end_time", "<", $D2)
-                              ->get();
+        $Qs = $this->FormulaService->getAllQSet(
+            $D1, 
+            $D2, 
+            $req->Region,
+            $req->Category,
+            $req->Person
+        );
         $Q1Num = count($Q1s);
         $RawSurveyNum = count($Qs);
         $Q1Rate = 0;

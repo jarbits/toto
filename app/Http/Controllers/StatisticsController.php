@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Services\FormulaService;
 use App\RawSurvey;
 use Carbon\Carbon;
 use DateTime;
@@ -18,20 +19,15 @@ class SimpleClass
 
 class StatisticsController extends Controller
 {
-    protected $DayDiff;
+    public $FormulaService;
     public function __construct(Request $req)
     {
-        $StartDate = strtotime($req->StartTime);
-        $EndDate = strtotime($req->EndTime);
-        $this->DayDiff = ($EndDate - $StartDate) / (60 * 60 * 24);
+        $this->FormulaService = new FormulaService();
     }
 
     /**
      * 取得滿意度(Q1)百分比Chart(滿意度)
      * endpoint: /api/statistics/getChart1?StartTime=2022-02-11&EndTime=2022-02-22
-     * parameter
-     * 1. StartTime
-     * 2. EndTime
      */
     public function getChart1(Request $req)
     {
@@ -47,14 +43,21 @@ class StatisticsController extends Controller
         {
             $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
             $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
-            $Q1s = RawSurvey::where("q1", ">=", "4")
-                    ->where("start_time", ">=", $D1)
-                    ->where("end_time", "<", $D2)
-                    ->get();
+            $Q1s = $this->FormulaService->getQ1big4Set(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
 
-            $Qs = RawSurvey::where("start_time", ">=", $D1)
-                    ->where("end_time", "<", $D2)
-                    ->get();
+            $Qs = $this->FormulaService->getAllQSet(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
 
             $Q1Num = count($Q1s);
             $RawSurveyNum = count($Qs);
@@ -83,9 +86,6 @@ class StatisticsController extends Controller
     /**
      * 取得滿意度(Q1)為5分的百分比(感動率)
      * endpoint: /api/statistics/getChart2?StartTime=2022-02-11&EndTime=2022-02-22
-     * parameter
-     * 1. StartTime
-     * 2. EndTime
      */
     public function getChart2(Request $req)
     {
@@ -101,14 +101,21 @@ class StatisticsController extends Controller
         {
             $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
             $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
-            $Q1s = RawSurvey::where("q1", "=", "5")
-                              ->where("start_time", ">=", $D1)
-                              ->where("end_time", "<", $D2)
-                              ->get();
+            $Q1s = $this->FormulaService->getQ1is5Set(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
 
-            $Qs = RawSurvey::where("start_time", ">=", $D1)
-                            ->where("end_time", "<", $D2)
-                            ->get();
+            $Qs = $this->FormulaService->getAllQSet(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
 
             $Q1Num = count($Q1s);
             $RawSurveyNum = count($Qs);
@@ -136,9 +143,6 @@ class StatisticsController extends Controller
     /**
      * 取得Q13計算該題目分數各項資料占筆的平均0-6,7-8,9-10(NPS Line Chart)
      * endpoint: /api/statistics/getChart3?StartTime=2022-02-11&EndTime=2022-02-22
-     * parameter
-     * 1. StartTime
-     * 2. EndTime
      */
     public function getChart3(Request $req)
     {
@@ -159,35 +163,53 @@ class StatisticsController extends Controller
             $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
             $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
 
-            $Qs = RawSurvey::where("start_time", ">=", $D1)
-                            ->where("end_time", "<", $D2)
-                            ->get();
+            $Qs = $this->FormulaService->getAllQSet(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
 
-            $p0_6Bar = RawSurvey::where("q13", "<=", 6)
-                                ->where("start_time", ">=", $D1)
-                                ->where("end_time", "<", $D2)
-                                ->get();
+            $p0_6Bar = $this->FormulaService->getQ13_0_6Set(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
 
-            $p7_8Bar = RawSurvey::where("q13", ">=", 7)
-                                ->where("q13", "<=", 8)
-                                ->where("start_time", ">=", $D1)
-                                ->where("end_time", "<", $D2)
-                                ->get();
+            $p7_8Bar = $this->FormulaService->getQ13_7_8Set(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
 
-            $p9_10Bar = RawSurvey::where("q13", ">=", 9)
-                                ->where("start_time", ">=", $D1)
-                                ->where("end_time", "<", $D2)
-                                ->get();
+            $p9_10Bar = $this->FormulaService->getQ13big9Set(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
 
-            $p0_6Line = RawSurvey::where("q13", "<=", 6)
-                                ->where("start_time", ">=", $D1)
-                                ->where("end_time", "<", $D2)
-                                ->get();
+            $p0_6Line = $this->FormulaService->getQ13_0_6Set(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
   
-            $p9_10Line = RawSurvey::where("q13", ">=", 9)
-                                ->where("start_time", ">=", $D1)
-                                ->where("end_time", "<", $D2)
-                                ->get();
+            $p9_10Line = $this->FormulaService->getQ13big9Set(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
 
             $RawSurveyNum = count($Qs);
             $p0_6BarRate = 0;
@@ -236,9 +258,6 @@ class StatisticsController extends Controller
     /**
      * Q1所有回答之分數平均(整體滿意度)
      * endpoint: /api/statistics/getChart4?StartTime=2022-02-11&EndTime=2022-02-22
-     * parameter
-     * 1. StartTime
-     * 2. EndTime
      */
     public function getChart4(Request $req)
     {
@@ -254,9 +273,13 @@ class StatisticsController extends Controller
         {
             $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
             $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
-            $Q1s = RawSurvey::where("start_time", ">=", $D1)
-                              ->where("end_time", "<", $D2)
-                              ->get();
+            $Q1s = $this->FormulaService->getAllQSet(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
 
             $Q1Num = 0;
             foreach ($Q1s as $Q) {
@@ -287,9 +310,6 @@ class StatisticsController extends Controller
     /**
      * Q2所有回答之分數平均(0800接聽服務品質)
      * endpoint: /api/statistics/getChart5?StartTime=2022-02-11&EndTime=2022-02-22
-     * parameter
-     * 1. StartTime
-     * 2. EndTime
      */
     public function getChart5(Request $req)
     {
@@ -305,9 +325,13 @@ class StatisticsController extends Controller
         {
             $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
             $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
-            $Q2s = RawSurvey::where("start_time", ">=", $D1)
-                              ->where("end_time", "<", $D2)
-                              ->get();
+            $Q2s = $this->FormulaService->getAllQSet(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
 
             $Q2Num = 0;
             foreach ($Q2s as $Q) {
@@ -338,9 +362,6 @@ class StatisticsController extends Controller
     /**
      * Q3所有回答之分數平均(維修安排速度)
      * endpoint: /api/statistics/getChart6?StartTime=2022-02-11&EndTime=2022-02-22
-     * parameter
-     * 1. StartTime
-     * 2. EndTime
      */
     public function getChart6(Request $req)
     {
@@ -356,9 +377,13 @@ class StatisticsController extends Controller
         {
             $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
             $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
-            $Q3s = RawSurvey::where("start_time", ">=", $D1)
-                              ->where("end_time", "<", $D2)
-                              ->get();
+            $Q3s = $this->FormulaService->getAllQSet(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
 
             $Q3Num = 0;
             foreach ($Q3s as $Q) {
@@ -389,9 +414,6 @@ class StatisticsController extends Controller
     /**
      * Q5所有回答之分數平均(維修人員服務態度)
      * endpoint: /api/statistics/getChart7?StartTime=2022-02-11&EndTime=2022-02-22
-     * parameter
-     * 1. StartTime
-     * 2. EndTime
      */
     public function getChart7(Request $req)
     {
@@ -407,9 +429,13 @@ class StatisticsController extends Controller
         {
             $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
             $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
-            $Q5s = RawSurvey::where("start_time", ">=", $D1)
-                              ->where("end_time", "<", $D2)
-                              ->get();
+            $Q5s = $this->FormulaService->getAllQSet(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
 
             $Q5Num = 0;
             foreach ($Q5s as $Q) {
@@ -440,9 +466,6 @@ class StatisticsController extends Controller
     /**
      * Q9所有回答之分數平均(講解故障原因)
      * endpoint: /api/statistics/getChart8?StartTime=2022-02-11&EndTime=2022-02-22
-     * parameter
-     * 1. StartTime
-     * 2. EndTime
      */
     public function getChart8(Request $req)
     {
@@ -458,9 +481,13 @@ class StatisticsController extends Controller
         {
             $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
             $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
-            $Q9s = RawSurvey::where("start_time", ">=", $D1)
-                              ->where("end_time", "<", $D2)
-                              ->get();
+            $Q9s = $this->FormulaService->getAllQSet(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
 
             $Q9Num = 0;
             foreach ($Q9s as $Q) {
@@ -491,9 +518,6 @@ class StatisticsController extends Controller
     /**
      * Q10所有回答之分數平均(維修技術)
      * endpoint: /api/statistics/getChart9?StartTime=2022-02-11&EndTime=2022-02-22
-     * parameter
-     * 1. StartTime
-     * 2. EndTime
      */
     public function getChart9(Request $req)
     {
@@ -509,9 +533,13 @@ class StatisticsController extends Controller
         {
             $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
             $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
-            $Q10s = RawSurvey::where("start_time", ">=", $D1)
-                              ->where("end_time", "<", $D2)
-                              ->get();
+            $Q10s = $this->FormulaService->getAllQSet(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
 
             $Q10Num = 0;
             foreach ($Q10s as $Q) {
@@ -542,9 +570,6 @@ class StatisticsController extends Controller
     /**
      * Q11所有回答之分數平均(拆換零件處理)
      * endpoint: /api/statistics/getChart10?StartTime=2022-02-11&EndTime=2022-02-22
-     * parameter
-     * 1. StartTime
-     * 2. EndTime
      */
     public function getChart10(Request $req)
     {
@@ -560,9 +585,13 @@ class StatisticsController extends Controller
         {
             $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
             $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
-            $Q11s = RawSurvey::where("start_time", ">=", $D1)
-                              ->where("end_time", "<", $D2)
-                              ->get();
+            $Q11s = $this->FormulaService->getAllQSet(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
 
             $Q11Num = 0;
             foreach ($Q11s as $Q) {
@@ -593,9 +622,6 @@ class StatisticsController extends Controller
     /**
      * Q12所有回答之分數平均(現場清潔)
      * endpoint: /api/statistics/getChart11?StartTime=2022-02-11&EndTime=2022-02-22
-     * parameter
-     * 1. StartTime
-     * 2. EndTime
      */
     public function getChart11(Request $req)
     {
@@ -611,9 +637,13 @@ class StatisticsController extends Controller
         {
             $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
             $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
-            $Q12s = RawSurvey::where("start_time", ">=", $D1)
-                              ->where("end_time", "<", $D2)
-                              ->get();
+            $Q12s = $this->FormulaService->getAllQSet(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
 
             $Q12Num = 0;
             foreach ($Q12s as $Q) {
@@ -644,9 +674,6 @@ class StatisticsController extends Controller
     /**
      * Q4回答1的比例(是否按照約定時段抵達)
      * endpoint: /api/statistics/getChart12?StartTime=2022-02-11&EndTime=2022-02-22
-     * parameter
-     * 1. StartTime
-     * 2. EndTime
      */
     public function getChart12(Request $req)
     {
@@ -662,14 +689,21 @@ class StatisticsController extends Controller
         {
             $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
             $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
-            $Qs = RawSurvey::where("q4", "=", "1")
-                              ->where("start_time", ">=", $D1)
-                              ->where("end_time", "<", $D2)
-                              ->get();
+            $Qs = $this->FormulaService->getQ4is1Set(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
 
-            $QsAll = RawSurvey::where("start_time", ">=", $D1)
-                              ->where("end_time", "<", $D2)
-                              ->get();
+            $QsAll = $this->FormulaService->getAllQSet(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
                               
             $QNum = count($Qs);
             $RawSurveyNum = count($QsAll);
@@ -697,9 +731,6 @@ class StatisticsController extends Controller
     /**
      * Q6回答9的比例(是否有缺失情形)
      * endpoint: /api/statistics/getChart13?StartTime=2022-02-11&EndTime=2022-02-22
-     * parameter
-     * 1. StartTime
-     * 2. EndTime
      */
     public function getChart13(Request $req)
     {
@@ -715,14 +746,21 @@ class StatisticsController extends Controller
         {
             $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
             $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
-            $Qs = RawSurvey::where("q6", "=", "9")
-                              ->where("start_time", ">=", $D1)
-                              ->where("end_time", "<", $D2)
-                              ->get();
+            $Qs = $this->FormulaService->getQ6is9Set(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
 
-            $QsAll = RawSurvey::where("start_time", ">=", $D1)
-                              ->where("end_time", "<", $D2)
-                              ->get();
+            $QsAll = $this->FormulaService->getAllQSet(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
                               
             $QNum = count($Qs);
             $RawSurveyNum = count($QsAll);
@@ -750,9 +788,6 @@ class StatisticsController extends Controller
     /**
      * Q7回答1的比例(是否單趟完成)
      * endpoint: /api/statistics/getChart14?StartTime=2022-02-11&EndTime=2022-02-22
-     * parameter
-     * 1. StartTime
-     * 2. EndTime
      */
     public function getChart14(Request $req)
     {
@@ -768,14 +803,21 @@ class StatisticsController extends Controller
         {
             $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
             $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
-            $Qs = RawSurvey::where("q7", "=", "1")
-                              ->where("start_time", ">=", $D1)
-                              ->where("end_time", "<", $D2)
-                              ->get();
+            $Qs = $this->FormulaService->getQ7is1Set(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
 
-            $QsAll = RawSurvey::where("start_time", ">=", $D1)
-                              ->where("end_time", "<", $D2)
-                              ->get();
+            $QsAll = $this->FormulaService->getAllQSet(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
                               
             $QNum = count($Qs);
             $RawSurveyNum = count($QsAll);
@@ -801,15 +843,19 @@ class StatisticsController extends Controller
     }
 
     //Table1
-    public function getC1V($D1, $D2)
+    public function getC1V($D1, $D2, $Region=null, $Category=null, $Person=null)
     {
         $Q1s = RawSurvey::where("q1", ">=", "4")
                     ->where("start_time", ">=", $D1)
                     ->where("end_time", "<", $D2)
                     ->get();
-        $Qs = RawSurvey::where("start_time", ">=", $D1)
-                ->where("end_time", "<", $D2)
-                ->get();
+        $Qs = $this->FormulaService->getAllQSet(
+            $D1, 
+            $D2, 
+            $Region,
+            $Category,
+            $Person
+        );
         $Q1Num = count($Q1s);
         $RawSurveyNum = count($Qs);
         $Q1Rate = 0;
@@ -819,15 +865,19 @@ class StatisticsController extends Controller
         return $Q1Rate;
     }
 
-    public function getC2V($D1, $D2)
+    public function getC2V($D1, $D2, $Region=null, $Category=null, $Person=null)
     {
         $Q1s = RawSurvey::where("q1", "=", "5")
                         ->where("start_time", ">=", $D1)
                         ->where("end_time", "<", $D2)
                         ->get();
-        $Qs = RawSurvey::where("start_time", ">=", $D1)
-                        ->where("end_time", "<", $D2)
-                        ->get();
+        $Qs = $this->FormulaService->getAllQSet(
+            $D1, 
+            $D2, 
+            $Region,
+            $Category,
+            $Person
+        );
         $Q1Num = count($Q1s);
         $RawSurveyNum = count($Qs);
         $Q1Rate = 0;
@@ -837,11 +887,15 @@ class StatisticsController extends Controller
         return $Q1Rate;
     }
 
-    public function getC3V($D1, $D2)
+    public function getC3V($D1, $D2, $Region=null, $Category=null, $Person=null)
     {
-        $Qs = RawSurvey::where("start_time", ">=", $D1)
-                        ->where("end_time", "<", $D2)
-                        ->get();
+        $Qs = $this->FormulaService->getAllQSet(
+            $D1, 
+            $D2, 
+            $Region,
+            $Category,
+            $Person
+        );
 
         $p0_6Bar = RawSurvey::where("q13", "<=", 6)
                             ->where("start_time", ">=", $D1)
@@ -888,11 +942,15 @@ class StatisticsController extends Controller
         return $NPSLine;
     }
 
-    public function getC4V($D1, $D2)
+    public function getC4V($D1, $D2, $Region=null, $Category=null, $Person=null)
     {
-        $Q1s = RawSurvey::where("start_time", ">=", $D1)
-                            ->where("end_time", "<", $D2)
-                            ->get();
+        $Q1s = $this->FormulaService->getAllQSet(
+            $D1, 
+            $D2, 
+            $Region,
+            $Category,
+            $Person
+        );
         $Q1Num = 0;
         foreach ($Q1s as $Q) {
             $Q1Num += intval($Q->q1);
@@ -905,11 +963,15 @@ class StatisticsController extends Controller
         return $Q1Rate;
     }
 
-    public function getC5V($D1, $D2)
+    public function getC5V($D1, $D2, $Region=null, $Category=null, $Person=null)
     {
-        $Q2s = RawSurvey::where("start_time", ">=", $D1)
-                        ->where("end_time", "<", $D2)
-                        ->get();
+        $Q2s = $this->FormulaService->getAllQSet(
+            $D1, 
+            $D2, 
+            $Region,
+            $Category,
+            $Person
+        );
         $Q2Num = 0;
         foreach ($Q2s as $Q) {
             $Q2Num += intval($Q->q2);
@@ -922,11 +984,15 @@ class StatisticsController extends Controller
         return $Q2Rate;
     }
 
-    public function getC6V($D1, $D2)
+    public function getC6V($D1, $D2, $Region=null, $Category=null, $Person=null)
     {
-        $Q3s = RawSurvey::where("start_time", ">=", $D1)
-                            ->where("end_time", "<", $D2)
-                            ->get();
+        $Q3s = $this->FormulaService->getAllQSet(
+            $D1, 
+            $D2, 
+            $Region,
+            $Category,
+            $Person
+        );
         $Q3Num = 0;
         foreach ($Q3s as $Q) {
             $Q3Num += intval($Q->q3);
@@ -939,11 +1005,15 @@ class StatisticsController extends Controller
         return $Q3Rate;
     }
 
-    public function getC7V($D1, $D2)
+    public function getC7V($D1, $D2, $Region=null, $Category=null, $Person=null)
     {
-        $Q5s = RawSurvey::where("start_time", ">=", $D1)
-                        ->where("end_time", "<", $D2)
-                        ->get();
+        $Q5s = $this->FormulaService->getAllQSet(
+            $D1, 
+            $D2, 
+            $Region,
+            $Category,
+            $Person
+        );
         $Q5Num = 0;
         foreach ($Q5s as $Q) {
             $Q5Num += intval($Q->q5);
@@ -956,11 +1026,15 @@ class StatisticsController extends Controller
         return $Q5Rate;
     }
 
-    public function getC8V($D1, $D2)
+    public function getC8V($D1, $D2, $Region=null, $Category=null, $Person=null)
     {
-        $Q9s = RawSurvey::where("start_time", ">=", $D1)
-                            ->where("end_time", "<", $D2)
-                            ->get();
+        $Q9s = $this->FormulaService->getAllQSet(
+            $D1, 
+            $D2, 
+            $Region,
+            $Category,
+            $Person
+        );
         $Q9Num = 0;
         foreach ($Q9s as $Q) {
             $Q9Num += intval($Q->q9);
@@ -973,11 +1047,15 @@ class StatisticsController extends Controller
         return $Q9Rate;
     }
 
-    public function getC9V($D1, $D2)
+    public function getC9V($D1, $D2, $Region=null, $Category=null, $Person=null)
     {
-        $Q10s = RawSurvey::where("start_time", ">=", $D1)
-                            ->where("end_time", "<", $D2)
-                            ->get();
+        $Q10s = $this->FormulaService->getAllQSet(
+            $D1, 
+            $D2, 
+            $Region,
+            $Category,
+            $Person
+        );
         $Q10Num = 0;
         foreach ($Q10s as $Q) {
             $Q10Num += intval($Q->q10);
@@ -990,11 +1068,15 @@ class StatisticsController extends Controller
         return $Q10Rate;
     }
 
-    public function getC10V($D1, $D2)
+    public function getC10V($D1, $D2, $Region=null, $Category=null, $Person=null)
     {
-        $Q11s = RawSurvey::where("start_time", ">=", $D1)
-                            ->where("end_time", "<", $D2)
-                            ->get();
+        $Q11s = $this->FormulaService->getAllQSet(
+            $D1, 
+            $D2, 
+            $Region,
+            $Category,
+            $Person
+        );
         $Q11Num = 0;
         foreach ($Q11s as $Q) {
             $Q11Num += intval($Q->q11);
@@ -1007,11 +1089,15 @@ class StatisticsController extends Controller
         return $Q11Rate;
     }
 
-    public function getC11V($D1, $D2)
+    public function getC11V($D1, $D2, $Region=null, $Category=null, $Person=null)
     {
-        $Q12s = RawSurvey::where("start_time", ">=", $D1)
-                            ->where("end_time", "<", $D2)
-                            ->get();
+        $Q12s = $this->FormulaService->getAllQSet(
+            $D1, 
+            $D2, 
+            $Region,
+            $Category,
+            $Person
+        );
         $Q12Num = 0;
         foreach ($Q12s as $Q) {
             $Q12Num += intval($Q->q12);
@@ -1024,15 +1110,19 @@ class StatisticsController extends Controller
         return $Q12Rate;
     }
 
-    public function getC12V($D1, $D2)
+    public function getC12V($D1, $D2, $Region=null, $Category=null, $Person=null)
     {
         $Qs = RawSurvey::where("q4", "=", "1")
                         ->where("start_time", ">=", $D1)
                         ->where("end_time", "<", $D2)
                         ->get();
-        $QsAll = RawSurvey::where("start_time", ">=", $D1)
-                        ->where("end_time", "<", $D2)
-                        ->get();
+        $QsAll = $this->FormulaService->getAllQSet(
+            $D1, 
+            $D2, 
+            $Region,
+            $Category,
+            $Person
+        );
         $QNum = count($Qs);
         $RawSurveyNum = count($QsAll);
         $QRate = 0;
@@ -1042,16 +1132,20 @@ class StatisticsController extends Controller
         return $QRate;
     }
 
-    public function getC13V($D1, $D2)
+    public function getC13V($D1, $D2, $Region=null, $Category=null, $Person=null)
     {
         $Qs = RawSurvey::where("q6", "=", "9")
                         ->where("start_time", ">=", $D1)
                         ->where("end_time", "<", $D2)
                         ->get();
 
-        $QsAll = RawSurvey::where("start_time", ">=", $D1)
-                        ->where("end_time", "<", $D2)
-                        ->get();
+        $QsAll = $this->FormulaService->getAllQSet(
+            $D1, 
+            $D2, 
+            $Region,
+            $Category,
+            $Person
+        );
         $QNum = count($Qs);
         $RawSurveyNum = count($QsAll);
         $QRate = 0;
@@ -1061,15 +1155,19 @@ class StatisticsController extends Controller
         return $QRate;
     }
 
-    public function getC14V($D1, $D2)
+    public function getC14V($D1, $D2, $Region=null, $Category=null, $Person=null)
     {
         $Qs = RawSurvey::where("q7", "=", "1")
                         ->where("start_time", ">=", $D1)
                         ->where("end_time", "<", $D2)
                         ->get();
-        $QsAll = RawSurvey::where("start_time", ">=", $D1)
-                        ->where("end_time", "<", $D2)
-                        ->get();
+        $QsAll = $this->FormulaService->getAllQSet(
+            $D1, 
+            $D2, 
+            $Region,
+            $Category,
+            $Person
+        );
         $QNum = count($Qs);
         $RawSurveyNum = count($QsAll);
         $QRate = 0;
