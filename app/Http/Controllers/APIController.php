@@ -28,7 +28,7 @@ class APIController extends Controller
         $EndMonth = date('m', strtotime($req->EndTime));
         
         $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
-        $D2 = date('Y-m-d', strtotime($NowYear.'-'.($EndMonth).'-01 00:00:00'));
+        $D2 = date('Y-m-d', strtotime($NowYear.'-'.($EndMonth+1).'-01 00:00:00'));
 
         $Qs = $this->FormulaService->getAllQSet(
             $D1, 
@@ -54,7 +54,7 @@ class APIController extends Controller
         $EndMonth = date('m', strtotime($req->EndTime));
         
         $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
-        $D2 = date('Y-m-d', strtotime($NowYear.'-'.($EndMonth).'-01 00:00:00'));
+        $D2 = date('Y-m-d', strtotime($NowYear.'-'.($EndMonth+1).'-01 00:00:00'));
 
         $Qs = $this->FormulaService->getAllQSet(
             $D1, 
@@ -80,7 +80,7 @@ class APIController extends Controller
         $EndMonth = date('m', strtotime($req->EndTime));
         
         $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
-        $D2 = date('Y-m-d', strtotime($NowYear.'-'.($EndMonth).'-01 00:00:00'));
+        $D2 = date('Y-m-d', strtotime($NowYear.'-'.($EndMonth+1).'-01 00:00:00'));
 
         $LowScore = $this->FormulaService->getLScoreSet(
             $D1, 
@@ -106,7 +106,7 @@ class APIController extends Controller
         $EndMonth = date('m', strtotime($req->EndTime));
         
         $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
-        $D2 = date('Y-m-d', strtotime($NowYear.'-'.($EndMonth).'-01 00:00:00'));
+        $D2 = date('Y-m-d', strtotime($NowYear.'-'.($EndMonth+1).'-01 00:00:00'));
 
         $Q1s = $this->FormulaService->getQ1big4Set(
             $D1, 

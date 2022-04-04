@@ -8,49 +8,86 @@ use DB;
 
 class AdvanceMenuController extends Controller
 {
-    public function regionLV1()
+    public function selectLV1()
     {
-        $Data = [];
+        $Data = [
+            'data' => 
+            [
+                [
+                    'key'=>'區域',
+                    'value'=>'區域',
+                ],
+                [
+                    'key'=>'經銷',
+                    'value'=>'經銷',
+                ],
+                [
+                    'key'=>'售服員',
+                    'value'=>'售服員',
+                ]
+            ],
+            'next' => 'true'
+        ];
+        
+        return json_encode($Data, JSON_UNESCAPED_UNICODE);
+    }
 
-        $Set = DB::select("
-            SELECT DISTINCT(s_region) FROM rawsurvey AS T
-        ");
+    public function selectLV2(Request $req)
+    {
+        $Data = ['data'=>[]];
+        $menu = $req->menu;
+        if ($menu == '區域') {
+            $Set = DB::select("
+                SELECT DISTINCT(s_region) FROM rawsurvey AS T
+            ");
 
-        foreach ($Set as $key => $value) {
-            array_push($Data, ['key'=>$value->s_region, 'value'=>$value->s_region]);
+            foreach ($Set as $key => $value) {
+                array_push($Data['data'], ['key'=>$value->s_region, 'value'=>$value->s_region]);
+            }
+            $Data['next'] = 'false';
+        }
+        if ($menu == '經銷') {
+            $Set = DB::select("
+                SELECT DISTINCT(s_category) FROM rawsurvey AS T
+            ");
+
+            foreach ($Set as $key => $value) {
+                array_push($Data['data'], ['key'=>$value->s_category, 'value'=>$value->s_category]);
+            }
+            $Data['next'] = 'false';
+        }
+        if ($menu == '售服員') {
+            $Set = DB::select("
+                SELECT DISTINCT(s_category) FROM rawsurvey AS T
+            ");
+
+            foreach ($Set as $key => $value) {
+                array_push($Data['data'], ['key'=>$value->s_category, 'value'=>$value->s_category]);
+            }
+            $Data['next'] = 'true';
         }
         
-        return json_encode($Data);
+        return json_encode($Data, JSON_UNESCAPED_UNICODE);
     }
 
-    public function categoryLV2(Request $req)
+    public function selectLV3(Request $req)
     {
-        $Data = [];
-        $Set = DB::select("
-            SELECT DISTINCT(s_category) FROM rawsurvey AS T
-            WHERE 1=1
-            AND T.s_region = '".$req->Region."'
-        ");
-        foreach ($Set as $key => $value) {
-            array_push($Data, ['key'=>$value->s_category, 'value'=>$value->s_category]);
+        $Data = ['data'=>[]];
+        $menu = $req->menu;
+        $category = $req->category;
+        if ($menu == '售服員') {
+            $Set = DB::select("
+                SELECT DISTINCT(s_person) FROM rawsurvey AS T
+                WHERE 1=1
+                AND T.s_category = '".$category."'
+            ");
+
+            foreach ($Set as $key => $value) {
+                array_push($Data['data'], ['key'=>$value->s_person, 'value'=>$value->s_person]);
+            }
+            $Data['next'] = 'false';
         }
-
-        return $Set;
-    }
-
-    public function personLV3(Request $req)
-    {
-        $Data = [];
-        $Set = DB::select("
-            SELECT DISTINCT(s_person) FROM rawsurvey AS T
-            WHERE 1=1
-            AND T.s_region = '".$req->Region."'
-            AND T.s_category = '".$req->Category."'
-        ");
-        foreach ($Set as $key => $value) {
-            array_push($Data, ['key'=>$value->s_person, 'value'=>$value->s_person]);
-        }
-
-        return $Set;
+        
+        return json_encode($Data, JSON_UNESCAPED_UNICODE);
     }
 }

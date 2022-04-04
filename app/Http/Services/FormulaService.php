@@ -9,7 +9,7 @@ use DB;
 
 class FormulaService
 {
-    public function advanceSearch($Region=null, $Category=null, $Person=null)
+    public function advanceSearch($Region, $Category, $Person)
     {
         $qStr = "";
 
@@ -18,17 +18,15 @@ class FormulaService
                 AND T.s_region = '".$Region."'
                 ";
         }
-        if ($Region != null && $Category != null) {
+        if ($Category != null) {
             $qStr = "
-                AND T.s_region = '".$Region."'
                 AND T.s_category = '".$Category."'
                 ";
         }
-        if ($Region != null && $Category != null && $Person != null) {
+        if ($Category != null && $Person != null) {
             $qStr = "
-                AND T.s_region = '".$Region."'
                 AND T.s_category = '".$Category."'
-                AND T.s_person LIKE '%".$Person."%'
+                AND T.s_person = '".$Person."'
                 ";
         }
         return $qStr;
