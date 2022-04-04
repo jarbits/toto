@@ -843,12 +843,16 @@ class StatisticsController extends Controller
     }
 
     //Table1
-    public function getC1V($D1, $D2, $Region=null, $Category=null, $Person=null)
+    public function getC1V($D1, $D2, $Region, $Category, $Person)
     {
-        $Q1s = RawSurvey::where("q1", ">=", "4")
-                    ->where("start_time", ">=", $D1)
-                    ->where("end_time", "<", $D2)
-                    ->get();
+        $Q1s = $this->FormulaService->getQ1big4Set(
+            $D1, 
+            $D2, 
+            $Region,
+            $Category,
+            $Person
+        );
+
         $Qs = $this->FormulaService->getAllQSet(
             $D1, 
             $D2, 
@@ -865,12 +869,15 @@ class StatisticsController extends Controller
         return $Q1Rate;
     }
 
-    public function getC2V($D1, $D2, $Region=null, $Category=null, $Person=null)
+    public function getC2V($D1, $D2, $Region, $Category, $Person)
     {
-        $Q1s = RawSurvey::where("q1", "=", "5")
-                        ->where("start_time", ">=", $D1)
-                        ->where("end_time", "<", $D2)
-                        ->get();
+        $Q1s = $this->FormulaService->getQ1is5Set(
+            $D1, 
+            $D2, 
+            $Region,
+            $Category,
+            $Person
+        );
         $Qs = $this->FormulaService->getAllQSet(
             $D1, 
             $D2, 
@@ -887,7 +894,7 @@ class StatisticsController extends Controller
         return $Q1Rate;
     }
 
-    public function getC3V($D1, $D2, $Region=null, $Category=null, $Person=null)
+    public function getC3V($D1, $D2, $Region, $Category, $Person)
     {
         $Qs = $this->FormulaService->getAllQSet(
             $D1, 
@@ -897,32 +904,45 @@ class StatisticsController extends Controller
             $Person
         );
 
-        $p0_6Bar = RawSurvey::where("q13", "<=", 6)
-                            ->where("start_time", ">=", $D1)
-                            ->where("end_time", "<", $D2)
-                            ->get();
+        $p0_6Bar = $this->FormulaService->getQ13less6Set(
+            $D1, 
+            $D2, 
+            $Region,
+            $Category,
+            $Person
+        );
 
-        $p7_8Bar = RawSurvey::where("q13", ">=", 7)
-                            ->where("q13", "<=", 8)
-                            ->where("start_time", ">=", $D1)
-                            ->where("end_time", "<", $D2)
-                            ->get();
+        $p7_8Bar = $this->FormulaService->getQ13_7_8Set(
+            $D1, 
+            $D2, 
+            $Region,
+            $Category,
+            $Person
+        );
 
-        $p9_10Bar = RawSurvey::where("q13", ">=", 9)
-                            ->where("start_time", ">=", $D1)
-                            ->where("end_time", "<", $D2)
-                            ->get();
+        $p9_10Bar = $this->FormulaService->getQ13big9Set(
+            $D1, 
+            $D2, 
+            $Region,
+            $Category,
+            $Person
+        );
 
-        $p0_6Line = RawSurvey::where("q13", ">=", 0)
-                            ->where("q13", "<=", 6)
-                            ->where("start_time", ">=", $D1)
-                            ->where("end_time", "<", $D2)
-                            ->get();
+        $p0_6Line = $this->FormulaService->getQ13_0_6Set(
+            $D1, 
+            $D2, 
+            $Region,
+            $Category,
+            $Person
+        );
 
-        $p9_10Line = RawSurvey::where("q13", ">=", 9)
-                            ->where("start_time", ">=", $D1)
-                            ->where("end_time", "<", $D2)
-                            ->get();
+        $p9_10Line = $this->FormulaService->getQ13big9Set(
+            $D1, 
+            $D2, 
+            $Region,
+            $Category,
+            $Person
+        );
 
         $RawSurveyNum = count($Qs);
         $p0_6BarRate = 0;
@@ -942,7 +962,7 @@ class StatisticsController extends Controller
         return $NPSLine;
     }
 
-    public function getC4V($D1, $D2, $Region=null, $Category=null, $Person=null)
+    public function getC4V($D1, $D2, $Region, $Category, $Person)
     {
         $Q1s = $this->FormulaService->getAllQSet(
             $D1, 
@@ -963,7 +983,7 @@ class StatisticsController extends Controller
         return $Q1Rate;
     }
 
-    public function getC5V($D1, $D2, $Region=null, $Category=null, $Person=null)
+    public function getC5V($D1, $D2, $Region, $Category, $Person)
     {
         $Q2s = $this->FormulaService->getAllQSet(
             $D1, 
@@ -984,7 +1004,7 @@ class StatisticsController extends Controller
         return $Q2Rate;
     }
 
-    public function getC6V($D1, $D2, $Region=null, $Category=null, $Person=null)
+    public function getC6V($D1, $D2, $Region, $Category, $Person)
     {
         $Q3s = $this->FormulaService->getAllQSet(
             $D1, 
@@ -1005,7 +1025,7 @@ class StatisticsController extends Controller
         return $Q3Rate;
     }
 
-    public function getC7V($D1, $D2, $Region=null, $Category=null, $Person=null)
+    public function getC7V($D1, $D2, $Region, $Category, $Person)
     {
         $Q5s = $this->FormulaService->getAllQSet(
             $D1, 
@@ -1026,7 +1046,7 @@ class StatisticsController extends Controller
         return $Q5Rate;
     }
 
-    public function getC8V($D1, $D2, $Region=null, $Category=null, $Person=null)
+    public function getC8V($D1, $D2, $Region, $Category, $Person)
     {
         $Q9s = $this->FormulaService->getAllQSet(
             $D1, 
@@ -1047,7 +1067,7 @@ class StatisticsController extends Controller
         return $Q9Rate;
     }
 
-    public function getC9V($D1, $D2, $Region=null, $Category=null, $Person=null)
+    public function getC9V($D1, $D2, $Region, $Category, $Person)
     {
         $Q10s = $this->FormulaService->getAllQSet(
             $D1, 
@@ -1068,7 +1088,7 @@ class StatisticsController extends Controller
         return $Q10Rate;
     }
 
-    public function getC10V($D1, $D2, $Region=null, $Category=null, $Person=null)
+    public function getC10V($D1, $D2, $Region, $Category, $Person)
     {
         $Q11s = $this->FormulaService->getAllQSet(
             $D1, 
@@ -1089,7 +1109,7 @@ class StatisticsController extends Controller
         return $Q11Rate;
     }
 
-    public function getC11V($D1, $D2, $Region=null, $Category=null, $Person=null)
+    public function getC11V($D1, $D2, $Region, $Category, $Person)
     {
         $Q12s = $this->FormulaService->getAllQSet(
             $D1, 
@@ -1110,12 +1130,15 @@ class StatisticsController extends Controller
         return $Q12Rate;
     }
 
-    public function getC12V($D1, $D2, $Region=null, $Category=null, $Person=null)
+    public function getC12V($D1, $D2, $Region, $Category, $Person)
     {
-        $Qs = RawSurvey::where("q4", "=", "1")
-                        ->where("start_time", ">=", $D1)
-                        ->where("end_time", "<", $D2)
-                        ->get();
+        $Qs = $this->FormulaService->getQ4is1Set(
+            $D1, 
+            $D2, 
+            $Region,
+            $Category,
+            $Person
+        );
         $QsAll = $this->FormulaService->getAllQSet(
             $D1, 
             $D2, 
@@ -1132,12 +1155,15 @@ class StatisticsController extends Controller
         return $QRate;
     }
 
-    public function getC13V($D1, $D2, $Region=null, $Category=null, $Person=null)
+    public function getC13V($D1, $D2, $Region, $Category, $Person)
     {
-        $Qs = RawSurvey::where("q6", "=", "9")
-                        ->where("start_time", ">=", $D1)
-                        ->where("end_time", "<", $D2)
-                        ->get();
+        $Qs = $this->FormulaService->getQ6is9Set(
+            $D1, 
+            $D2, 
+            $Region,
+            $Category,
+            $Person
+        );
 
         $QsAll = $this->FormulaService->getAllQSet(
             $D1, 
@@ -1155,12 +1181,15 @@ class StatisticsController extends Controller
         return $QRate;
     }
 
-    public function getC14V($D1, $D2, $Region=null, $Category=null, $Person=null)
+    public function getC14V($D1, $D2, $Region, $Category, $Person)
     {
-        $Qs = RawSurvey::where("q7", "=", "1")
-                        ->where("start_time", ">=", $D1)
-                        ->where("end_time", "<", $D2)
-                        ->get();
+        $Qs = $this->FormulaService->getQ7is1Set(
+            $D1, 
+            $D2, 
+            $Region,
+            $Category,
+            $Person
+        );
         $QsAll = $this->FormulaService->getAllQSet(
             $D1, 
             $D2, 
@@ -1177,7 +1206,7 @@ class StatisticsController extends Controller
         return $QRate;
     }
 
-    public function getFirstHalfTable1($Date)
+    public function getFirstHalfTable1($Date, $Region=null, $Category=null, $Person=null)
     {
         $NowYear = date('Y', strtotime($Date));
         $D1 = $NowYear."-01-01 00:00:00";
@@ -1185,24 +1214,24 @@ class StatisticsController extends Controller
 
         return 
         [
-            $this->getC1V($D1,$D2),
-            $this->getC2V($D1,$D2),
-            $this->getC3V($D1,$D2),
-            $this->getC4V($D1,$D2),
-            $this->getC5V($D1,$D2),
-            $this->getC6V($D1,$D2),
-            $this->getC7V($D1,$D2),
-            $this->getC8V($D1,$D2),
-            $this->getC9V($D1,$D2),
-            $this->getC10V($D1,$D2),
-            $this->getC11V($D1,$D2),
-            $this->getC12V($D1,$D2),
-            $this->getC13V($D1,$D2),
-            $this->getC14V($D1,$D2)
+            $this->getC1V($D1,$D2,$Region,$Category,$Person),
+            $this->getC2V($D1,$D2,$Region,$Category,$Person),
+            $this->getC3V($D1,$D2,$Region,$Category,$Person),
+            $this->getC4V($D1,$D2,$Region,$Category,$Person),
+            $this->getC5V($D1,$D2,$Region,$Category,$Person),
+            $this->getC6V($D1,$D2,$Region,$Category,$Person),
+            $this->getC7V($D1,$D2,$Region,$Category,$Person),
+            $this->getC8V($D1,$D2,$Region,$Category,$Person),
+            $this->getC9V($D1,$D2,$Region,$Category,$Person),
+            $this->getC10V($D1,$D2,$Region,$Category,$Person),
+            $this->getC11V($D1,$D2,$Region,$Category,$Person),
+            $this->getC12V($D1,$D2,$Region,$Category,$Person),
+            $this->getC13V($D1,$D2,$Region,$Category,$Person),
+            $this->getC14V($D1,$D2,$Region,$Category,$Person)
         ];
     }
 
-    public function getSecondHalfTable1($Date)
+    public function getSecondHalfTable1($Date, $Region=null, $Category=null, $Person=null)
     {
         $NowYear = date('Y', strtotime($Date));
         $D1 = $NowYear."-07-01 00:00:00";
@@ -1210,24 +1239,24 @@ class StatisticsController extends Controller
         
         return 
         [
-            $this->getC1V($D1,$D2),
-            $this->getC2V($D1,$D2),
-            $this->getC3V($D1,$D2),
-            $this->getC4V($D1,$D2),
-            $this->getC5V($D1,$D2),
-            $this->getC6V($D1,$D2),
-            $this->getC7V($D1,$D2),
-            $this->getC8V($D1,$D2),
-            $this->getC9V($D1,$D2),
-            $this->getC10V($D1,$D2),
-            $this->getC11V($D1,$D2),
-            $this->getC12V($D1,$D2),
-            $this->getC13V($D1,$D2),
-            $this->getC14V($D1,$D2)
+            $this->getC1V($D1,$D2,$Region,$Category,$Person),
+            $this->getC2V($D1,$D2,$Region,$Category,$Person),
+            $this->getC3V($D1,$D2,$Region,$Category,$Person),
+            $this->getC4V($D1,$D2,$Region,$Category,$Person),
+            $this->getC5V($D1,$D2,$Region,$Category,$Person),
+            $this->getC6V($D1,$D2,$Region,$Category,$Person),
+            $this->getC7V($D1,$D2,$Region,$Category,$Person),
+            $this->getC8V($D1,$D2,$Region,$Category,$Person),
+            $this->getC9V($D1,$D2,$Region,$Category,$Person),
+            $this->getC10V($D1,$D2,$Region,$Category,$Person),
+            $this->getC11V($D1,$D2,$Region,$Category,$Person),
+            $this->getC12V($D1,$D2,$Region,$Category,$Person),
+            $this->getC13V($D1,$D2,$Region,$Category,$Person),
+            $this->getC14V($D1,$D2,$Region,$Category,$Person)
         ];
     }
 
-    public function getWholeTable1($Date)
+    public function getWholeTable1($Date, $Region=null, $Category=null, $Person=null)
     {
         $NowYear = date('Y', strtotime($Date));
         $D1 = $NowYear."-01-01 00:00:00";
@@ -1235,29 +1264,29 @@ class StatisticsController extends Controller
         
         return 
         [
-            $this->getC1V($D1,$D2),
-            $this->getC2V($D1,$D2),
-            $this->getC3V($D1,$D2),
-            $this->getC4V($D1,$D2),
-            $this->getC5V($D1,$D2),
-            $this->getC6V($D1,$D2),
-            $this->getC7V($D1,$D2),
-            $this->getC8V($D1,$D2),
-            $this->getC9V($D1,$D2),
-            $this->getC10V($D1,$D2),
-            $this->getC11V($D1,$D2),
-            $this->getC12V($D1,$D2),
-            $this->getC13V($D1,$D2),
-            $this->getC14V($D1,$D2)
+            $this->getC1V($D1,$D2,$Region,$Category,$Person),
+            $this->getC2V($D1,$D2,$Region,$Category,$Person),
+            $this->getC3V($D1,$D2,$Region,$Category,$Person),
+            $this->getC4V($D1,$D2,$Region,$Category,$Person),
+            $this->getC5V($D1,$D2,$Region,$Category,$Person),
+            $this->getC6V($D1,$D2,$Region,$Category,$Person),
+            $this->getC7V($D1,$D2,$Region,$Category,$Person),
+            $this->getC8V($D1,$D2,$Region,$Category,$Person),
+            $this->getC9V($D1,$D2,$Region,$Category,$Person),
+            $this->getC10V($D1,$D2,$Region,$Category,$Person),
+            $this->getC11V($D1,$D2,$Region,$Category,$Person),
+            $this->getC12V($D1,$D2,$Region,$Category,$Person),
+            $this->getC13V($D1,$D2,$Region,$Category,$Person),
+            $this->getC14V($D1,$D2,$Region,$Category,$Person)
         ];
     }
 
     public function getTable1(Request $req)
     {
         $Date = $req->StartTime;
-        $FirstHalfTable1 = $this->getFirstHalfTable1($Date);
-        $SecondHalfTable1 = $this->getSecondHalfTable1($Date);
-        $WholeTable1 = $this->getWholeTable1($Date);
+        $FirstHalfTable1 = $this->getFirstHalfTable1($Date, $req->Region, $req->Category, $req->Person);
+        $SecondHalfTable1 = $this->getSecondHalfTable1($Date, $req->Region, $req->Category, $req->Person);
+        $WholeTable1 = $this->getWholeTable1($Date, $req->Region, $req->Category, $req->Person);
 
         $Data = [];
         $item = ['滿意度', '感動率', 'NPS', '整體滿意度', '0800接聽及應對服務品質', '維修安排速度', 
