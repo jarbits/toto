@@ -11,6 +11,12 @@ use DB;
 
 class DeficiencyController extends Controller
 {
+    public $FormulaService;
+    public function __construct(Request $req)
+    {
+        $this->FormulaService = new FormulaService();
+    }
+
     /**
      * 整體：[Q8]不為空白的總數
      */
