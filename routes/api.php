@@ -77,7 +77,8 @@ Route::group([
     Route::post('/deficiency/getChart23', 'DeficiencyController@getChart23');      
     Route::post('/deficiency/getChart24', 'DeficiencyController@getChart24');    
     Route::post('/deficiency/getChart25', 'DeficiencyController@getChart25');    
-    Route::post('/deficiency/getChart26', 'DeficiencyController@getChart26');     
+    Route::post('/deficiency/getChart26', 'DeficiencyController@getChart26');  
+    Route::post('/deficiency/getChart27', 'DeficiencyController@getChart27');   
 
     Route::post('/selectLV1', 'AdvanceMenuController@selectLV1');
     Route::post('/selectLV2', 'AdvanceMenuController@selectLV2');

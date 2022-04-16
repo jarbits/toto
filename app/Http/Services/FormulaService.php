@@ -106,7 +106,7 @@ class FormulaService
         return $Set;
     }
 
-     /**
+    /**
      * 取得(Q4 = 1)SET
      */
     public function getQ4is1Set($StartTime, $EndTime, $Region=null, $Category=null, $Person=null)
@@ -115,6 +115,23 @@ class FormulaService
             SELECT * FROM rawsurvey AS T
             WHERE 1=1
             AND T.q4 = '1'
+            ".$this->advanceSearch($Region, $Category, $Person)."
+            AND T.start_time >= '".$StartTime."' 
+            AND T.end_time < '".$EndTime."'
+        ");
+
+        return $Set;
+    }
+
+    /**
+     * 取得(Q4 = 1)SET
+     */
+    public function getQ4is2Or3Set($StartTime, $EndTime, $Region=null, $Category=null, $Person=null)
+    {
+        $Set = DB::select("
+            SELECT * FROM rawsurvey AS T
+            WHERE 1=1
+            AND (T.q4 = '2' OR T.q4 = '3')
             ".$this->advanceSearch($Region, $Category, $Person)."
             AND T.start_time >= '".$StartTime."' 
             AND T.end_time < '".$EndTime."'
