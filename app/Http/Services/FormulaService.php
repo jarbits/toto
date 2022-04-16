@@ -140,7 +140,7 @@ class FormulaService
         return $Set;
     }
 
-     /**
+    /**
      * 取得(Q7 = 1)SET
      */
     public function getQ7is1Set($StartTime, $EndTime, $Region=null, $Category=null, $Person=null)
@@ -154,6 +154,22 @@ class FormulaService
             AND T.end_time < '".$EndTime."'
         ");
 
+        return $Set;
+    }
+
+    /**
+     * [Q8]不為空白的總數
+     */
+    public function getQ8isNotNullSet($StartTime, $EndTime, $Region=null, $Category=null, $Person=null)
+    {
+        $Set = DB::select("
+            SELECT * FROM rawsurvey AS T
+            WHERE 1=1
+            AND T.q8 IS NOT NULL
+            ".$this->advanceSearch($Region, $Category, $Person)."
+            AND T.start_time >= '".$StartTime."' 
+            AND T.end_time < '".$EndTime."'
+        ");
         return $Set;
     }
 
