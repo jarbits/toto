@@ -56,7 +56,12 @@ class AdvanceMenuController extends Controller
 
             foreach ($Set as $key => $value) {
                 // array_push($Data['data'], ['key'=>$value->s_category, 'value'=>$value->s_category]);
-                array_push($Data['data'], [ 'key'=>explode('-', $value->s_person)[0], 'value'=>explode('-', $value->s_person)[0] ]);
+                
+                $Catgory = explode('-', $value->s_person)[0];
+
+                if (!in_array($Catgory, $Data['data'])) {
+                    array_push($Data['data'], [ 'key'=>$Catgory, 'value'=>$Catgory ]);
+                }
             }
             $Data['next'] = 'false';
         }
