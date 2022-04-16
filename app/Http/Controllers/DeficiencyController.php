@@ -182,7 +182,7 @@ class DeficiencyController extends Controller
             'label' => $Calender,
             'datasets' => [
                 'type' => 'line',
-                'label' => '零件有瑕疵',
+                'label' => '零件需調貨',
                 'data' => $Q8NumVec
             ]
         ];
