@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Services\FormulaService;
+use App\RawSurvey;
+use Carbon\Carbon;
+use DateTime;
+use DB;
 
 class DeficiencyController extends Controller
 {
