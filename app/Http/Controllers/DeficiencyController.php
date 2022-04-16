@@ -57,7 +57,7 @@ class DeficiencyController extends Controller
                 'data' => $Q8NumVec
             ]
         ];
-        return json_encode($Data);
+        return json_encode($Data, JSON_UNESCAPED_UNICODE);
     }
 
     public function getChart2(Request $req)
