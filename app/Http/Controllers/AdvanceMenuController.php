@@ -110,7 +110,7 @@ class AdvanceMenuController extends Controller
             $Set = DB::select("
                 SELECT DISTINCT(s_person) FROM rawsurvey AS T
                 WHERE 1=1
-                AND T.s_category LIKE '%".$category."%'
+                AND T.s_person LIKE '%".$category."%'
             ");
 
             foreach ($Set as $key => $value) {
