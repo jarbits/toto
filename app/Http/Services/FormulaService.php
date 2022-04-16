@@ -19,12 +19,12 @@ class FormulaService
                 ";
         }
         if ($Category != null) {
-            $qStr = "
-                AND T.s_category = '".$Category."'
-                ";
             // $qStr = "
-            //     ND T.s_person LIKE '%".$Category."%'
+            //     AND T.s_category = '".$Category."'
             //     ";
+            $qStr = "
+                AND T.s_person LIKE '%".$Category."%'
+                ";
         }
         if ($Category != null && $Person != null) {
             $qStr = "
