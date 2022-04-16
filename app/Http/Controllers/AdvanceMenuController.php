@@ -51,7 +51,7 @@ class AdvanceMenuController extends Controller
             //     SELECT DISTINCT(s_category) FROM rawsurvey AS T
             // ");
             $Set = DB::select("
-                SELECT DISTINCT(s_person) FROM rawsurvey AS T
+                SELECT * FROM rawsurvey AS T
             ");
 
             foreach ($Set as $key => $value) {
