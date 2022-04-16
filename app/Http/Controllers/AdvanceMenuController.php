@@ -58,9 +58,7 @@ class AdvanceMenuController extends Controller
                 // array_push($Data['data'], ['key'=>$value->s_category, 'value'=>$value->s_category]);
                 
                 $Catgory = explode('-', $value->s_person)[0];
-                dd(in_array($Catgory, $Data['data']));
-
-                if (!in_array($Catgory, $Data['data'])) {
+                if (in_array($Catgory, $Data['data'])) {
                     array_push($Data['data'], [ 'key'=>$Catgory, 'value'=>$Catgory ]);
                 }
             }
