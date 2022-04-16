@@ -101,10 +101,16 @@ class AdvanceMenuController extends Controller
         $menu = $req->menu;
         $category = $req->category;
         if ($menu == '售服員') {
+            // $Set = DB::select("
+            //     SELECT DISTINCT(s_person) FROM rawsurvey AS T
+            //     WHERE 1=1
+            //     AND T.s_category = '".$category."'
+            // ");
+
             $Set = DB::select("
                 SELECT DISTINCT(s_person) FROM rawsurvey AS T
                 WHERE 1=1
-                AND T.s_category = '".$category."'
+                AND T.s_category LIKE '%".$category."%'
             ");
 
             foreach ($Set as $key => $value) {
