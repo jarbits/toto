@@ -54,11 +54,13 @@ class AdvanceMenuController extends Controller
                 SELECT DISTINCT(s_person) FROM rawsurvey AS T
             ");
 
+            $isExist = [];
             foreach ($Set as $key => $value) {
                 // array_push($Data['data'], ['key'=>$value->s_category, 'value'=>$value->s_category]);
                 
-                $Catgory =  explode('-', trim($value->s_person, " ") )[0];
-                if (in_array($Catgory, $Data['data'])) {
+                $Catgory =  explode('-', $value->s_person)[0];
+                if (in_array($Catgory, $isExist)) {
+                    array_push($isExist, $Catgory);
                     array_push($Data['data'], [ 'key'=>$Catgory, 'value'=>$Catgory ]);
                 }
             }
