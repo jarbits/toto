@@ -40,7 +40,7 @@ class APIController extends Controller
         $Data = [
             'value' => count($Qs)
         ];
-        return json_encode($Data);
+        return json_encode($Data, JSON_UNESCAPED_UNICODE);
     }
 
     /**
@@ -66,7 +66,7 @@ class APIController extends Controller
         $Data = [
             'value' => count($Qs)
         ];
-        return json_encode($Data);
+        return json_encode($Data, JSON_UNESCAPED_UNICODE);
     }
 
     /**
@@ -92,7 +92,7 @@ class APIController extends Controller
         $Data = [
             'value' => count($LowScore)
         ];
-        return json_encode($Data);
+        return json_encode($Data, JSON_UNESCAPED_UNICODE);
     }
 
     /**
@@ -139,7 +139,7 @@ class APIController extends Controller
                 'data' => $Q1Rate
             ]
         ];
-        return json_encode($Data);
+        return json_encode($Data, JSON_UNESCAPED_UNICODE);
     }
 
     /**
@@ -197,7 +197,7 @@ class APIController extends Controller
             ]
             
         ];
-        return json_encode($Data);
+        return json_encode($Data, JSON_UNESCAPED_UNICODE);
     }
 
     /**
@@ -255,7 +255,7 @@ class APIController extends Controller
                 'data' => $Q1RateVec
             ]
         ];
-        return json_encode($Data);
+        return json_encode($Data, JSON_UNESCAPED_UNICODE);
     }
 
     /**
@@ -368,7 +368,7 @@ class APIController extends Controller
                 ]
             ]
         ];            
-        return json_encode($Data);
+        return json_encode($Data, JSON_UNESCAPED_UNICODE);
     }
 
     /**
@@ -446,7 +446,7 @@ class APIController extends Controller
                 ]
             ]
         ];            
-        return json_encode($Data);
+        return json_encode($Data, JSON_UNESCAPED_UNICODE);
     }
 
     /**
@@ -491,7 +491,7 @@ class APIController extends Controller
                 ]
             ]
         ];            
-        return json_encode($Data);
+        return json_encode($Data, JSON_UNESCAPED_UNICODE);
     }
 
     /**
@@ -553,7 +553,7 @@ class APIController extends Controller
                 ]
             ]
         ];            
-        return json_encode($Data);
+        return json_encode($Data, JSON_UNESCAPED_UNICODE);
     }
 
     /**
@@ -636,7 +636,7 @@ class APIController extends Controller
                 ]
             ]
         ];            
-        return json_encode($Data);
+        return json_encode($Data, JSON_UNESCAPED_UNICODE);
     }
 
     /**
@@ -680,6 +680,6 @@ class APIController extends Controller
                 'data' => $Q1Rate
             ]
         ];
-        return json_encode($Data);
+        return json_encode($Data, JSON_UNESCAPED_UNICODE);
     }
 }
