@@ -103,10 +103,47 @@ class DeficiencyController extends Controller
         return json_encode($Data, JSON_UNESCAPED_UNICODE);
     }
 
+    /**
+     * 零件有瑕疵：[Q8]=2的總數
+     */
     public function getChart3(Request $req)
     {
-        $Data = ['OK'];
-        return json_encode($Data);
+        $Q8NumVec = array();
+        $Calender = array();
+
+        $NowYear = date('Y', strtotime($req->StartTime));
+        $NowMonth = date('m', strtotime($req->StartTime));
+        $EndMonth = date('m', strtotime($req->EndTime));
+
+        $i_start = $NowMonth;
+        for($i=$i_start; $i<=$EndMonth; $i++)
+        {
+            $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
+            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
+
+            $Q8s = $this->FormulaService->getQ8is2Set(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
+
+            $Q8Num = count($Q8s);
+            array_push($Q8NumVec, $Q8Num);
+            array_push($Calender, date('Y/m', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00')));
+            $NowMonth++;
+        }
+        
+        $Data = [
+            'label' => $Calender,
+            'datasets' => [
+                'type' => 'line',
+                'label' => '零件有瑕疵',
+                'data' => $Q8NumVec
+            ]
+        ];
+        return json_encode($Data, JSON_UNESCAPED_UNICODE);
     }
 
     public function getChart4(Request $req)

@@ -189,6 +189,22 @@ class FormulaService
         return $Set;
     }
 
+    /**
+     * 零件有瑕疵：[Q8]=2的總數
+     */
+    public function getQ8is2Set($StartTime, $EndTime, $Region=null, $Category=null, $Person=null)
+    {
+        $Set = DB::select("
+            SELECT * FROM rawsurvey AS T
+            WHERE 1=1
+            AND T.q8 = 2
+            ".$this->advanceSearch($Region, $Category, $Person)."
+            AND T.start_time >= '".$StartTime."' 
+            AND T.end_time < '".$EndTime."'
+        ");
+        return $Set;
+    }
+
     ### NPS Set ###
     /**
      * Q13 <= 6
