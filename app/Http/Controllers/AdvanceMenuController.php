@@ -47,12 +47,17 @@ class AdvanceMenuController extends Controller
             $Data['next'] = 'false';
         }
         if ($menu == '經銷') {
+            // $Set = DB::select("
+            //     SELECT DISTINCT(s_category) FROM rawsurvey AS T
+            // ");
             $Set = DB::select("
                 SELECT DISTINCT(s_person) FROM rawsurvey AS T
             ");
 
             $isExist = [];
             foreach ($Set as $key => $value) {
+                // array_push($Data['data'], ['key'=>$value->s_category, 'value'=>$value->s_category]);
+                
                 $Catgory =  explode('-', $value->s_person)[0];
                 if (!in_array($Catgory, $isExist)) {
                     array_push($isExist, $Catgory);
@@ -62,24 +67,16 @@ class AdvanceMenuController extends Controller
             $Data['next'] = 'false';
         }
         if ($menu == '售服員') {
-            // $Set = DB::select("
-            //     SELECT DISTINCT(s_category) FROM rawsurvey AS T
-            // ");
             $Set = DB::select("
-                SELECT DISTINCT(s_person) FROM rawsurvey AS T
+                SELECT DISTINCT(s_category) FROM rawsurvey AS T
             ");
+            // $Set = DB::select("
+            //     SELECT DISTINCT(s_person) FROM rawsurvey AS T
+            // ");
 
-            // foreach ($Set as $key => $value) {
-            //     array_push($Data['data'], ['key'=>$value->s_category, 'value'=>$value->s_category]);
-            // }
-
-            $isExist = [];
             foreach ($Set as $key => $value) {
-                $Catgory =  explode('-', $value->s_person)[0];
-                if (!in_array($Catgory, $isExist)) {
-                    array_push($isExist, $Catgory);
-                    array_push($Data['data'], [ 'key'=>$Catgory, 'value'=>$Catgory ]);
-                }
+                array_push($Data['data'], ['key'=>$value->s_category, 'value'=>$value->s_category]);
+                // array_push($Data['data'], [ 'key'=>explode('-', $value->s_person)[0], 'value'=>$value->explode('-', $value->s_person)[0] ]);
             }
             $Data['next'] = 'true';
         }
