@@ -604,6 +604,22 @@ class FormulaService
         return $Set;
     }
 
+    /**
+     * 顯示[Q8_9]不為空白的資料(表格)
+     */
+    public function getQ8_9NotNullSet($StartTime, $EndTime, $Region=null, $Category=null, $Person=null)
+    {
+        $Set = DB::select("
+            SELECT * FROM rawsurvey AS T
+            WHERE 1=1
+            AND T.q8_9 IS NOT NULL
+            ".$this->advanceSearch($Region, $Category, $Person)."
+            AND T.start_time >= '".$StartTime."'
+            AND T.end_time < '".$EndTime."'
+        ");
+        return $Set;
+    }
+
     ### NPS Set ###
     /**
      * Q13 <= 6

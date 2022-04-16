@@ -9,6 +9,13 @@ use Carbon\Carbon;
 use DateTime;
 use DB;
 
+class TableOtherReason {
+    public $CreateTime = "";
+    public $Category = "";
+    public $Person = "";
+    public $Reason = "";
+}
+
 class DeficiencyController extends Controller
 {
     public $FormulaService;
@@ -1175,6 +1182,53 @@ class DeficiencyController extends Controller
                 'type' => 'line',
                 'label' => '全部總計',
                 'data' => $Q8NumVec
+            ]
+        ];
+        return json_encode($Data, JSON_UNESCAPED_UNICODE);
+    }
+
+    ###表格###
+    /**
+     * 顯示[Q8_9]不為空白的資料
+     */
+    public function getTable1(Request $req)
+    {
+        $TableData = array();
+        $Calender = array();
+
+        $NowYear = date('Y', strtotime($req->StartTime));
+        $NowMonth = date('m', strtotime($req->StartTime));
+        $EndYear = date('Y', strtotime($req->EndTime));
+        $EndMonth = date('m', strtotime($req->EndTime));
+
+        $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
+        $D2 = date('Y-m-d', strtotime($EndYear.'-'.($EndMonth+1).'-01 00:00:00'));
+
+        $Result = $this->FormulaService->getQ8_9NotNullSet(
+            $D1, 
+            $D2, 
+            $req->Region,
+            $req->Category,
+            $req->Person
+        );
+
+        $TableData = array();
+        foreach ($Result as $row) {
+            $Obj = new TableOtherReason();
+            $Obj->CreateTime = $row->start_time;
+            $Obj->Category = explode('-', $row->s_person)[0];
+            $Obj->Person = explode('-', $row->s_person)[1];
+            $Obj->Reason = $row->q14;
+
+            array_push($TableData, $Obj);
+        }
+
+        $Data = [
+            'label' => Null,
+            'datasets' => [
+                'type' => 'Table',
+                'label' => '其他原因查詢',
+                'data' => $TableData
             ]
         ];
         return json_encode($Data, JSON_UNESCAPED_UNICODE);
