@@ -52,7 +52,8 @@ class AdvanceMenuController extends Controller
             ");
 
             foreach ($Set as $key => $value) {
-                array_push($Data['data'], ['key'=>$value->s_category, 'value'=>$value->s_category]);
+                // array_push($Data['data'], ['key'=>$value->s_category, 'value'=>$value->s_category]);
+                array_push($Data['data'], [ 'key'=>explode('-', $value->s_person)[0], 'value'=>$value->explode('-', $value->s_person)[0] ]);
             }
             $Data['next'] = 'false';
         }
@@ -62,7 +63,8 @@ class AdvanceMenuController extends Controller
             ");
 
             foreach ($Set as $key => $value) {
-                array_push($Data['data'], ['key'=>$value->s_category, 'value'=>$value->s_category]);
+                // array_push($Data['data'], ['key'=>$value->s_category, 'value'=>$value->s_category]);
+                array_push($Data['data'], [ 'key'=>explode('-', $value->s_person)[0], 'value'=>$value->explode('-', $value->s_person)[0] ]);
             }
             $Data['next'] = 'true';
         }
