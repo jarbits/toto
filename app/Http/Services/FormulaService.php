@@ -23,7 +23,7 @@ class FormulaService
             //     AND T.s_category = '".$Category."'
             //     ";
             $qStr = "
-                ND T.s_person LIKE '%".$Person."%'
+                ND T.s_person LIKE '%".$Category."%'
                 ";
         }
         if ($Category != null && $Person != null) {
@@ -32,7 +32,7 @@ class FormulaService
             //     AND T.s_person = '".$Person."'
             //     ";
             $qStr = "
-                AND T.s_category = '".$Category."'
+                AND T.s_person = '".$Category."'
                 AND T.s_person LIKE '%".$Person."%'
                 ";
         }
