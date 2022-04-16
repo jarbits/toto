@@ -253,6 +253,231 @@ class FormulaService
         return $Set;
     }
 
+    /**
+     * 商品故障嚴重尚在評估：[Q8]=6的總數
+     */
+    public function getQ8is6Set($StartTime, $EndTime, $Region=null, $Category=null, $Person=null)
+    {
+        $Set = DB::select("
+            SELECT * FROM rawsurvey AS T
+            WHERE 1=1
+            AND T.q8 = '6'
+            ".$this->advanceSearch($Region, $Category, $Person)."
+            AND T.start_time >= '".$StartTime."'
+            AND T.end_time < '".$EndTime."'
+        ");
+        return $Set;
+    }
+
+    /**
+     * 零件非日本製：[Q8]=7的總數
+     */
+    public function getQ8is7Set($StartTime, $EndTime, $Region=null, $Category=null, $Person=null)
+    {
+        $Set = DB::select("
+            SELECT * FROM rawsurvey AS T
+            WHERE 1=1
+            AND T.q8 = '7'
+            ".$this->advanceSearch($Region, $Category, $Person)."
+            AND T.start_time >= '".$StartTime."'
+            AND T.end_time < '".$EndTime."'
+        ");
+        return $Set;
+    }
+
+    /**
+     * 先來確認故障狀況：[Q8]=8的總數
+     */
+    public function getQ8is8Set($StartTime, $EndTime, $Region=null, $Category=null, $Person=null)
+    {
+        $Set = DB::select("
+            SELECT * FROM rawsurvey AS T
+            WHERE 1=1
+            AND T.q8 = '8'
+            ".$this->advanceSearch($Region, $Category, $Person)."
+            AND T.start_time >= '".$StartTime."'
+            AND T.end_time < '".$EndTime."'
+        ");
+        return $Set;
+    }
+
+    /**
+     * 商品無法安裝：[Q8]=10的總數
+     */
+    public function getQ8is10Set($StartTime, $EndTime, $Region=null, $Category=null, $Person=null)
+    {
+        $Set = DB::select("
+            SELECT * FROM rawsurvey AS T
+            WHERE 1=1
+            AND T.q8 = '10'
+            ".$this->advanceSearch($Region, $Category, $Person)."
+            AND T.start_time >= '".$StartTime."'
+            AND T.end_time < '".$EndTime."'
+        ");
+        return $Set;
+    }
+
+    /**
+     * 維修後產生其他故障問題：[Q8]=11的總數
+     */
+    public function getQ8is11Set($StartTime, $EndTime, $Region=null, $Category=null, $Person=null)
+    {
+        $Set = DB::select("
+            SELECT * FROM rawsurvey AS T
+            WHERE 1=1
+            AND T.q8 = '11'
+            ".$this->advanceSearch($Region, $Category, $Person)."
+            AND T.start_time >= '".$StartTime."'
+            AND T.end_time < '".$EndTime."'
+        ");
+        return $Set;
+    }
+
+    /**
+     * 商品無法維修：[Q8]=12的總數
+     */
+    public function getQ8is12Set($StartTime, $EndTime, $Region=null, $Category=null, $Person=null)
+    {
+        $Set = DB::select("
+            SELECT * FROM rawsurvey AS T
+            WHERE 1=1
+            AND T.q8 = '12'
+            ".$this->advanceSearch($Region, $Category, $Person)."
+            AND T.start_time >= '".$StartTime."'
+            AND T.end_time < '".$EndTime."'
+        ");
+        return $Set;
+    }
+
+    /**
+     * 零件停產無法維修：[Q8]=13的總數
+     */
+    public function getQ8is13Set($StartTime, $EndTime, $Region=null, $Category=null, $Person=null)
+    {
+        $Set = DB::select("
+            SELECT * FROM rawsurvey AS T
+            WHERE 1=1
+            AND T.q8 = '13'
+            ".$this->advanceSearch($Region, $Category, $Person)."
+            AND T.start_time >= '".$StartTime."'
+            AND T.end_time < '".$EndTime."'
+        ");
+        return $Set;
+    }
+
+    /**
+     * 維修人員蓄意破壞產品：[Q8]=14的總數
+     */
+    public function getQ8is14Set($StartTime, $EndTime, $Region=null, $Category=null, $Person=null)
+    {
+        $Set = DB::select("
+            SELECT * FROM rawsurvey AS T
+            WHERE 1=1
+            AND T.q8 = '14'
+            ".$this->advanceSearch($Region, $Category, $Person)."
+            AND T.start_time >= '".$StartTime."'
+            AND T.end_time < '".$EndTime."'
+        ");
+        return $Set;
+    }
+
+    /**
+     * 維修人員沒有來：[Q8]=15的總數
+     */
+    public function getQ8is15Set($StartTime, $EndTime, $Region=null, $Category=null, $Person=null)
+    {
+        $Set = DB::select("
+            SELECT * FROM rawsurvey AS T
+            WHERE 1=1
+            AND T.q8 = '15'
+            ".$this->advanceSearch($Region, $Category, $Person)."
+            AND T.start_time >= '".$StartTime."'
+            AND T.end_time < '".$EndTime."'
+        ");
+        return $Set;
+    }
+
+    /**
+     * 需水電配合：[Q8]=16的總數
+     */
+    public function getQ8is16Set($StartTime, $EndTime, $Region=null, $Category=null, $Person=null)
+    {
+        $Set = DB::select("
+            SELECT * FROM rawsurvey AS T
+            WHERE 1=1
+            AND T.q8 = '16'
+            ".$this->advanceSearch($Region, $Category, $Person)."
+            AND T.start_time >= '".$StartTime."'
+            AND T.end_time < '".$EndTime."'
+        ");
+        return $Set;
+    }
+
+    /**
+     * 顧客尚在考慮：[Q8]=17的總數
+     */
+    public function getQ8is17Set($StartTime, $EndTime, $Region=null, $Category=null, $Person=null)
+    {
+        $Set = DB::select("
+            SELECT * FROM rawsurvey AS T
+            WHERE 1=1
+            AND T.q8 = '17'
+            ".$this->advanceSearch($Region, $Category, $Person)."
+            AND T.start_time >= '".$StartTime."'
+            AND T.end_time < '".$EndTime."'
+        ");
+        return $Set;
+    }
+
+    /**
+     * 另外安排維修人員：[Q8]=18的總數
+     */
+    public function getQ8is18Set($StartTime, $EndTime, $Region=null, $Category=null, $Person=null)
+    {
+        $Set = DB::select("
+            SELECT * FROM rawsurvey AS T
+            WHERE 1=1
+            AND T.q8 = '18'
+            ".$this->advanceSearch($Region, $Category, $Person)."
+            AND T.start_time >= '".$StartTime."'
+            AND T.end_time < '".$EndTime."'
+        ");
+        return $Set;
+    }
+
+    /**
+     * 其他：[Q8]=9 & 97的總數
+     */
+    public function getQ8is9And97Set($StartTime, $EndTime, $Region=null, $Category=null, $Person=null)
+    {
+        $Set = DB::select("
+            SELECT * FROM rawsurvey AS T
+            WHERE 1=1
+            AND T.q8 = '9'
+            AND T.q8 = '97'
+            ".$this->advanceSearch($Region, $Category, $Person)."
+            AND T.start_time >= '".$StartTime."'
+            AND T.end_time < '".$EndTime."'
+        ");
+        return $Set;
+    }
+
+    /**
+     * 不知道：[Q8]=98的總數
+     */
+    public function getQ8is98Set($StartTime, $EndTime, $Region=null, $Category=null, $Person=null)
+    {
+        $Set = DB::select("
+            SELECT * FROM rawsurvey AS T
+            WHERE 1=1
+            AND T.q8 = '98'
+            ".$this->advanceSearch($Region, $Category, $Person)."
+            AND T.start_time >= '".$StartTime."'
+            AND T.end_time < '".$EndTime."'
+        ");
+        return $Set;
+    }
+
     ### NPS Set ###
     /**
      * Q13 <= 6
