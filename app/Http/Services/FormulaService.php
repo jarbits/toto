@@ -19,22 +19,22 @@ class FormulaService
                 ";
         }
         if ($Category != null) {
-            // $qStr = "
-            //     AND T.s_category = '".$Category."'
-            //     ";
             $qStr = "
-                ND T.s_person LIKE '%".$Category."%'
+                AND T.s_category = '".$Category."'
                 ";
+            // $qStr = "
+            //     ND T.s_person LIKE '%".$Category."%'
+            //     ";
         }
         if ($Category != null && $Person != null) {
-            // $qStr = "
-            //     AND T.s_category = '".$Category."'
-            //     AND T.s_person = '".$Person."'
-            //     ";
             $qStr = "
-                AND T.s_person = '".$Category."'
-                AND T.s_person LIKE '%".$Person."%'
+                AND T.s_category = '".$Category."'
+                AND T.s_person = '".$Person."'
                 ";
+            // $qStr = "
+            //     AND T.s_person = '".$Category."'
+            //     AND T.s_person LIKE '%".$Person."%'
+            //     ";
         }
         return $qStr;
     }
