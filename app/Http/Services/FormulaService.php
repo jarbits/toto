@@ -205,6 +205,38 @@ class FormulaService
         return $Set;
     }
 
+    /**
+     * 零件有瑕疵：[Q8]=3的總數
+     */
+    public function getQ8is3Set($StartTime, $EndTime, $Region=null, $Category=null, $Person=null)
+    {
+        $Set = DB::select("
+            SELECT * FROM rawsurvey AS T
+            WHERE 1=1
+            AND T.q8 = 3
+            ".$this->advanceSearch($Region, $Category, $Person)."
+            AND T.start_time >= '".$StartTime."'
+            AND T.end_time < '".$EndTime."'
+        ");
+        return $Set;
+    }
+
+    /**
+     * 未攜帶適合的工具：[Q8]=4的總數
+     */
+    public function getQ8is4Set($StartTime, $EndTime, $Region=null, $Category=null, $Person=null)
+    {
+        $Set = DB::select("
+            SELECT * FROM rawsurvey AS T
+            WHERE 1=1
+            AND T.q8 = 4
+            ".$this->advanceSearch($Region, $Category, $Person)."
+            AND T.start_time >= '".$StartTime."'
+            AND T.end_time < '".$EndTime."'
+        ");
+        return $Set;
+    }
+
     ### NPS Set ###
     /**
      * Q13 <= 6
