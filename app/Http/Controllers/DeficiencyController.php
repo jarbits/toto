@@ -361,76 +361,520 @@ class DeficiencyController extends Controller
         return json_encode($Data, JSON_UNESCAPED_UNICODE);
     }
 
+    /**
+     * 先來確認故障狀況：[Q8]=8的總數
+     */
     public function getChart9(Request $req)
     {
-        $Data = ['OK'];
-        return json_encode($Data);
+        $Q8NumVec = array();
+        $Calender = array();
+
+        $NowYear = date('Y', strtotime($req->StartTime));
+        $NowMonth = date('m', strtotime($req->StartTime));
+        $EndMonth = date('m', strtotime($req->EndTime));
+
+        $i_start = $NowMonth;
+        for($i=$i_start; $i<=$EndMonth; $i++)
+        {
+            $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
+            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
+
+            $Q8s = $this->FormulaService->getQ8is8Set(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
+
+            $Q8Num = count($Q8s);
+            array_push($Q8NumVec, $Q8Num);
+            array_push($Calender, date('Y/m', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00')));
+            $NowMonth++;
+        }
+        
+        $Data = [
+            'label' => $Calender,
+            'datasets' => [
+                'type' => 'line',
+                'label' => '先來確認故障狀況',
+                'data' => $Q8NumVec
+            ]
+        ];
+        return json_encode($Data, JSON_UNESCAPED_UNICODE);
     }
 
+    /**
+     * 商品無法安裝：[Q8]=10的總數
+     */
     public function getChart10(Request $req)
     {
-        $Data = ['OK'];
-        return json_encode($Data);
+        $Q8NumVec = array();
+        $Calender = array();
+
+        $NowYear = date('Y', strtotime($req->StartTime));
+        $NowMonth = date('m', strtotime($req->StartTime));
+        $EndMonth = date('m', strtotime($req->EndTime));
+
+        $i_start = $NowMonth;
+        for($i=$i_start; $i<=$EndMonth; $i++)
+        {
+            $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
+            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
+
+            $Q8s = $this->FormulaService->getQ8is10Set(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
+
+            $Q8Num = count($Q8s);
+            array_push($Q8NumVec, $Q8Num);
+            array_push($Calender, date('Y/m', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00')));
+            $NowMonth++;
+        }
+        
+        $Data = [
+            'label' => $Calender,
+            'datasets' => [
+                'type' => 'line',
+                'label' => '商品無法安裝',
+                'data' => $Q8NumVec
+            ]
+        ];
+        return json_encode($Data, JSON_UNESCAPED_UNICODE);
     }
     
+    /**
+     * 維修後產生其他故障問題：[Q8]=11的總數
+     */
     public function getChart11(Request $req)
     {
-        $Data = ['OK'];
-        return json_encode($Data);
+        $Q8NumVec = array();
+        $Calender = array();
+
+        $NowYear = date('Y', strtotime($req->StartTime));
+        $NowMonth = date('m', strtotime($req->StartTime));
+        $EndMonth = date('m', strtotime($req->EndTime));
+
+        $i_start = $NowMonth;
+        for($i=$i_start; $i<=$EndMonth; $i++)
+        {
+            $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
+            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
+
+            $Q8s = $this->FormulaService->getQ8is11Set(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
+
+            $Q8Num = count($Q8s);
+            array_push($Q8NumVec, $Q8Num);
+            array_push($Calender, date('Y/m', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00')));
+            $NowMonth++;
+        }
+        
+        $Data = [
+            'label' => $Calender,
+            'datasets' => [
+                'type' => 'line',
+                'label' => '維修後產生其他故障問題',
+                'data' => $Q8NumVec
+            ]
+        ];
+        return json_encode($Data, JSON_UNESCAPED_UNICODE);
     }
 
+    /**
+     * 商品無法維修：[Q8]=12的總數
+     */
     public function getChart12(Request $req)
     {
-        $Data = ['OK'];
-        return json_encode($Data);
+        $Q8NumVec = array();
+        $Calender = array();
+
+        $NowYear = date('Y', strtotime($req->StartTime));
+        $NowMonth = date('m', strtotime($req->StartTime));
+        $EndMonth = date('m', strtotime($req->EndTime));
+
+        $i_start = $NowMonth;
+        for($i=$i_start; $i<=$EndMonth; $i++)
+        {
+            $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
+            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
+
+            $Q8s = $this->FormulaService->getQ8is12Set(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
+
+            $Q8Num = count($Q8s);
+            array_push($Q8NumVec, $Q8Num);
+            array_push($Calender, date('Y/m', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00')));
+            $NowMonth++;
+        }
+        
+        $Data = [
+            'label' => $Calender,
+            'datasets' => [
+                'type' => 'line',
+                'label' => '商品無法維修',
+                'data' => $Q8NumVec
+            ]
+        ];
+        return json_encode($Data, JSON_UNESCAPED_UNICODE);
     }
 
+    /**
+     * 零件停產無法維修：[Q8]=13的總數
+     */
     public function getChart13(Request $req)
     {
-        $Data = ['OK'];
-        return json_encode($Data);
+        $Q8NumVec = array();
+        $Calender = array();
+
+        $NowYear = date('Y', strtotime($req->StartTime));
+        $NowMonth = date('m', strtotime($req->StartTime));
+        $EndMonth = date('m', strtotime($req->EndTime));
+
+        $i_start = $NowMonth;
+        for($i=$i_start; $i<=$EndMonth; $i++)
+        {
+            $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
+            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
+
+            $Q8s = $this->FormulaService->getQ8is13Set(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
+
+            $Q8Num = count($Q8s);
+            array_push($Q8NumVec, $Q8Num);
+            array_push($Calender, date('Y/m', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00')));
+            $NowMonth++;
+        }
+        
+        $Data = [
+            'label' => $Calender,
+            'datasets' => [
+                'type' => 'line',
+                'label' => '零件停產無法維修',
+                'data' => $Q8NumVec
+            ]
+        ];
+        return json_encode($Data, JSON_UNESCAPED_UNICODE);
     }
 
+    /**
+     * 維修人員蓄意破壞產品：[Q8]=14的總數
+     */
     public function getChart14(Request $req)
     {
-        $Data = ['OK'];
-        return json_encode($Data);
+        $Q8NumVec = array();
+        $Calender = array();
+
+        $NowYear = date('Y', strtotime($req->StartTime));
+        $NowMonth = date('m', strtotime($req->StartTime));
+        $EndMonth = date('m', strtotime($req->EndTime));
+
+        $i_start = $NowMonth;
+        for($i=$i_start; $i<=$EndMonth; $i++)
+        {
+            $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
+            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
+
+            $Q8s = $this->FormulaService->getQ8is14Set(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
+
+            $Q8Num = count($Q8s);
+            array_push($Q8NumVec, $Q8Num);
+            array_push($Calender, date('Y/m', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00')));
+            $NowMonth++;
+        }
+        
+        $Data = [
+            'label' => $Calender,
+            'datasets' => [
+                'type' => 'line',
+                'label' => '維修人員蓄意破壞產品',
+                'data' => $Q8NumVec
+            ]
+        ];
+        return json_encode($Data, JSON_UNESCAPED_UNICODE);
     }
 
+    /**
+     * 維修人員沒有來：[Q8]=15的總數
+     */
     public function getChart15(Request $req)
     {
-        $Data = ['OK'];
-        return json_encode($Data);
+        $Q8NumVec = array();
+        $Calender = array();
+
+        $NowYear = date('Y', strtotime($req->StartTime));
+        $NowMonth = date('m', strtotime($req->StartTime));
+        $EndMonth = date('m', strtotime($req->EndTime));
+
+        $i_start = $NowMonth;
+        for($i=$i_start; $i<=$EndMonth; $i++)
+        {
+            $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
+            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
+
+            $Q8s = $this->FormulaService->getQ8is15Set(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
+
+            $Q8Num = count($Q8s);
+            array_push($Q8NumVec, $Q8Num);
+            array_push($Calender, date('Y/m', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00')));
+            $NowMonth++;
+        }
+        
+        $Data = [
+            'label' => $Calender,
+            'datasets' => [
+                'type' => 'line',
+                'label' => '維修人員沒有來',
+                'data' => $Q8NumVec
+            ]
+        ];
+        return json_encode($Data, JSON_UNESCAPED_UNICODE);
     }
 
+    /**
+     * 需水電配合：[Q8]=16的總數
+     */
     public function getChart16(Request $req)
     {
-        $Data = ['OK'];
-        return json_encode($Data);
+        $Q8NumVec = array();
+        $Calender = array();
+
+        $NowYear = date('Y', strtotime($req->StartTime));
+        $NowMonth = date('m', strtotime($req->StartTime));
+        $EndMonth = date('m', strtotime($req->EndTime));
+
+        $i_start = $NowMonth;
+        for($i=$i_start; $i<=$EndMonth; $i++)
+        {
+            $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
+            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
+
+            $Q8s = $this->FormulaService->getQ8is16Set(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
+
+            $Q8Num = count($Q8s);
+            array_push($Q8NumVec, $Q8Num);
+            array_push($Calender, date('Y/m', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00')));
+            $NowMonth++;
+        }
+        
+        $Data = [
+            'label' => $Calender,
+            'datasets' => [
+                'type' => 'line',
+                'label' => '需水電配合',
+                'data' => $Q8NumVec
+            ]
+        ];
+        return json_encode($Data, JSON_UNESCAPED_UNICODE);
     }
 
+    /**
+     * 顧客尚在考慮：[Q8]=17的總數
+     */
     public function getChart17(Request $req)
     {
-        $Data = ['OK'];
-        return json_encode($Data);
+        $Q8NumVec = array();
+        $Calender = array();
+
+        $NowYear = date('Y', strtotime($req->StartTime));
+        $NowMonth = date('m', strtotime($req->StartTime));
+        $EndMonth = date('m', strtotime($req->EndTime));
+
+        $i_start = $NowMonth;
+        for($i=$i_start; $i<=$EndMonth; $i++)
+        {
+            $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
+            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
+
+            $Q8s = $this->FormulaService->getQ8is17Set(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
+
+            $Q8Num = count($Q8s);
+            array_push($Q8NumVec, $Q8Num);
+            array_push($Calender, date('Y/m', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00')));
+            $NowMonth++;
+        }
+        
+        $Data = [
+            'label' => $Calender,
+            'datasets' => [
+                'type' => 'line',
+                'label' => '顧客尚在考慮',
+                'data' => $Q8NumVec
+            ]
+        ];
+        return json_encode($Data, JSON_UNESCAPED_UNICODE);
     }
 
+    /**
+     * 另外安排維修人員：[Q8]=18的總數
+     */
     public function getChart18(Request $req)
     {
-        $Data = ['OK'];
-        return json_encode($Data);
+        $Q8NumVec = array();
+        $Calender = array();
+
+        $NowYear = date('Y', strtotime($req->StartTime));
+        $NowMonth = date('m', strtotime($req->StartTime));
+        $EndMonth = date('m', strtotime($req->EndTime));
+
+        $i_start = $NowMonth;
+        for($i=$i_start; $i<=$EndMonth; $i++)
+        {
+            $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
+            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
+
+            $Q8s = $this->FormulaService->getQ8is18Set(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
+
+            $Q8Num = count($Q8s);
+            array_push($Q8NumVec, $Q8Num);
+            array_push($Calender, date('Y/m', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00')));
+            $NowMonth++;
+        }
+        
+        $Data = [
+            'label' => $Calender,
+            'datasets' => [
+                'type' => 'line',
+                'label' => '另外安排維修人員',
+                'data' => $Q8NumVec
+            ]
+        ];
+        return json_encode($Data, JSON_UNESCAPED_UNICODE);
     }
 
+    /**
+     * 其他：[Q8]=9 & 97的總數
+     */
     public function getChart19(Request $req)
     {
-        $Data = ['OK'];
-        return json_encode($Data);
+        $Q8NumVec = array();
+        $Calender = array();
+
+        $NowYear = date('Y', strtotime($req->StartTime));
+        $NowMonth = date('m', strtotime($req->StartTime));
+        $EndMonth = date('m', strtotime($req->EndTime));
+
+        $i_start = $NowMonth;
+        for($i=$i_start; $i<=$EndMonth; $i++)
+        {
+            $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
+            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
+
+            $Q8s = $this->FormulaService->getQ8is9And97Set(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
+
+            $Q8Num = count($Q8s);
+            array_push($Q8NumVec, $Q8Num);
+            array_push($Calender, date('Y/m', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00')));
+            $NowMonth++;
+        }
+        
+        $Data = [
+            'label' => $Calender,
+            'datasets' => [
+                'type' => 'line',
+                'label' => '其他',
+                'data' => $Q8NumVec
+            ]
+        ];
+        return json_encode($Data, JSON_UNESCAPED_UNICODE);
     }
 
+    /**
+     * 不知道：[Q8]=98的總數
+     */
     public function getChart20(Request $req)
     {
-        $Data = ['OK'];
-        return json_encode($Data);
+        $Q8NumVec = array();
+        $Calender = array();
+
+        $NowYear = date('Y', strtotime($req->StartTime));
+        $NowMonth = date('m', strtotime($req->StartTime));
+        $EndMonth = date('m', strtotime($req->EndTime));
+
+        $i_start = $NowMonth;
+        for($i=$i_start; $i<=$EndMonth; $i++)
+        {
+            $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
+            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
+
+            $Q8s = $this->FormulaService->getQ8is98Set(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
+
+            $Q8Num = count($Q8s);
+            array_push($Q8NumVec, $Q8Num);
+            array_push($Calender, date('Y/m', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00')));
+            $NowMonth++;
+        }
+        
+        $Data = [
+            'label' => $Calender,
+            'datasets' => [
+                'type' => 'line',
+                'label' => '不知道',
+                'data' => $Q8NumVec
+            ]
+        ];
+        return json_encode($Data, JSON_UNESCAPED_UNICODE);
     }
 
     public function getChart21(Request $req)
