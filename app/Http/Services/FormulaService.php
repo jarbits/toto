@@ -237,6 +237,22 @@ class FormulaService
         return $Set;
     }
 
+    /**
+     * 人員專業度不足：[Q8]=5的總數
+     */
+    public function getQ8is5Set($StartTime, $EndTime, $Region=null, $Category=null, $Person=null)
+    {
+        $Set = DB::select("
+            SELECT * FROM rawsurvey AS T
+            WHERE 1=1
+            AND T.q8 = '5'
+            ".$this->advanceSearch($Region, $Category, $Person)."
+            AND T.start_time >= '".$StartTime."'
+            AND T.end_time < '".$EndTime."'
+        ");
+        return $Set;
+    }
+
     ### NPS Set ###
     /**
      * Q13 <= 6
