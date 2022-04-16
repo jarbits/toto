@@ -181,7 +181,7 @@ class FormulaService
         $Set = DB::select("
             SELECT * FROM rawsurvey AS T
             WHERE 1=1
-            AND T.q8 = 1
+            AND T.q8 = '1'
             ".$this->advanceSearch($Region, $Category, $Person)."
             AND T.start_time >= '".$StartTime."' 
             AND T.end_time < '".$EndTime."'
@@ -197,7 +197,7 @@ class FormulaService
         $Set = DB::select("
             SELECT * FROM rawsurvey AS T
             WHERE 1=1
-            AND T.q8 = 2
+            AND T.q8 = '2'
             ".$this->advanceSearch($Region, $Category, $Person)."
             AND T.start_time >= '".$StartTime."' 
             AND T.end_time < '".$EndTime."'
@@ -213,7 +213,7 @@ class FormulaService
         $Set = DB::select("
             SELECT * FROM rawsurvey AS T
             WHERE 1=1
-            AND T.q8 = 3
+            AND T.q8 = '3'
             ".$this->advanceSearch($Region, $Category, $Person)."
             AND T.start_time >= '".$StartTime."'
             AND T.end_time < '".$EndTime."'
@@ -229,7 +229,7 @@ class FormulaService
         $Set = DB::select("
             SELECT * FROM rawsurvey AS T
             WHERE 1=1
-            AND T.q8 = 4
+            AND T.q8 = '4'
             ".$this->advanceSearch($Region, $Category, $Person)."
             AND T.start_time >= '".$StartTime."'
             AND T.end_time < '".$EndTime."'
