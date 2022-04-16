@@ -141,6 +141,108 @@ class FormulaService
     }
 
     /**
+     * 整體：[Q6]不為9的總數
+     */
+    public function getQ6isNot9Set($StartTime, $EndTime, $Region=null, $Category=null, $Person=null)
+    {
+        $Set = DB::select("
+            SELECT * FROM rawsurvey AS T
+            WHERE 1=1
+            AND T.q6 != '9'
+            ".$this->advanceSearch($Region, $Category, $Person)."
+            AND T.start_time >= '".$StartTime."' 
+            AND T.end_time < '".$EndTime."'
+        ");
+
+        return $Set;
+    }
+
+    /**
+     * 沒有配戴識別證：[Q6]內容中含有5即符合
+     */
+    public function getQ6isLike5Set($StartTime, $EndTime, $Region=null, $Category=null, $Person=null)
+    {
+        $Set = DB::select("
+            SELECT * FROM rawsurvey AS T
+            WHERE 1=1
+            AND T.q6 LIKE '%5%'
+            ".$this->advanceSearch($Region, $Category, $Person)."
+            AND T.start_time >= '".$StartTime."' 
+            AND T.end_time < '".$EndTime."'
+        ");
+
+        return $Set;
+    }
+
+    /**
+     * 沒有穿制服：[Q6]內容中含有2即符合
+     */
+    public function getQ6isLike2Set($StartTime, $EndTime, $Region=null, $Category=null, $Person=null)
+    {
+        $Set = DB::select("
+            SELECT * FROM rawsurvey AS T
+            WHERE 1=1
+            AND T.q6 LIKE '%2%'
+            ".$this->advanceSearch($Region, $Category, $Person)."
+            AND T.start_time >= '".$StartTime."' 
+            AND T.end_time < '".$EndTime."'
+        ");
+
+        return $Set;
+    }
+
+    /**
+     * 穿拖鞋：[Q6]內容中含有3即符合
+     */
+    public function getQ6isLike3Set($StartTime, $EndTime, $Region=null, $Category=null, $Person=null)
+    {
+        $Set = DB::select("
+            SELECT * FROM rawsurvey AS T
+            WHERE 1=1
+            AND T.q6 LIKE '%3%'
+            ".$this->advanceSearch($Region, $Category, $Person)."
+            AND T.start_time >= '".$StartTime."' 
+            AND T.end_time < '".$EndTime."'
+        ");
+
+        return $Set;
+    }
+
+    /**
+     * 身上有煙味：[Q6]內容中含有1即符合
+     */
+    public function getQ6isLike1Set($StartTime, $EndTime, $Region=null, $Category=null, $Person=null)
+    {
+        $Set = DB::select("
+            SELECT * FROM rawsurvey AS T
+            WHERE 1=1
+            AND T.q6 LIKE '%1%'
+            ".$this->advanceSearch($Region, $Category, $Person)."
+            AND T.start_time >= '".$StartTime."' 
+            AND T.end_time < '".$EndTime."'
+        ");
+
+        return $Set;
+    }
+
+    /**
+     * 態度粗魯或口氣不佳：[Q6]內容中含有4者即符合
+     */
+    public function getQ6isLike4Set($StartTime, $EndTime, $Region=null, $Category=null, $Person=null)
+    {
+        $Set = DB::select("
+            SELECT * FROM rawsurvey AS T
+            WHERE 1=1
+            AND T.q6 LIKE '%4%'
+            ".$this->advanceSearch($Region, $Category, $Person)."
+            AND T.start_time >= '".$StartTime."' 
+            AND T.end_time < '".$EndTime."'
+        ");
+
+        return $Set;
+    }
+
+    /**
      * 取得(Q7 = 1)SET
      */
     public function getQ7is1Set($StartTime, $EndTime, $Region=null, $Category=null, $Person=null)

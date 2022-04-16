@@ -877,39 +877,262 @@ class DeficiencyController extends Controller
         return json_encode($Data, JSON_UNESCAPED_UNICODE);
     }
 
+    ###人員缺失###
+    /**
+     * 整體：[Q6]不為9的總數
+     */
     public function getChart21(Request $req)
     {
-        $Data = ['OK'];
-        return json_encode($Data);
+        $Q8NumVec = array();
+        $Calender = array();
+
+        $NowYear = date('Y', strtotime($req->StartTime));
+        $NowMonth = date('m', strtotime($req->StartTime));
+        $EndMonth = date('m', strtotime($req->EndTime));
+
+        $i_start = $NowMonth;
+        for($i=$i_start; $i<=$EndMonth; $i++)
+        {
+            $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
+            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
+
+            $Q8s = $this->FormulaService->getQ6isNot9Set(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
+
+            $Q8Num = count($Q8s);
+            array_push($Q8NumVec, $Q8Num);
+            array_push($Calender, date('Y/m', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00')));
+            $NowMonth++;
+        }
+        
+        $Data = [
+            'label' => $Calender,
+            'datasets' => [
+                'type' => 'line',
+                'label' => '整體',
+                'data' => $Q8NumVec
+            ]
+        ];
+        return json_encode($Data, JSON_UNESCAPED_UNICODE);
     }
 
+    /**
+     * 沒有配戴識別證：[Q6]內容中含有5即符合
+     */
     public function getChart22(Request $req)
     {
-        $Data = ['OK'];
-        return json_encode($Data);
+        $Q8NumVec = array();
+        $Calender = array();
+
+        $NowYear = date('Y', strtotime($req->StartTime));
+        $NowMonth = date('m', strtotime($req->StartTime));
+        $EndMonth = date('m', strtotime($req->EndTime));
+
+        $i_start = $NowMonth;
+        for($i=$i_start; $i<=$EndMonth; $i++)
+        {
+            $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
+            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
+
+            $Q8s = $this->FormulaService->getQ6isLike5Set(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
+
+            $Q8Num = count($Q8s);
+            array_push($Q8NumVec, $Q8Num);
+            array_push($Calender, date('Y/m', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00')));
+            $NowMonth++;
+        }
+        
+        $Data = [
+            'label' => $Calender,
+            'datasets' => [
+                'type' => 'line',
+                'label' => '沒有配戴識別證',
+                'data' => $Q8NumVec
+            ]
+        ];
+        return json_encode($Data, JSON_UNESCAPED_UNICODE);
     }
 
+    /**
+     * 沒有穿制服：[Q6]內容中含有2即符合
+     */
     public function getChart23(Request $req)
     {
-        $Data = ['OK'];
-        return json_encode($Data);
+        $Q8NumVec = array();
+        $Calender = array();
+
+        $NowYear = date('Y', strtotime($req->StartTime));
+        $NowMonth = date('m', strtotime($req->StartTime));
+        $EndMonth = date('m', strtotime($req->EndTime));
+
+        $i_start = $NowMonth;
+        for($i=$i_start; $i<=$EndMonth; $i++)
+        {
+            $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
+            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
+
+            $Q8s = $this->FormulaService->getQ6isLike2Set(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
+
+            $Q8Num = count($Q8s);
+            array_push($Q8NumVec, $Q8Num);
+            array_push($Calender, date('Y/m', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00')));
+            $NowMonth++;
+        }
+        
+        $Data = [
+            'label' => $Calender,
+            'datasets' => [
+                'type' => 'line',
+                'label' => '沒有配戴識別證',
+                'data' => $Q8NumVec
+            ]
+        ];
+        return json_encode($Data, JSON_UNESCAPED_UNICODE);
     }
 
+    /**
+     * 穿拖鞋：[Q6]內容中含有3即符合
+     */
     public function getChart24(Request $req)
     {
-        $Data = ['OK'];
-        return json_encode($Data);
+        $Q8NumVec = array();
+        $Calender = array();
+
+        $NowYear = date('Y', strtotime($req->StartTime));
+        $NowMonth = date('m', strtotime($req->StartTime));
+        $EndMonth = date('m', strtotime($req->EndTime));
+
+        $i_start = $NowMonth;
+        for($i=$i_start; $i<=$EndMonth; $i++)
+        {
+            $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
+            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
+
+            $Q8s = $this->FormulaService->getQ6isLike3Set(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
+
+            $Q8Num = count($Q8s);
+            array_push($Q8NumVec, $Q8Num);
+            array_push($Calender, date('Y/m', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00')));
+            $NowMonth++;
+        }
+        
+        $Data = [
+            'label' => $Calender,
+            'datasets' => [
+                'type' => 'line',
+                'label' => '穿拖鞋',
+                'data' => $Q8NumVec
+            ]
+        ];
+        return json_encode($Data, JSON_UNESCAPED_UNICODE);
     }
 
+    /**
+     * 身上有煙味：[Q6]內容中含有1即符合
+     */
     public function getChart25(Request $req)
     {
-        $Data = ['OK'];
-        return json_encode($Data);
+        $Q8NumVec = array();
+        $Calender = array();
+
+        $NowYear = date('Y', strtotime($req->StartTime));
+        $NowMonth = date('m', strtotime($req->StartTime));
+        $EndMonth = date('m', strtotime($req->EndTime));
+
+        $i_start = $NowMonth;
+        for($i=$i_start; $i<=$EndMonth; $i++)
+        {
+            $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
+            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
+
+            $Q8s = $this->FormulaService->getQ6isLike1Set(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
+
+            $Q8Num = count($Q8s);
+            array_push($Q8NumVec, $Q8Num);
+            array_push($Calender, date('Y/m', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00')));
+            $NowMonth++;
+        }
+        
+        $Data = [
+            'label' => $Calender,
+            'datasets' => [
+                'type' => 'line',
+                'label' => '身上有煙味',
+                'data' => $Q8NumVec
+            ]
+        ];
+        return json_encode($Data, JSON_UNESCAPED_UNICODE);
     }
 
+    /**
+     * 態度粗魯或口氣不佳：[Q6]內容中含有4者即符合
+     */
     public function getChart26(Request $req)
     {
-        $Data = ['OK'];
-        return json_encode($Data);
+        $Q8NumVec = array();
+        $Calender = array();
+
+        $NowYear = date('Y', strtotime($req->StartTime));
+        $NowMonth = date('m', strtotime($req->StartTime));
+        $EndMonth = date('m', strtotime($req->EndTime));
+
+        $i_start = $NowMonth;
+        for($i=$i_start; $i<=$EndMonth; $i++)
+        {
+            $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
+            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
+
+            $Q8s = $this->FormulaService->getQ6isLike4Set(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
+
+            $Q8Num = count($Q8s);
+            array_push($Q8NumVec, $Q8Num);
+            array_push($Calender, date('Y/m', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00')));
+            $NowMonth++;
+        }
+        
+        $Data = [
+            'label' => $Calender,
+            'datasets' => [
+                'type' => 'line',
+                'label' => '態度粗魯或口氣不佳',
+                'data' => $Q8NumVec
+            ]
+        ];
+        return json_encode($Data, JSON_UNESCAPED_UNICODE);
     }
 }
