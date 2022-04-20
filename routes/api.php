@@ -51,35 +51,35 @@ Route::group([
     Route::post('/statistics/getChart14', 'StatisticsController@getChart14');    //Q7 回答1的比例
     Route::post('/statistics/getTable1', 'StatisticsController@getTable1');
 
-    ###缺失情形分析###
-    Route::post('/deficiency/getChart1', 'DeficiencyController@getChart1');      
-    Route::post('/deficiency/getChart2', 'DeficiencyController@getChart2');      
-    Route::post('/deficiency/getChart3', 'DeficiencyController@getChart3');      
-    Route::post('/deficiency/getChart4', 'DeficiencyController@getChart4');      
-    Route::post('/deficiency/getChart5', 'DeficiencyController@getChart5');      
-    Route::post('/deficiency/getChart6', 'DeficiencyController@getChart6');      
-    Route::post('/deficiency/getChart7', 'DeficiencyController@getChart7');      
-    Route::post('/deficiency/getChart8', 'DeficiencyController@getChart8');      
-    Route::post('/deficiency/getChart9', 'DeficiencyController@getChart9');      
-    Route::post('/deficiency/getChart10', 'DeficiencyController@getChart10');    
-    Route::post('/deficiency/getChart11', 'DeficiencyController@getChart11');    
-    Route::post('/deficiency/getChart12', 'DeficiencyController@getChart12');    
-    Route::post('/deficiency/getChart13', 'DeficiencyController@getChart13');    
-    Route::post('/deficiency/getChart14', 'DeficiencyController@getChart14');    
-    Route::post('/deficiency/getChart15', 'DeficiencyController@getChart15');      
-    Route::post('/deficiency/getChart16', 'DeficiencyController@getChart16');      
-    Route::post('/deficiency/getChart17', 'DeficiencyController@getChart17');      
-    Route::post('/deficiency/getChart18', 'DeficiencyController@getChart18');      
-    Route::post('/deficiency/getChart19', 'DeficiencyController@getChart19');      
-    Route::post('/deficiency/getChart20', 'DeficiencyController@getChart20');      
-    Route::post('/deficiency/getChart21', 'DeficiencyController@getChart21');      
-    Route::post('/deficiency/getChart22', 'DeficiencyController@getChart22');      
-    Route::post('/deficiency/getChart23', 'DeficiencyController@getChart23');      
-    Route::post('/deficiency/getChart24', 'DeficiencyController@getChart24');    
-    Route::post('/deficiency/getChart25', 'DeficiencyController@getChart25');    
-    Route::post('/deficiency/getChart26', 'DeficiencyController@getChart26');  
-    Route::post('/deficiency/getChart27', 'DeficiencyController@getChart27');   
-    Route::post('/deficiency/getTable1', 'DeficiencyController@getTable1');   
+    ###缺失情形分析### //unsuccessful chart20隻，table1隻 //person 6隻 //timeout 1隻
+    Route::post('/deficiency/unsuccessful/getChart1', 'DeficiencyController@getChart1');      
+    Route::post('/deficiency/unsuccessful/getChart2', 'DeficiencyController@getChart2');      
+    Route::post('/deficiency/unsuccessful/getChart3', 'DeficiencyController@getChart3');      
+    Route::post('/deficiency/unsuccessful/getChart4', 'DeficiencyController@getChart4');      
+    Route::post('/deficiency/unsuccessful/getChart5', 'DeficiencyController@getChart5');      
+    Route::post('/deficiency/unsuccessful/getChart6', 'DeficiencyController@getChart6');      
+    Route::post('/deficiency/unsuccessful/getChart7', 'DeficiencyController@getChart7');      
+    Route::post('/deficiency/unsuccessful/getChart8', 'DeficiencyController@getChart8');      
+    Route::post('/deficiency/unsuccessful/getChart9', 'DeficiencyController@getChart9');      
+    Route::post('/deficiency/unsuccessful/getChart10', 'DeficiencyController@getChart10');    
+    Route::post('/deficiency/unsuccessful/getChart11', 'DeficiencyController@getChart11');    
+    Route::post('/deficiency/unsuccessful/getChart12', 'DeficiencyController@getChart12');    
+    Route::post('/deficiency/unsuccessful/getChart13', 'DeficiencyController@getChart13');    
+    Route::post('/deficiency/unsuccessful/getChart14', 'DeficiencyController@getChart14');    
+    Route::post('/deficiency/unsuccessful/getChart15', 'DeficiencyController@getChart15');      
+    Route::post('/deficiency/unsuccessful/getChart16', 'DeficiencyController@getChart16');      
+    Route::post('/deficiency/unsuccessful/getChart17', 'DeficiencyController@getChart17');      
+    Route::post('/deficiency/unsuccessful/getChart18', 'DeficiencyController@getChart18');      
+    Route::post('/deficiency/unsuccessful/getChart19', 'DeficiencyController@getChart19');      
+    Route::post('/deficiency/unsuccessful/getChart20', 'DeficiencyController@getChart20');      
+    Route::post('/deficiency/person/getChart21', 'DeficiencyController@getChart21');      
+    Route::post('/deficiency/person/getChart22', 'DeficiencyController@getChart22');      
+    Route::post('/deficiency/person/getChart23', 'DeficiencyController@getChart23');      
+    Route::post('/deficiency/person/getChart24', 'DeficiencyController@getChart24');    
+    Route::post('/deficiency/person/getChart25', 'DeficiencyController@getChart25');    
+    Route::post('/deficiency/person/getChart26', 'DeficiencyController@getChart26');  
+    Route::post('/deficiency/timeout/getChart27', 'DeficiencyController@getChart27');   
+    Route::post('/deficiency/person/getTable1', 'DeficiencyController@getTable1');   
 
     Route::post('/selectLV1', 'AdvanceMenuController@selectLV1');
     Route::post('/selectLV2', 'AdvanceMenuController@selectLV2');
