@@ -72,14 +72,14 @@ Route::group([
     Route::post('/deficiency/unsuccessful/getChart18', 'DeficiencyController@getChart18');      
     Route::post('/deficiency/unsuccessful/getChart19', 'DeficiencyController@getChart19');      
     Route::post('/deficiency/unsuccessful/getChart20', 'DeficiencyController@getChart20');      
-    Route::post('/deficiency/person/getChart21', 'DeficiencyController@getChart21');      
-    Route::post('/deficiency/person/getChart22', 'DeficiencyController@getChart22');      
-    Route::post('/deficiency/person/getChart23', 'DeficiencyController@getChart23');      
-    Route::post('/deficiency/person/getChart24', 'DeficiencyController@getChart24');    
-    Route::post('/deficiency/person/getChart25', 'DeficiencyController@getChart25');    
-    Route::post('/deficiency/person/getChart26', 'DeficiencyController@getChart26');  
-    Route::post('/deficiency/timeout/getChart27', 'DeficiencyController@getChart27');   
-    Route::post('/deficiency/person/getTable1', 'DeficiencyController@getTable1');   
+    Route::post('/deficiency/person/getChart1', 'DeficiencyController@getChart21');      
+    Route::post('/deficiency/person/getChart2', 'DeficiencyController@getChart22');      
+    Route::post('/deficiency/person/getChart3', 'DeficiencyController@getChart23');      
+    Route::post('/deficiency/person/getChart4', 'DeficiencyController@getChart24');    
+    Route::post('/deficiency/person/getChart5', 'DeficiencyController@getChart25');    
+    Route::post('/deficiency/person/getChart6', 'DeficiencyController@getChart26');  
+    Route::post('/deficiency/timeout/getChart1', 'DeficiencyController@getChart27');   
+    Route::post('/deficiency/unsuccessful/getTable1', 'DeficiencyController@getTable1');   
 
     Route::post('/selectLV1', 'AdvanceMenuController@selectLV1');
     Route::post('/selectLV2', 'AdvanceMenuController@selectLV2');
