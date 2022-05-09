@@ -1502,6 +1502,89 @@ class FormulaService
 
         return $Set;
     }
+
+    //建議事項-建議事項
+    public function getSummaryTable06($StartTime, $EndTime, $Region=null, $Category=null, $Person=null)
+    {
+        $Set = DB::select("
+        SELECT
+            RAW.Distribution,
+            RAW.Sell,
+            RAW.SUM_CASE,
+            ROUND(RAW.STATISFY_NUM/RAW.SUM_CASE, 2) AS STATISFY_RATE,
+            ROUND(RAW.MOVING_NUM/RAW.SUM_CASE, 2) AS MOVING_RATE,
+            (
+                ROUND(RAW.Q13_0_6_NUM/RAW.SUM_CASE, 2) - ROUND(RAW.Q13Big9_NUM/RAW.SUM_CASE, 2)
+            ) AS NPS_RATE
+        FROM
+        (
+        SELECT  
+        SUBSTRING(T.s_person, 1, LOCATE('-', T.s_person)-1) AS Distribution,
+        SUBSTRING(T.s_person, LOCATE('-', T.s_person)+1, LENGTH(T.s_person) ) AS Sell,
+        SUM(
+            CASE 
+                WHEN (T.rq14 >= '1000' OR T.rq14 <= '9998') THEN
+                    1
+                ELSE
+                    0
+            END
+        ) AS SUM_CASE,
+        SUM(
+            CASE 
+                WHEN T.q1 > '4' THEN
+                    1
+                ELSE
+                    0
+            END
+        ) AS STATISFY_NUM,
+        SUM(
+            CASE 
+                WHEN T.q1 = '5' THEN
+                    1
+                ELSE
+                    0
+            END
+        ) AS MOVING_NUM,
+        SUM(
+            CASE 
+                WHEN T.q13 >= '0' AND T.q13 <= '6' THEN
+                    1
+                ELSE
+                    0
+            END
+        ) AS Q13_0_6_NUM,
+        SUM(
+            CASE 
+                WHEN T.q13 >= '7' AND T.q13 <= '8' THEN
+                    1
+                ELSE
+                    0
+            END
+        ) AS Q13_7_8_NUM,
+        SUM(
+            CASE 
+                WHEN T.q13 >= '9' THEN
+                    1
+                ELSE
+                    0
+            END
+        ) AS Q13Big9_NUM
+
+        FROM toto.rawsurvey AS T
+        WHERE 1=1
+        ".$this->advanceSearch($Region, $Category, $Person)."
+        AND T.start_time >= '".$StartTime."' 
+        AND T.end_time < '".$EndTime."'
+
+        GROUP BY T.s_person
+        ORDER BY SUM_CASE DESC
+        
+        ) AS RAW
+
+        ");
+
+        return $Set;
+    }
     ### End 彙總分析 ###
 
 }

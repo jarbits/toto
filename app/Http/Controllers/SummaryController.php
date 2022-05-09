@@ -470,7 +470,41 @@ class SummaryController extends Controller
      */
     public function getChart6(Request $req)
     {
-        return json_encode(200);
+        $Calender = array();
+        $NoCommentsVec = array();
+
+        $NowYear = date('Y', strtotime($req->StartTime));
+        $NowMonth = date('m', strtotime($req->StartTime));
+        $EndMonth = date('m', strtotime($req->EndTime));
+
+        $i_start = $NowMonth;
+        for($i=$i_start; $i<=$EndMonth; $i++)
+        {
+            $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
+            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
+
+            $NoComments = $this->FormulaService->getRQ14is9999Set(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
+
+            array_push($NoCommentsVec, count($NoComments) );
+            array_push($Calender, date('Y/m', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00')));
+            $NowMonth++;
+        }
+
+        $Data = [
+            'label' => $Calender,
+            'datasets' => [
+                'type' => 'line',
+                'label' => '無意見',
+                'data' => $CommentsVec
+            ]
+        ];            
+        return json_encode($Data, JSON_UNESCAPED_UNICODE);
     }
 
     ### End 回復總類分析 ###
