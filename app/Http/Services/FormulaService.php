@@ -701,8 +701,8 @@ class FormulaService
         $Set = DB::select("
             SELECT * FROM rawsurvey AS T
             WHERE 1=1
-            AND T.rq14 >= '1000'
-            AND T.rq14 <= '9999'
+            AND (T.rq14 >= '1000'
+            OR T.rq14 <= '9999')
             ".$this->advanceSearch($Region, $Category, $Person)."
             AND T.start_time >= '".$StartTime."' 
             AND T.end_time < '".$EndTime."'
@@ -746,4 +746,762 @@ class FormulaService
     }
 
     ### End 取得正負評價數 ###
+
+    ### Start 彙總分析 ###
+    
+    /*
+    //總覽-彙總分析
+    public function getSummaryTable01($StartTime, $EndTime, $Region=null, $Category=null, $Person=null)
+    {
+        $Set = DB::select("
+        SELECT
+            RAW.Distribution,
+            RAW.Sell,
+            RAW.SUM_CASE,
+            ROUND(RAW.STATISFY_NUM/RAW.SUM_CASE, 2) AS STATISFY_RATE,
+            ROUND(RAW.MOVING_NUM/RAW.SUM_CASE, 2) AS MOVING_RATE,
+            (
+                ROUND(RAW.Q13_0_6_NUM/RAW.SUM_CASE, 2) - ROUND(RAW.Q13Big9_NUM/RAW.SUM_CASE, 2)
+            ) AS NPS_RATE
+        FROM
+        (
+        SELECT  
+        SUBSTRING(T.s_person, 1, LOCATE('-', T.s_person)-1) AS Distribution,
+        SUBSTRING(T.s_person, LOCATE('-', T.s_person)+1, LENGTH(T.s_person) ) AS Sell,
+        SUM(
+            CASE 
+                WHEN T.s_person IS NOT NULL THEN
+                    1
+                ELSE
+                    0
+            END
+        ) AS SUM_CASE,
+        SUM(
+            CASE 
+                WHEN T.q1 > '4' THEN
+                    1
+                ELSE
+                    0
+            END
+        ) AS STATISFY_NUM,
+        SUM(
+            CASE 
+                WHEN T.q1 = '5' THEN
+                    1
+                ELSE
+                    0
+            END
+        ) AS MOVING_NUM,
+        SUM(
+            CASE 
+                WHEN T.q13 >= '0' AND T.q13 <= '6' THEN
+                    1
+                ELSE
+                    0
+            END
+        ) AS Q13_0_6_NUM,
+        SUM(
+            CASE 
+                WHEN T.q13 >= '7' AND T.q13 <= '8' THEN
+                    1
+                ELSE
+                    0
+            END
+        ) AS Q13_7_8_NUM,
+        SUM(
+            CASE 
+                WHEN T.q13 >= '9' THEN
+                    1
+                ELSE
+                    0
+            END
+        ) AS Q13Big9_NUM
+
+        FROM toto.rawsurvey AS T
+        WHERE 1=1
+        ".$this->advanceSearch($Region, $Category, $Person)."
+        AND T.start_time >= '".$StartTime."' 
+        AND T.end_time < '".$EndTime."'
+
+        GROUP BY T.s_person
+        ORDER BY SUM_CASE DESC
+        
+        ) AS RAW
+
+        ");
+
+        return $Set;
+    }
+    //總覽-排名分析
+    public function getSummaryTable02($StartTime, $EndTime, $Region=null, $Category=null, $Person=null)
+    {
+        $Year = explode('-', $StartTime)[0];
+
+        $Set = DB::select("
+        SELECT
+            RAW.Distribution,
+            RAW.Sell,
+        SUM(
+            CASE
+                WHEN RAW.GMonth = '".$Year."-01' AND RAW.SUM_CASE IS NOT NULL THEN
+                    RAW.SUM_CASE
+                ELSE
+                    0
+            END
+        ) AS M1,
+        SUM(
+            CASE
+                WHEN RAW.GMonth = '".$Year."-02' AND RAW.SUM_CASE IS NOT NULL THEN
+                    RAW.SUM_CASE
+                ELSE
+                    0
+            END
+        ) AS M2,
+        SUM(
+            CASE
+                WHEN RAW.GMonth = '".$Year."-03' AND RAW.SUM_CASE IS NOT NULL THEN
+                    RAW.SUM_CASE
+                ELSE
+                    0
+            END
+        ) AS M3,
+        SUM(
+            CASE
+                WHEN RAW.GMonth = '".$Year."-04' AND RAW.SUM_CASE IS NOT NULL THEN
+                    RAW.SUM_CASE
+                ELSE
+                    0
+            END
+        ) AS M4,
+        SUM(
+            CASE
+                WHEN RAW.GMonth = '".$Year."-05' AND RAW.SUM_CASE IS NOT NULL THEN
+                    RAW.SUM_CASE
+                ELSE
+                    0
+            END
+        ) AS M5,
+        SUM(
+            CASE
+                WHEN RAW.GMonth = '".$Year."-06' AND RAW.SUM_CASE IS NOT NULL THEN
+                    RAW.SUM_CASE
+                ELSE
+                    0
+            END
+        ) AS M6,
+        SUM(
+            CASE
+                WHEN RAW.GMonth = '".$Year."-07' AND RAW.SUM_CASE IS NOT NULL THEN
+                    RAW.SUM_CASE
+                ELSE
+                    0
+            END
+        ) AS M7,
+        SUM(
+            CASE
+                WHEN RAW.GMonth = '".$Year."-08' AND RAW.SUM_CASE IS NOT NULL THEN
+                    RAW.SUM_CASE
+                ELSE
+                    0
+            END
+        ) AS M8,
+        SUM(
+            CASE
+                WHEN RAW.GMonth = '".$Year."-09' AND RAW.SUM_CASE IS NOT NULL THEN
+                    RAW.SUM_CASE
+                ELSE
+                    0
+            END
+        ) AS M9,
+        SUM(
+            CASE
+                WHEN RAW.GMonth = '".$Year."-10' AND RAW.SUM_CASE IS NOT NULL THEN
+                    RAW.SUM_CASE
+                ELSE
+                    0
+            END
+        ) AS M10,
+        SUM(
+            CASE
+                WHEN RAW.GMonth = '".$Year."-11' AND RAW.SUM_CASE IS NOT NULL THEN
+                    RAW.SUM_CASE
+                ELSE
+                    0
+            END
+        ) AS M11,
+        SUM(
+            CASE
+                WHEN RAW.GMonth = '".$Year."-12' AND RAW.SUM_CASE IS NOT NULL THEN
+                    RAW.SUM_CASE
+                ELSE
+                    0
+            END
+        ) AS M12
+
+        FROM
+        (
+        SELECT 
+        SUBSTRING(T.s_person, 1, LOCATE('-', T.s_person)-1) AS Distribution,
+        SUBSTRING(T.s_person, LOCATE('-', T.s_person)+1, LENGTH(T.s_person) ) AS Sell,
+        T.s_person,
+        DATE_FORMAT(T.start_time, '%Y-%m') AS GMonth,
+        SUM(
+            CASE 
+                WHEN T.s_person IS NOT NULL THEN THEN
+                    1
+                ELSE
+                    0
+            END
+        ) AS SUM_CASE
+
+        FROM toto.rawsurvey AS T
+        WHERE 1=1
+        ".$this->advanceSearch($Region, $Category, $Person)."
+        AND T.start_time >= '".$Year."-01-01 00:00:00'
+        AND T.end_time <= '".$Year."-12-31 23:59:59'
+
+        GROUP BY T.s_person, DATE_FORMAT(T.start_time, '%Y-%m')
+        ) AS RAW
+        GROUP BY RAW.s_person
+        ");
+
+        return $Set;
+    }
+    */
+
+    //客訴分析-彙總分析
+    public function getSummaryTable01($StartTime, $EndTime, $Region=null, $Category=null, $Person=null)
+    {
+        $Set = DB::select("
+        SELECT
+            RAW.Distribution,
+            RAW.Sell,
+            RAW.SUM_CASE,
+            ROUND(RAW.STATISFY_NUM/RAW.SUM_CASE, 2) AS STATISFY_RATE,
+            ROUND(RAW.MOVING_NUM/RAW.SUM_CASE, 2) AS MOVING_RATE,
+            (
+                ROUND(RAW.Q13_0_6_NUM/RAW.SUM_CASE, 2) - ROUND(RAW.Q13Big9_NUM/RAW.SUM_CASE, 2)
+            ) AS NPS_RATE
+        FROM
+        (
+        SELECT  
+        SUBSTRING(T.s_person, 1, LOCATE('-', T.s_person)-1) AS Distribution,
+        SUBSTRING(T.s_person, LOCATE('-', T.s_person)+1, LENGTH(T.s_person) ) AS Sell,
+        SUM(
+            CASE 
+                WHEN (T.cklow_score LIKE '%Q1%'
+                OR T.cklow_score LIKE '%Q2%'
+                OR T.cklow_score LIKE '%Q3%'
+                OR T.cklow_score LIKE '%Q5%'
+                OR T.cklow_score LIKE '%Q9%'
+                OR T.cklow_score LIKE '%Q10%'
+                OR T.cklow_score LIKE '%Q11%'
+                OR T.cklow_score LIKE '%Q12%'
+                OR T.cklow_score LIKE '%Q13%') THEN
+                    1
+                ELSE
+                    0
+            END
+        ) AS SUM_CASE,
+        SUM(
+            CASE 
+                WHEN T.q1 > '4' THEN
+                    1
+                ELSE
+                    0
+            END
+        ) AS STATISFY_NUM,
+        SUM(
+            CASE 
+                WHEN T.q1 = '5' THEN
+                    1
+                ELSE
+                    0
+            END
+        ) AS MOVING_NUM,
+        SUM(
+            CASE 
+                WHEN T.q13 >= '0' AND T.q13 <= '6' THEN
+                    1
+                ELSE
+                    0
+            END
+        ) AS Q13_0_6_NUM,
+        SUM(
+            CASE 
+                WHEN T.q13 >= '7' AND T.q13 <= '8' THEN
+                    1
+                ELSE
+                    0
+            END
+        ) AS Q13_7_8_NUM,
+        SUM(
+            CASE 
+                WHEN T.q13 >= '9' THEN
+                    1
+                ELSE
+                    0
+            END
+        ) AS Q13Big9_NUM
+
+        FROM toto.rawsurvey AS T
+        WHERE 1=1
+        ".$this->advanceSearch($Region, $Category, $Person)."
+        AND T.start_time >= '".$StartTime."' 
+        AND T.end_time < '".$EndTime."'
+
+        GROUP BY T.s_person
+        ORDER BY SUM_CASE DESC
+        
+        ) AS RAW
+
+        ");
+
+        return $Set;
+    }
+    //客訴分析-排名分析
+    public function getSummaryTable02($StartTime, $EndTime, $Region=null, $Category=null, $Person=null)
+    {
+        $Year = explode('-', $StartTime)[0];
+
+        $Set = DB::select("
+        SELECT
+            RAW.Distribution,
+            RAW.Sell,
+        SUM(
+            CASE
+                WHEN RAW.GMonth = '".$Year."-01' AND RAW.SUM_CASE IS NOT NULL THEN
+                    RAW.SUM_CASE
+                ELSE
+                    0
+            END
+        ) AS M1,
+        SUM(
+            CASE
+                WHEN RAW.GMonth = '".$Year."-02' AND RAW.SUM_CASE IS NOT NULL THEN
+                    RAW.SUM_CASE
+                ELSE
+                    0
+            END
+        ) AS M2,
+        SUM(
+            CASE
+                WHEN RAW.GMonth = '".$Year."-03' AND RAW.SUM_CASE IS NOT NULL THEN
+                    RAW.SUM_CASE
+                ELSE
+                    0
+            END
+        ) AS M3,
+        SUM(
+            CASE
+                WHEN RAW.GMonth = '".$Year."-04' AND RAW.SUM_CASE IS NOT NULL THEN
+                    RAW.SUM_CASE
+                ELSE
+                    0
+            END
+        ) AS M4,
+        SUM(
+            CASE
+                WHEN RAW.GMonth = '".$Year."-05' AND RAW.SUM_CASE IS NOT NULL THEN
+                    RAW.SUM_CASE
+                ELSE
+                    0
+            END
+        ) AS M5,
+        SUM(
+            CASE
+                WHEN RAW.GMonth = '".$Year."-06' AND RAW.SUM_CASE IS NOT NULL THEN
+                    RAW.SUM_CASE
+                ELSE
+                    0
+            END
+        ) AS M6,
+        SUM(
+            CASE
+                WHEN RAW.GMonth = '".$Year."-07' AND RAW.SUM_CASE IS NOT NULL THEN
+                    RAW.SUM_CASE
+                ELSE
+                    0
+            END
+        ) AS M7,
+        SUM(
+            CASE
+                WHEN RAW.GMonth = '".$Year."-08' AND RAW.SUM_CASE IS NOT NULL THEN
+                    RAW.SUM_CASE
+                ELSE
+                    0
+            END
+        ) AS M8,
+        SUM(
+            CASE
+                WHEN RAW.GMonth = '".$Year."-09' AND RAW.SUM_CASE IS NOT NULL THEN
+                    RAW.SUM_CASE
+                ELSE
+                    0
+            END
+        ) AS M9,
+        SUM(
+            CASE
+                WHEN RAW.GMonth = '".$Year."-10' AND RAW.SUM_CASE IS NOT NULL THEN
+                    RAW.SUM_CASE
+                ELSE
+                    0
+            END
+        ) AS M10,
+        SUM(
+            CASE
+                WHEN RAW.GMonth = '".$Year."-11' AND RAW.SUM_CASE IS NOT NULL THEN
+                    RAW.SUM_CASE
+                ELSE
+                    0
+            END
+        ) AS M11,
+        SUM(
+            CASE
+                WHEN RAW.GMonth = '".$Year."-12' AND RAW.SUM_CASE IS NOT NULL THEN
+                    RAW.SUM_CASE
+                ELSE
+                    0
+            END
+        ) AS M12
+
+        FROM
+        (
+        SELECT 
+        SUBSTRING(T.s_person, 1, LOCATE('-', T.s_person)-1) AS Distribution,
+        SUBSTRING(T.s_person, LOCATE('-', T.s_person)+1, LENGTH(T.s_person) ) AS Sell,
+        T.s_person,
+        DATE_FORMAT(T.start_time, '%Y-%m') AS GMonth,
+        SUM(
+            CASE 
+                WHEN (T.cklow_score LIKE '%Q1%'
+                OR T.cklow_score LIKE '%Q2%'
+                OR T.cklow_score LIKE '%Q3%'
+                OR T.cklow_score LIKE '%Q5%'
+                OR T.cklow_score LIKE '%Q9%'
+                OR T.cklow_score LIKE '%Q10%'
+                OR T.cklow_score LIKE '%Q11%'
+                OR T.cklow_score LIKE '%Q12%'
+                OR T.cklow_score LIKE '%Q13%') THEN
+                    1
+                ELSE
+                    0
+            END
+        ) AS SUM_CASE
+
+        FROM toto.rawsurvey AS T
+        WHERE 1=1
+        ".$this->advanceSearch($Region, $Category, $Person)."
+        AND T.start_time >= '".$Year."-01-01 00:00:00'
+        AND T.end_time <= '".$Year."-12-31 23:59:59'
+
+        GROUP BY T.s_person, DATE_FORMAT(T.start_time, '%Y-%m')
+        ) AS RAW
+        GROUP BY RAW.s_person
+        ");
+
+        return $Set;
+    }
+    //讚美分析-彙總分析
+    public function getSummaryTable03($StartTime, $EndTime, $Region=null, $Category=null, $Person=null)
+    {
+        $Set = DB::select("
+        SELECT
+            RAW.Distribution,
+            RAW.Sell,
+            RAW.SUM_CASE,
+            ROUND(RAW.STATISFY_NUM/RAW.SUM_CASE, 2) AS STATISFY_RATE,
+            ROUND(RAW.MOVING_NUM/RAW.SUM_CASE, 2) AS MOVING_RATE,
+            (
+                ROUND(RAW.Q13_0_6_NUM/RAW.SUM_CASE, 2) - ROUND(RAW.Q13Big9_NUM/RAW.SUM_CASE, 2)
+            ) AS NPS_RATE
+        FROM
+        (
+        SELECT  
+        SUBSTRING(T.s_person, 1, LOCATE('-', T.s_person)-1) AS Distribution,
+        SUBSTRING(T.s_person, LOCATE('-', T.s_person)+1, LENGTH(T.s_person) ) AS Sell,
+        SUM(
+            CASE 
+                WHEN T.rq14 < '999' THEN
+                    1
+                ELSE
+                    0
+            END
+        ) AS SUM_CASE,
+        SUM(
+            CASE 
+                WHEN T.q1 > '4' THEN
+                    1
+                ELSE
+                    0
+            END
+        ) AS STATISFY_NUM,
+        SUM(
+            CASE 
+                WHEN T.q1 = '5' THEN
+                    1
+                ELSE
+                    0
+            END
+        ) AS MOVING_NUM,
+        SUM(
+            CASE 
+                WHEN T.q13 >= '0' AND T.q13 <= '6' THEN
+                    1
+                ELSE
+                    0
+            END
+        ) AS Q13_0_6_NUM,
+        SUM(
+            CASE 
+                WHEN T.q13 >= '7' AND T.q13 <= '8' THEN
+                    1
+                ELSE
+                    0
+            END
+        ) AS Q13_7_8_NUM,
+        SUM(
+            CASE 
+                WHEN T.q13 >= '9' THEN
+                    1
+                ELSE
+                    0
+            END
+        ) AS Q13Big9_NUM
+
+        FROM toto.rawsurvey AS T
+        WHERE 1=1
+        ".$this->advanceSearch($Region, $Category, $Person)."
+        AND T.start_time >= '".$StartTime."' 
+        AND T.end_time < '".$EndTime."'
+
+        GROUP BY T.s_person
+        ORDER BY SUM_CASE DESC
+        
+        ) AS RAW
+
+        ");
+
+        return $Set;
+    }
+    //讚美分析-排名分析
+    public function getSummaryTable04($StartTime, $EndTime, $Region=null, $Category=null, $Person=null)
+    {
+        $Year = explode('-', $StartTime)[0];
+
+        $Set = DB::select("
+        SELECT
+            RAW.Distribution,
+            RAW.Sell,
+        SUM(
+            CASE
+                WHEN RAW.GMonth = '".$Year."-01' AND RAW.SUM_CASE IS NOT NULL THEN
+                    RAW.SUM_CASE
+                ELSE
+                    0
+            END
+        ) AS M1,
+        SUM(
+            CASE
+                WHEN RAW.GMonth = '".$Year."-02' AND RAW.SUM_CASE IS NOT NULL THEN
+                    RAW.SUM_CASE
+                ELSE
+                    0
+            END
+        ) AS M2,
+        SUM(
+            CASE
+                WHEN RAW.GMonth = '".$Year."-03' AND RAW.SUM_CASE IS NOT NULL THEN
+                    RAW.SUM_CASE
+                ELSE
+                    0
+            END
+        ) AS M3,
+        SUM(
+            CASE
+                WHEN RAW.GMonth = '".$Year."-04' AND RAW.SUM_CASE IS NOT NULL THEN
+                    RAW.SUM_CASE
+                ELSE
+                    0
+            END
+        ) AS M4,
+        SUM(
+            CASE
+                WHEN RAW.GMonth = '".$Year."-05' AND RAW.SUM_CASE IS NOT NULL THEN
+                    RAW.SUM_CASE
+                ELSE
+                    0
+            END
+        ) AS M5,
+        SUM(
+            CASE
+                WHEN RAW.GMonth = '".$Year."-06' AND RAW.SUM_CASE IS NOT NULL THEN
+                    RAW.SUM_CASE
+                ELSE
+                    0
+            END
+        ) AS M6,
+        SUM(
+            CASE
+                WHEN RAW.GMonth = '".$Year."-07' AND RAW.SUM_CASE IS NOT NULL THEN
+                    RAW.SUM_CASE
+                ELSE
+                    0
+            END
+        ) AS M7,
+        SUM(
+            CASE
+                WHEN RAW.GMonth = '".$Year."-08' AND RAW.SUM_CASE IS NOT NULL THEN
+                    RAW.SUM_CASE
+                ELSE
+                    0
+            END
+        ) AS M8,
+        SUM(
+            CASE
+                WHEN RAW.GMonth = '".$Year."-09' AND RAW.SUM_CASE IS NOT NULL THEN
+                    RAW.SUM_CASE
+                ELSE
+                    0
+            END
+        ) AS M9,
+        SUM(
+            CASE
+                WHEN RAW.GMonth = '".$Year."-10' AND RAW.SUM_CASE IS NOT NULL THEN
+                    RAW.SUM_CASE
+                ELSE
+                    0
+            END
+        ) AS M10,
+        SUM(
+            CASE
+                WHEN RAW.GMonth = '".$Year."-11' AND RAW.SUM_CASE IS NOT NULL THEN
+                    RAW.SUM_CASE
+                ELSE
+                    0
+            END
+        ) AS M11,
+        SUM(
+            CASE
+                WHEN RAW.GMonth = '".$Year."-12' AND RAW.SUM_CASE IS NOT NULL THEN
+                    RAW.SUM_CASE
+                ELSE
+                    0
+            END
+        ) AS M12
+
+        FROM
+        (
+        SELECT 
+        SUBSTRING(T.s_person, 1, LOCATE('-', T.s_person)-1) AS Distribution,
+        SUBSTRING(T.s_person, LOCATE('-', T.s_person)+1, LENGTH(T.s_person) ) AS Sell,
+        T.s_person,
+        DATE_FORMAT(T.start_time, '%Y-%m') AS GMonth,
+        SUM(
+            CASE 
+                WHEN T.rq14 < '999' THEN
+                    1
+                ELSE
+                    0
+            END
+        ) AS SUM_CASE
+
+        FROM toto.rawsurvey AS T
+        WHERE 1=1
+        ".$this->advanceSearch($Region, $Category, $Person)."
+        AND T.start_time >= '".$Year."-01-01 00:00:00'
+        AND T.end_time <= '".$Year."-12-31 23:59:59'
+
+        GROUP BY T.s_person, DATE_FORMAT(T.start_time, '%Y-%m')
+        ) AS RAW
+        GROUP BY RAW.s_person
+        ");
+
+        return $Set;
+    }
+
+    //建議事項-彙總分析
+    public function getSummaryTable05($StartTime, $EndTime, $Region=null, $Category=null, $Person=null)
+    {
+        $Set = DB::select("
+        SELECT
+            RAW.Distribution,
+            RAW.Sell,
+            RAW.SUM_CASE,
+            ROUND(RAW.STATISFY_NUM/RAW.SUM_CASE, 2) AS STATISFY_RATE,
+            ROUND(RAW.MOVING_NUM/RAW.SUM_CASE, 2) AS MOVING_RATE,
+            (
+                ROUND(RAW.Q13_0_6_NUM/RAW.SUM_CASE, 2) - ROUND(RAW.Q13Big9_NUM/RAW.SUM_CASE, 2)
+            ) AS NPS_RATE
+        FROM
+        (
+        SELECT  
+        SUBSTRING(T.s_person, 1, LOCATE('-', T.s_person)-1) AS Distribution,
+        SUBSTRING(T.s_person, LOCATE('-', T.s_person)+1, LENGTH(T.s_person) ) AS Sell,
+        SUM(
+            CASE 
+                WHEN (T.rq14 >= '1000' OR T.rq14 <= '9998') THEN
+                    1
+                ELSE
+                    0
+            END
+        ) AS SUM_CASE,
+        SUM(
+            CASE 
+                WHEN T.q1 > '4' THEN
+                    1
+                ELSE
+                    0
+            END
+        ) AS STATISFY_NUM,
+        SUM(
+            CASE 
+                WHEN T.q1 = '5' THEN
+                    1
+                ELSE
+                    0
+            END
+        ) AS MOVING_NUM,
+        SUM(
+            CASE 
+                WHEN T.q13 >= '0' AND T.q13 <= '6' THEN
+                    1
+                ELSE
+                    0
+            END
+        ) AS Q13_0_6_NUM,
+        SUM(
+            CASE 
+                WHEN T.q13 >= '7' AND T.q13 <= '8' THEN
+                    1
+                ELSE
+                    0
+            END
+        ) AS Q13_7_8_NUM,
+        SUM(
+            CASE 
+                WHEN T.q13 >= '9' THEN
+                    1
+                ELSE
+                    0
+            END
+        ) AS Q13Big9_NUM
+
+        FROM toto.rawsurvey AS T
+        WHERE 1=1
+        ".$this->advanceSearch($Region, $Category, $Person)."
+        AND T.start_time >= '".$StartTime."' 
+        AND T.end_time < '".$EndTime."'
+
+        GROUP BY T.s_person
+        ORDER BY SUM_CASE DESC
+        
+        ) AS RAW
+
+        ");
+
+        return $Set;
+    }
+    ### End 彙總分析 ###
+
 }
