@@ -85,7 +85,7 @@ Route::group([
     Route::post('/selectLV2', 'AdvanceMenuController@selectLV2');
     Route::post('/selectLV3', 'AdvanceMenuController@selectLV3');
 
-    Route::get('/summary/receive-category/getChart1', 'SummaryController@getChart1');
+    Route::post('/summary/receive-category/getChart1', 'SummaryController@getChart1');
     Route::post('/summary/receive-category/getChart2', 'SummaryController@getChart2');
     Route::post('/summary/receive-category/getChart3', 'SummaryController@getChart3');
     Route::post('/summary/receive-category/getChart4', 'SummaryController@getChart4');
