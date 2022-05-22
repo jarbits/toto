@@ -977,6 +977,7 @@ class FormulaService
             RAW.Distribution,
             RAW.Sell,
             RAW.SUM_CASE,
+            RAW.ACC_CASE,
             ROUND(RAW.STATISFY_NUM/RAW.SUM_CASE, 2) AS STATISFY_RATE,
             ROUND(RAW.MOVING_NUM/RAW.SUM_CASE, 2) AS MOVING_RATE,
             (
@@ -1003,6 +1004,7 @@ class FormulaService
                     0
             END
         ) AS SUM_CASE,
+        Q.ACC_CASE,
         SUM(
             CASE 
                 WHEN T.q1 > '4' THEN
@@ -1045,12 +1047,37 @@ class FormulaService
         ) AS Q13Big9_NUM
 
         FROM toto.rawsurvey AS T
+
+        LEFT JOIN (
+            SELECT 
+            Q.s_person,
+            SUM(
+                CASE 
+                    WHEN (T.cklow_score LIKE '%Q1%'
+                    OR T.cklow_score LIKE '%Q2%'
+                    OR T.cklow_score LIKE '%Q3%'
+                    OR T.cklow_score LIKE '%Q5%'
+                    OR T.cklow_score LIKE '%Q9%'
+                    OR T.cklow_score LIKE '%Q10%'
+                    OR T.cklow_score LIKE '%Q11%'
+                    OR T.cklow_score LIKE '%Q12%'
+                    OR T.cklow_score LIKE '%Q13%') THEN
+                        1
+                    ELSE
+                        0
+                END
+            ) AS ACC_CASE
+            FROM toto.rawsurvey AS Q
+            GROUP BY Q.s_person
+        ) AS Q
+        ON T.s_person = Q.s_person
+
         WHERE 1=1
         ".$this->advanceSearch($Region, $Category, $Person)."
         AND T.start_time >= '".$StartTime."' 
         AND T.end_time < '".$EndTime."'
 
-        GROUP BY T.s_person
+        GROUP BY T.s_person, Q.ACC_CASE
         ORDER BY SUM_CASE DESC
         
         ) AS RAW
@@ -1210,6 +1237,7 @@ class FormulaService
             RAW.Distribution,
             RAW.Sell,
             RAW.SUM_CASE,
+            RAW.ACC_CASE,
             ROUND(RAW.STATISFY_NUM/RAW.SUM_CASE, 2) AS STATISFY_RATE,
             ROUND(RAW.MOVING_NUM/RAW.SUM_CASE, 2) AS MOVING_RATE,
             (
@@ -1228,6 +1256,7 @@ class FormulaService
                     0
             END
         ) AS SUM_CASE,
+        Q.ACC_CASE,
         SUM(
             CASE 
                 WHEN T.q1 > '4' THEN
@@ -1270,12 +1299,29 @@ class FormulaService
         ) AS Q13Big9_NUM
 
         FROM toto.rawsurvey AS T
+
+        LEFT JOIN (
+            SELECT 
+            Q.s_person,
+            SUM(
+                CASE 
+                    WHEN T.rq14 < '999' THEN
+                        1
+                    ELSE
+                        0
+                END
+            ) AS ACC_CASE
+            FROM toto.rawsurvey AS Q
+            GROUP BY Q.s_person
+        ) AS Q
+        ON T.s_person = Q.s_person
+
         WHERE 1=1
         ".$this->advanceSearch($Region, $Category, $Person)."
         AND T.start_time >= '".$StartTime."' 
         AND T.end_time < '".$EndTime."'
 
-        GROUP BY T.s_person
+        GROUP BY T.s_person, Q.ACC_CASE
         ORDER BY SUM_CASE DESC
         
         ) AS RAW
@@ -1428,6 +1474,7 @@ class FormulaService
             RAW.Distribution,
             RAW.Sell,
             RAW.SUM_CASE,
+            RAW.ACC_CASE,
             ROUND(RAW.STATISFY_NUM/RAW.SUM_CASE, 2) AS STATISFY_RATE,
             ROUND(RAW.MOVING_NUM/RAW.SUM_CASE, 2) AS MOVING_RATE,
             (
@@ -1446,6 +1493,7 @@ class FormulaService
                     0
             END
         ) AS SUM_CASE,
+        Q.ACC_CASE,
         SUM(
             CASE 
                 WHEN T.q1 > '4' THEN
@@ -1488,12 +1536,29 @@ class FormulaService
         ) AS Q13Big9_NUM
 
         FROM toto.rawsurvey AS T
+
+        LEFT JOIN (
+            SELECT 
+            Q.s_person,
+            SUM(
+                CASE 
+                    WHEN (T.rq14 >= '1000' OR T.rq14 <= '9998') THEN
+                        1
+                    ELSE
+                        0
+                END
+            ) AS ACC_CASE
+            FROM toto.rawsurvey AS Q
+            GROUP BY Q.s_person
+        ) AS Q
+        ON T.s_person = Q.s_person
+
         WHERE 1=1
         ".$this->advanceSearch($Region, $Category, $Person)."
         AND T.start_time >= '".$StartTime."' 
         AND T.end_time < '".$EndTime."'
 
-        GROUP BY T.s_person
+        GROUP BY T.s_person, Q.ACC_CASE
         ORDER BY SUM_CASE DESC
         
         ) AS RAW
