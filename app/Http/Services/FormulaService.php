@@ -1053,15 +1053,15 @@ class FormulaService
             Q.s_person,
             SUM(
                 CASE 
-                    WHEN (T.cklow_score LIKE '%Q1%'
-                    OR T.cklow_score LIKE '%Q2%'
-                    OR T.cklow_score LIKE '%Q3%'
-                    OR T.cklow_score LIKE '%Q5%'
-                    OR T.cklow_score LIKE '%Q9%'
-                    OR T.cklow_score LIKE '%Q10%'
-                    OR T.cklow_score LIKE '%Q11%'
-                    OR T.cklow_score LIKE '%Q12%'
-                    OR T.cklow_score LIKE '%Q13%') THEN
+                    WHEN (Q.cklow_score LIKE '%Q1%'
+                    OR Q.cklow_score LIKE '%Q2%'
+                    OR Q.cklow_score LIKE '%Q3%'
+                    OR Q.cklow_score LIKE '%Q5%'
+                    OR Q.cklow_score LIKE '%Q9%'
+                    OR Q.cklow_score LIKE '%Q10%'
+                    OR Q.cklow_score LIKE '%Q11%'
+                    OR Q.cklow_score LIKE '%Q12%'
+                    OR Q.cklow_score LIKE '%Q13%') THEN
                         1
                     ELSE
                         0
@@ -1305,7 +1305,7 @@ class FormulaService
             Q.s_person,
             SUM(
                 CASE 
-                    WHEN T.rq14 < '999' THEN
+                    WHEN Q.rq14 < '999' THEN
                         1
                     ELSE
                         0
@@ -1542,7 +1542,7 @@ class FormulaService
             Q.s_person,
             SUM(
                 CASE 
-                    WHEN (T.rq14 >= '1000' OR T.rq14 <= '9998') THEN
+                    WHEN (Q.rq14 >= '1000' OR Q.rq14 <= '9998') THEN
                         1
                     ELSE
                         0
