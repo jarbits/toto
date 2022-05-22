@@ -974,6 +974,7 @@ class FormulaService
     {
         $Set = DB::select("
         SELECT
+            @i := @i + 1 AS Row_NO,
             RAW.Distribution,
             RAW.Sell,
             RAW.SUM_CASE,
@@ -1080,7 +1081,7 @@ class FormulaService
         GROUP BY T.s_person, Q.ACC_CASE
         ORDER BY SUM_CASE DESC
         
-        ) AS RAW
+        ) AS RAW, (select @i := 0) temp
 
         ");
 
@@ -1234,6 +1235,7 @@ class FormulaService
     {
         $Set = DB::select("
         SELECT
+            @i := @i + 1 AS Row_NO,
             RAW.Distribution,
             RAW.Sell,
             RAW.SUM_CASE,
@@ -1324,7 +1326,7 @@ class FormulaService
         GROUP BY T.s_person, Q.ACC_CASE
         ORDER BY SUM_CASE DESC
         
-        ) AS RAW
+        ) AS RAW, (select @i := 0) temp
 
         ");
 
@@ -1471,6 +1473,7 @@ class FormulaService
     {
         $Set = DB::select("
         SELECT
+            @i := @i + 1 AS Row_NO,
             RAW.Distribution,
             RAW.Sell,
             RAW.SUM_CASE,
@@ -1561,7 +1564,7 @@ class FormulaService
         GROUP BY T.s_person, Q.ACC_CASE
         ORDER BY SUM_CASE DESC
         
-        ) AS RAW
+        ) AS RAW, (select @i := 0) temp
 
         ");
 
