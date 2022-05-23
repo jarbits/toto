@@ -1094,6 +1094,7 @@ class FormulaService
 
         $Set = DB::select("
         SELECT
+            @i := @i + 1 AS Row_NO,
             RAW.Distribution,
             RAW.Sell,
         SUM(
@@ -1224,7 +1225,7 @@ class FormulaService
         AND T.end_time <= '".$Year."-12-31 23:59:59'
 
         GROUP BY T.s_person, DATE_FORMAT(T.start_time, '%Y-%m')
-        ) AS RAW
+        ) AS RAW, (select @i := 0) temp
         GROUP BY RAW.s_person
         ");
 
