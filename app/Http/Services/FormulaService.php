@@ -1340,6 +1340,7 @@ class FormulaService
 
         $Set = DB::select("
         SELECT
+            @i := @i + 1 AS Row_NO,
             RAW.Distribution,
             RAW.Sell,
         SUM(
@@ -1462,7 +1463,7 @@ class FormulaService
         AND T.end_time <= '".$Year."-12-31 23:59:59'
 
         GROUP BY T.s_person, DATE_FORMAT(T.start_time, '%Y-%m')
-        ) AS RAW
+        ) AS RAW, (select @i := 0) temp
         GROUP BY RAW.s_person
         ");
 
@@ -1577,13 +1578,14 @@ class FormulaService
     {
         $Set = DB::select("
         SELECT  
+            @i := @i + 1 AS Row_NO,
             T.start_time AS Start_Time,
             SUBSTRING(T.s_person, 1, LOCATE('-', T.s_person)-1) AS Distribution,
             SUBSTRING(T.s_person, LOCATE('-', T.s_person)+1, LENGTH(T.s_person) ) AS Sell,
             T.s_person,
             T.q14
 
-        FROM toto.rawsurvey AS T
+        FROM toto.rawsurvey AS T, (select @i := 0) temp
 
         WHERE 1=1
         AND (T.rq14 >= '1000' OR T.rq14 <= '9998')
