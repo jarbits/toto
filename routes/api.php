@@ -98,6 +98,6 @@ Route::group([
     Route::post('/summary/receive-category/getTable4', 'SummaryController@getTable4');
     Route::post('/summary/receive-category/getTable5', 'SummaryController@getTable5');
     Route::post('/summary/receive-category/getTable6', 'SummaryController@getTable6');
-    Route::get('/summary/receive-category/getTable7', 'SummaryController@getTable7');
+    Route::post('/summary/receive-category/getTable7', 'SummaryController@getTable7');
 
 });
