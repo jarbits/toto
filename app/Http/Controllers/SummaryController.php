@@ -519,7 +519,7 @@ class SummaryController extends Controller
 
     /**
      * 簡訊滿意度分析表
-     * endpoint: /api/summary/receive-category/getChart6
+     * endpoint: /api/summary/receive-category/getChart7
      */
     public function getTable7(Request $req)
     {
