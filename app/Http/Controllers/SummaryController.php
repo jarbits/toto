@@ -740,14 +740,14 @@ class SummaryController extends Controller
             ### Start 維修總件數 ###
             $C12 = new SmsRow;
             $C12->item = '維修總件數';
-            $C12->value = count($C12_value);
+            $C12->value = $C12_value;
             $C12->date = date('Y/m', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
             ### End 維修總件數 ###
 
             ### Start 簡訊發送件數 ###
             $C13 = new SmsRow;
             $C13->item = '簡訊發送件數';
-            $C13->value = count($C13_value);
+            $C13->value = $C13_value;
             $C13->date = date('Y/m', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
             ### End 簡訊發送件數 ###
 
@@ -761,14 +761,14 @@ class SummaryController extends Controller
             ### Start 訪問占比 ###
             $C15 = new SmsRow;
             $C15->item = '訪問占比';
-            $C15->value = count($C15_value);
+            $C15->value = $C15_value;
             $C15->date = date('Y/m', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
             ### End 訪問占比 ###
 
             ### Start 回覆率 ###
             $C16 = new SmsRow;
             $C16->item = '回覆率';
-            $C16->value = count($C16_value);
+            $C16->value = $C16_value;
             $C16->date = date('Y/m', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
             ### End 回覆率 ###
             
