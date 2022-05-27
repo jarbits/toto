@@ -677,98 +677,98 @@ class SummaryController extends Controller
             ### Start 1分 ###
             $C3 = new SmsRow;
             $C3->item = '1分';
-            $C3->value = $C3_value;
+            $C3->value = count($C3_value);
             $C3->date = date('Y/m', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
             ### End 1分 ###
 
             ### Start 2分 ###
             $C4 = new SmsRow;
             $C4->item = '2分';
-            $C4->value = $C4_value;
+            $C4->value = count($C4_value);
             $C4->date = date('Y/m', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
             ### End 2分 ###
 
             ### Start 3分 ###
             $C5 = new SmsRow;
             $C5->item = '3分';
-            $C5->value = $C5_value;
+            $C5->value = count($C5_value);
             $C5->date = date('Y/m', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
             ### End 3分 ###
 
             ### Start 4分 ###
             $C6 = new SmsRow;
             $C6->item = '4分';
-            $C6->value = $C6_value;
+            $C6->value = count($C6_value);
             $C6->date = date('Y/m', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
             ### End 4分 ###
 
             ### Start 5分 ###
             $C7 = new SmsRow;
             $C7->item = '5分';
-            $C7->value = $C7_value;
+            $C7->value = count($C7_value);
             $C7->date = date('Y/m', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
             ### End 5分 ###
 
             ### Start NPS ###
             $C8 = new SmsRow;
             $C8->item = 'NPS淨推薦值%';
-            $C8->value = $C8_01_value - $C8_02_value;
+            $C8->value = count($C8_01_value) - count($C8_02_value);
             $C8->date = date('Y/m', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
             ### End NPS ###
 
             ### Start 0-6 ###
             $C9 = new SmsRow;
             $C9->item = '0-6';
-            $C9->value = $C9_value;
+            $C9->value = count($C9_value);
             $C9->date = date('Y/m', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
             ### End 0-6 ###
 
             ### Start 7-8 ###
             $C10 = new SmsRow;
             $C10->item = '7-8';
-            $C10->value = $C10_value;
+            $C10->value = count($C10_value);
             $C10->date = date('Y/m', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
             ### End 7-8 ###
 
             ### Start 9-10 ###
             $C11 = new SmsRow;
             $C11->item = '9-10';
-            $C11->value = $C11_value;
+            $C11->value = count($C11_value);
             $C11->date = date('Y/m', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
             ### End 9-10 ###
 
             ### Start 維修總件數 ###
             $C12 = new SmsRow;
             $C12->item = '維修總件數';
-            $C12->value = $C12_value;
+            $C12->value = count($C12_value);
             $C12->date = date('Y/m', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
             ### End 維修總件數 ###
 
             ### Start 簡訊發送件數 ###
             $C13 = new SmsRow;
             $C13->item = '簡訊發送件數';
-            $C13->value = $C13_value;
+            $C13->value = count($C13_value);
             $C13->date = date('Y/m', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
             ### End 簡訊發送件數 ###
 
             ### Start 回覆件數 ###
             $C14 = new SmsRow;
             $C14->item = '回覆件數';
-            $C14->value = $C14_value;
+            $C14->value = count($C14_value);
             $C14->date = date('Y/m', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
             ### End 回覆件數 ###
 
             ### Start 訪問占比 ###
             $C15 = new SmsRow;
             $C15->item = '訪問占比';
-            $C15->value = $C15_value;
+            $C15->value = count($C15_value);
             $C15->date = date('Y/m', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
             ### End 訪問占比 ###
 
             ### Start 回覆率 ###
             $C16 = new SmsRow;
             $C16->item = '回覆率';
-            $C16->value = $C16_value;
+            $C16->value = count($C16_value);
             $C16->date = date('Y/m', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
             ### End 回覆率 ###
             
