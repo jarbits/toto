@@ -18,7 +18,7 @@ class Series {
 class SmsRow {
     public $date = '';
     public $item = '';
-    public $value = '';
+    public $value = 0;
 };
 
 class SummaryController extends Controller
