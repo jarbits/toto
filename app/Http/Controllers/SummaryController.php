@@ -15,6 +15,12 @@ class Series {
     public $data = [];
 };
 
+class SmsRow {
+    public $date = '';
+    public $item = '';
+    public $value = '';
+};
+
 class SummaryController extends Controller
 {
     public $FormulaService;
@@ -517,7 +523,283 @@ class SummaryController extends Controller
      */
     public function getTable7(Request $req)
     {
-        return json_encode(200);
+        $ResultVec = array();
+
+        $NowYear = date('Y', strtotime($req->StartTime));
+        $NowMonth = date('m', strtotime($req->StartTime));
+        $EndMonth = date('m', strtotime($req->EndTime));
+
+        $i_start = $NowMonth;
+        for($i=$i_start; $i<=$EndMonth; $i++)
+        {
+            $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
+            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
+
+            $Qs = $this->FormulaService->getAllQSet(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
+
+            $C1_value = $this->FormulaService->getQ1big4Set(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
+
+            $C2_value = $this->FormulaService->getQ1is5Set(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
+
+            $C3_value = $this->FormulaService->getQ1is1Set(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
+
+            $C4_value = $this->FormulaService->getQ1is2Set(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
+
+            $C5_value = $this->FormulaService->getQ1is3Set(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
+
+            $C6_value = $this->FormulaService->getQ1is4Set(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
+
+            $C7_value = $this->FormulaService->getQ1is5Set(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
+
+            ### NPS ###
+            $C8_01_value = $this->FormulaService->getQ13_0_6Set(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
+            $C8_02_value = $this->FormulaService->getQ13big9Set(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
+
+            $C9_value = $this->FormulaService->getQ13_0_6Set(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
+
+            $C10_value = $this->FormulaService->getQ13_7_8Set(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
+
+            $C11_value = $this->FormulaService->getQ13big9Set(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
+
+            $C12_value = 0; //維修總件數
+            $C13_value = 0; //簡訊發送件數
+
+            $C14_value = $Qs;
+
+            $C15_value = 0; //訪問占比
+            $C16_value = 0; //回覆率
+
+            $RawSurveyNum = count($Qs);
+
+            $C1Rate = 0; //滿意度%
+            $C2Rate = 0; //感動率%
+
+            try {
+                $C1Rate = round(count($C1_value)/$RawSurveyNum, 2)*100;
+            } catch (\Throwable $th) {}
+
+            try {
+                $C2Rate = round(count($C2_value)/$RawSurveyNum, 2)*100;
+            } catch (\Throwable $th) {}
+
+            ### Start 滿意度 ###
+            $C1 = new SmsRow;
+            $C1->item = '滿意度';
+            $C1->value = $C1Rate;
+            $C1->date = date('Y/m', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
+            ### End 滿意度 ###
+
+            ### Start 感動率 ###
+            $C2 = new SmsRow;
+            $C2->item = '感動率';
+            $C2->value = $C2Rate;
+            $C2->date = date('Y/m', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
+            ### End 感動率 ###
+
+            ### Start 1分 ###
+            $C3 = new SmsRow;
+            $C3->item = '1分';
+            $C3->value = $C3_value;
+            $C3->date = date('Y/m', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
+            ### End 1分 ###
+
+            ### Start 2分 ###
+            $C4 = new SmsRow;
+            $C4->item = '2分';
+            $C4->value = $C4_value;
+            $C4->date = date('Y/m', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
+            ### End 2分 ###
+
+            ### Start 3分 ###
+            $C5 = new SmsRow;
+            $C5->item = '3分';
+            $C5->value = $C5_value;
+            $C5->date = date('Y/m', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
+            ### End 3分 ###
+
+            ### Start 4分 ###
+            $C6 = new SmsRow;
+            $C6->item = '4分';
+            $C6->value = $C6_value;
+            $C6->date = date('Y/m', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
+            ### End 4分 ###
+
+            ### Start 5分 ###
+            $C7 = new SmsRow;
+            $C7->item = '5分';
+            $C7->value = $C7_value;
+            $C7->date = date('Y/m', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
+            ### End 5分 ###
+
+            ### Start NPS ###
+            $C8 = new SmsRow;
+            $C8->item = 'NPS淨推薦值%';
+            $C8->value = $C8_01_value - $C8_02_value;
+            $C8->date = date('Y/m', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
+            ### End NPS ###
+
+            ### Start 0-6 ###
+            $C9 = new SmsRow;
+            $C9->item = '0-6';
+            $C9->value = $C9_value;
+            $C9->date = date('Y/m', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
+            ### End 0-6 ###
+
+            ### Start 7-8 ###
+            $C10 = new SmsRow;
+            $C10->item = '7-8';
+            $C10->value = $C10_value;
+            $C10->date = date('Y/m', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
+            ### End 7-8 ###
+
+            ### Start 9-10 ###
+            $C11 = new SmsRow;
+            $C11->item = '9-10';
+            $C11->value = $C11_value;
+            $C11->date = date('Y/m', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
+            ### End 9-10 ###
+
+            ### Start 維修總件數 ###
+            $C12 = new SmsRow;
+            $C12->item = '維修總件數';
+            $C12->value = $C12_value;
+            $C12->date = date('Y/m', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
+            ### End 維修總件數 ###
+
+            ### Start 簡訊發送件數 ###
+            $C13 = new SmsRow;
+            $C13->item = '簡訊發送件數';
+            $C13->value = $C13_value;
+            $C13->date = date('Y/m', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
+            ### End 簡訊發送件數 ###
+
+            ### Start 回覆件數 ###
+            $C14 = new SmsRow;
+            $C14->item = '回覆件數';
+            $C14->value = $C14_value;
+            $C14->date = date('Y/m', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
+            ### End 回覆件數 ###
+
+            ### Start 訪問占比 ###
+            $C15 = new SmsRow;
+            $C15->item = '訪問占比';
+            $C15->value = $C15_value;
+            $C15->date = date('Y/m', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
+            ### End 訪問占比 ###
+
+            ### Start 回覆率 ###
+            $C16 = new SmsRow;
+            $C16->item = '回覆率';
+            $C16->value = $C16_value;
+            $C16->date = date('Y/m', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
+            ### End 回覆率 ###
+            
+            array_push($ResultVec, $C1);
+            array_push($ResultVec, $C2);
+            array_push($ResultVec, $C3);
+            array_push($ResultVec, $C4);
+            array_push($ResultVec, $C5);
+            array_push($ResultVec, $C6);
+            array_push($ResultVec, $C7);
+            array_push($ResultVec, $C8);
+            array_push($ResultVec, $C9);
+            array_push($ResultVec, $C10);
+            array_push($ResultVec, $C11);
+            array_push($ResultVec, $C12);
+            array_push($ResultVec, $C13);
+            array_push($ResultVec, $C14);
+            array_push($ResultVec, $C15);
+            array_push($ResultVec, $C16);
+
+            $NowMonth++;
+        }
+
+        $Data = [
+            'datasets' => [
+                'type' => 'table',
+                'label' => '簡訊滿意度分析表',
+                'data' => $ResultVec
+            ]
+        ];            
+        return json_encode($Data, JSON_UNESCAPED_UNICODE);
     }
 
     ### End 簡訊SMS市調統計 ###

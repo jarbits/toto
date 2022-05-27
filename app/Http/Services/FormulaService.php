@@ -80,6 +80,74 @@ class FormulaService
     }
 
     /**
+     * 取得Q1 = 1的SET
+     */
+    public function getQ1is1Set($StartTime, $EndTime, $Region=null, $Category=null, $Person=null)
+    {
+        $Set = DB::select("
+            SELECT * FROM rawsurvey AS T
+            WHERE 1=1
+            AND T.q1 = '1'
+            ".$this->advanceSearch($Region, $Category, $Person)."
+            AND T.start_time >= '".$StartTime."' 
+            AND T.end_time < '".$EndTime."'
+        ");
+
+        return $Set;
+    }
+
+    /**
+     * 取得Q1 = 2的SET
+     */
+    public function getQ1is2Set($StartTime, $EndTime, $Region=null, $Category=null, $Person=null)
+    {
+        $Set = DB::select("
+            SELECT * FROM rawsurvey AS T
+            WHERE 1=1
+            AND T.q1 = '2'
+            ".$this->advanceSearch($Region, $Category, $Person)."
+            AND T.start_time >= '".$StartTime."' 
+            AND T.end_time < '".$EndTime."'
+        ");
+
+        return $Set;
+    }
+
+    /**
+     * 取得Q1 = 3的SET
+     */
+    public function getQ1is3Set($StartTime, $EndTime, $Region=null, $Category=null, $Person=null)
+    {
+        $Set = DB::select("
+            SELECT * FROM rawsurvey AS T
+            WHERE 1=1
+            AND T.q1 = '3'
+            ".$this->advanceSearch($Region, $Category, $Person)."
+            AND T.start_time >= '".$StartTime."' 
+            AND T.end_time < '".$EndTime."'
+        ");
+
+        return $Set;
+    }
+
+    /**
+     * 取得Q1 = 4的SET
+     */
+    public function getQ1is4Set($StartTime, $EndTime, $Region=null, $Category=null, $Person=null)
+    {
+        $Set = DB::select("
+            SELECT * FROM rawsurvey AS T
+            WHERE 1=1
+            AND T.q1 = '4'
+            ".$this->advanceSearch($Region, $Category, $Person)."
+            AND T.start_time >= '".$StartTime."' 
+            AND T.end_time < '".$EndTime."'
+        ");
+
+        return $Set;
+    }
+
+    /**
      * 取得滿意度(Q1 >= 4)SET
      */
     public function getQ1big4Set($StartTime, $EndTime, $Region=null, $Category=null, $Person=null)
