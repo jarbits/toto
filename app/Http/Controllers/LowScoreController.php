@@ -11,6 +11,12 @@ use DB;
 
 class LowScoreController extends Controller
 {
+    public $FormulaService;
+    public function __construct(Request $req)
+    {
+        $this->FormulaService = new FormulaService();
+    }
+    
     public function getTable1(Request $req)
     {
         $NowYear = date('Y', strtotime($req->StartTime));
