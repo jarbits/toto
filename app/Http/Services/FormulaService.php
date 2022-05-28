@@ -1669,4 +1669,145 @@ class FormulaService
     }
     ### End 彙總分析 ###
 
+    ### 低分示警頁面表格 ###
+
+    public function getLowScoreTable01($StartTime, $EndTime, $Region=null, $Category=null, $Person=null)
+    {
+        $Set = DB::select("
+        SELECT
+        @i := @i + 1 as Row_NO,
+        Result.acceptance_code,
+        Result.start_time,
+        Result.created_at,
+        Result.Distribution,
+        Result.Sell,
+        CONCAT(Result.Q1,Result.Q2,
+        Result.Q3,Result.Q5,Result.Q9,Result.Q11,Result.Q12,Result.Q13) AS Complain,
+        Result.Bad_Score,
+        Result.Q1_Score AS Q1_Score,
+        Result.Q13_Score AS Q13_Score,
+        Result.Customer_Comment AS Customer_Comment
+        FROM
+        (
+        SELECT 
+        T.acceptance_code,
+        T.start_time,
+        T.created_at,
+        SUBSTRING(T.s_person, 1, LOCATE('-', T.s_person)-1) AS Distribution,
+        SUBSTRING(T.s_person, LOCATE('-', T.s_person)+1, LENGTH(T.s_person) ) AS Sell,
+        (
+            CASE
+                WHEN T.q1 < 2 THEN
+                    CONCAT(CONCAT('Q1.請問您對本次TOTO「售後維修服務」的整體滿意程度為何？(', T.q1),')<br>')
+                ELSE
+                    " "
+                END
+        ) AS Q1,
+        (
+            CASE
+                WHEN T.q2 < 2 THEN
+                    CONCAT(CONCAT('Q2.請問您對本次0800接聽及應對服務品質的滿意程度為何？(', T.q2),')<br>')
+                ELSE
+                    " "
+                END
+        ) AS Q2,
+        (
+            CASE
+                WHEN T.q3 < 2 THEN
+                    CONCAT(CONCAT('Q3.請問您對於本次維修安排速度的滿意程度為何？(', T.q3),')<br>')
+                ELSE
+                    " "
+                END
+        ) AS Q3,
+        (
+            CASE
+                WHEN T.q5 < 2 THEN
+                    CONCAT(CONCAT('Q5.請問您對維修人員服務態度的滿意程度為何？(', T.q5),')<br>')
+                ELSE
+                    " "
+                END
+        ) AS Q5,
+        (
+            CASE
+                WHEN T.q9 < 2 THEN
+                    CONCAT(CONCAT('Q9.請問您對維修人員說明講解故障的原因滿意程度為何？(', T.q9),')<br>')
+                ELSE
+                    " "
+                END
+        ) AS Q9,
+        (
+            CASE
+                WHEN T.q11 < 2 THEN
+                    CONCAT(CONCAT('Q11.請問您對維修人員在維修完成後拆換下的零件處理的滿意程度為何？(', T.q11),')<br>')
+                ELSE
+                    " "
+                END
+        ) AS Q11,
+        (
+            CASE
+                WHEN T.q12 < 2 THEN
+                    CONCAT(CONCAT('Q12.請問您對維修人員在維修完成後現場清潔的滿意程度為何？(', T.q12),')<br>')
+                ELSE
+                    " "
+                END
+        ) AS Q12,
+        (
+            CASE
+                WHEN T.q13 < 4 THEN
+                    CONCAT(CONCAT('Q13.請問您未來會向您的親朋好友推薦TOTO的意願程度為何呢？(', T.q13),')<br>')
+                ELSE
+                    " "
+                END
+        ) AS Q13,
+        LEAST(T.q1,T.q2,T.q3) AS Bad_Score,
+        T.q1 AS Q1_Score,
+        T.q13 AS Q13_Score,
+        T.q14 AS Customer_Comment
+
+        FROM toto.rawsurvey as T
+        WHERE 1=1
+        ".$this->advanceSearch($Region, $Category, $Person)."
+        AND T.start_time >= '".$StartTime."' 
+        AND T.end_time < '".$EndTime."'
+        ) AS Result, (select @i := 0) temp
+        ");
+
+        return $Set;
+    }
+
+    public function getLowScoreTable02($StartTime, $EndTime, $Region=null, $Category=null, $Person=null)
+    {
+        $Set = DB::select("
+        SELECT 
+        T.acceptance_code,
+        T.s_person2,
+        SUBSTRING(T.s_person, 1, LOCATE('-', T.s_person)-1) AS Distribution,
+        SUBSTRING(T.s_person, LOCATE('-', T.s_person)+1, LENGTH(T.s_person) ) AS Sell,
+        T.start_time,
+        T.created_at,
+        T.s1,
+        T.q1,
+        T.q2,
+        T.q3,
+        T.q4,
+        T.q5,
+        T.q6,
+        T.q7,
+        T.q9,
+        T.q10,
+        T.q11,
+        T.q12,
+        T.q13,
+        T.q14
+
+        FROM toto.rawsurvey as T
+        WHERE 1=1
+        ".$this->advanceSearch($Region, $Category, $Person)."
+        AND T.start_time >= '".$StartTime."' 
+        AND T.end_time < '".$EndTime."'
+        ");
+
+        return $Set;
+    }
+
 }
