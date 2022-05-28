@@ -100,6 +100,6 @@ Route::group([
     Route::post('/summary/receive-category/getTable6', 'SummaryController@getTable6');
     Route::post('/summary/receive-category/getTable7', 'SummaryController@getTable7');
 
-    Route::get('/lowscore/alarm/getTable1', 'LowScoreController@getTable1');
-    Route::get('/lowscore/alarm/getTable2', 'LowScoreController@getTable2');
+    Route::post('/lowscore/alarm/getTable1', 'LowScoreController@getTable1');
+    Route::post('/lowscore/alarm/getTable2', 'LowScoreController@getTable2');
 });
