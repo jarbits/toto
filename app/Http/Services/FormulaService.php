@@ -1670,7 +1670,7 @@ class FormulaService
     ### End 彙總分析 ###
 
     ### 低分示警頁面表格 ###
-/*
+
     public function getLowScoreTable01($StartTime, $EndTime, $Region=null, $Category=null, $Person=null)
     {
         $Set = DB::select("
@@ -1700,7 +1700,7 @@ class FormulaService
                 WHEN T.q1 < 2 THEN
                     CONCAT(CONCAT('Q1.請問您對本次TOTO「售後維修服務」的整體滿意程度為何？(', T.q1),')<br>')
                 ELSE
-                    " "
+                    ' '
                 END
         ) AS Q1,
         (
@@ -1708,7 +1708,7 @@ class FormulaService
                 WHEN T.q2 < 2 THEN
                     CONCAT(CONCAT('Q2.請問您對本次0800接聽及應對服務品質的滿意程度為何？(', T.q2),')<br>')
                 ELSE
-                    " "
+                    ' '
                 END
         ) AS Q2,
         (
@@ -1716,7 +1716,7 @@ class FormulaService
                 WHEN T.q3 < 2 THEN
                     CONCAT(CONCAT('Q3.請問您對於本次維修安排速度的滿意程度為何？(', T.q3),')<br>')
                 ELSE
-                    " "
+                    ' '
                 END
         ) AS Q3,
         (
@@ -1724,7 +1724,7 @@ class FormulaService
                 WHEN T.q5 < 2 THEN
                     CONCAT(CONCAT('Q5.請問您對維修人員服務態度的滿意程度為何？(', T.q5),')<br>')
                 ELSE
-                    " "
+                    ' '
                 END
         ) AS Q5,
         (
@@ -1732,7 +1732,7 @@ class FormulaService
                 WHEN T.q9 < 2 THEN
                     CONCAT(CONCAT('Q9.請問您對維修人員說明講解故障的原因滿意程度為何？(', T.q9),')<br>')
                 ELSE
-                    " "
+                    ' '
                 END
         ) AS Q9,
         (
@@ -1740,7 +1740,7 @@ class FormulaService
                 WHEN T.q11 < 2 THEN
                     CONCAT(CONCAT('Q11.請問您對維修人員在維修完成後拆換下的零件處理的滿意程度為何？(', T.q11),')<br>')
                 ELSE
-                    " "
+                    ' '
                 END
         ) AS Q11,
         (
@@ -1748,7 +1748,7 @@ class FormulaService
                 WHEN T.q12 < 2 THEN
                     CONCAT(CONCAT('Q12.請問您對維修人員在維修完成後現場清潔的滿意程度為何？(', T.q12),')<br>')
                 ELSE
-                    " "
+                    ' '
                 END
         ) AS Q12,
         (
@@ -1756,7 +1756,7 @@ class FormulaService
                 WHEN T.q13 < 4 THEN
                     CONCAT(CONCAT('Q13.請問您未來會向您的親朋好友推薦TOTO的意願程度為何呢？(', T.q13),')<br>')
                 ELSE
-                    " "
+                    ' '
                 END
         ) AS Q13,
         LEAST(T.q1,T.q2,T.q3) AS Bad_Score,
@@ -1809,6 +1809,6 @@ class FormulaService
 
         return $Set;
     }
-    */
+    
 
 }
