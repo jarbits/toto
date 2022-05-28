@@ -1670,7 +1670,7 @@ class FormulaService
     ### End 彙總分析 ###
 
     ### 低分示警頁面表格 ###
-
+/*
     public function getLowScoreTable01($StartTime, $EndTime, $Region=null, $Category=null, $Person=null)
     {
         $Set = DB::select("
@@ -1809,5 +1809,6 @@ class FormulaService
 
         return $Set;
     }
+    */
 
 }
