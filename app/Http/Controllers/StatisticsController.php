@@ -63,7 +63,7 @@ class StatisticsController extends Controller
             $RawSurveyNum = count($Qs);
             $Q1Rate = 0;
             try {
-                $Q1Rate = round($Q1Num/$RawSurveyNum, 1)*100;
+                $Q1Rate = round($Q1Num/$RawSurveyNum, 2)*100;
             } catch (\Throwable $th) {}
 
             array_push($Q1RateVec, $Q1Rate);
@@ -121,7 +121,7 @@ class StatisticsController extends Controller
             $RawSurveyNum = count($Qs);
             $Q1Rate = 0;
             try {
-                $Q1Rate = round($Q1Num/$RawSurveyNum, 1)*100;
+                $Q1Rate = round($Q1Num/$RawSurveyNum, 2)*100;
             } catch (\Throwable $th) {}
             
             array_push($Q1RateVec, $Q1Rate);
@@ -219,11 +219,11 @@ class StatisticsController extends Controller
             $p9_10LineRate = 0;
 
             try {
-                $p0_6BarRate = round(count($p0_6Bar)/$RawSurveyNum, 1)*100;
-                $p7_8BarRate = round(count($p7_8Bar)/$RawSurveyNum, 1)*100;
-                $p9_10BarRate = round(count($p9_10Bar)/$RawSurveyNum, 1)*100;
-                $p0_6LineRate = round(count($p0_6Line)/$RawSurveyNum, 1)*100;
-                $p9_10LineRate = round(count($p9_10Line)/$RawSurveyNum, 1)*100;
+                $p0_6BarRate = round(count($p0_6Bar)/$RawSurveyNum, 2)*100;
+                $p7_8BarRate = round(count($p7_8Bar)/$RawSurveyNum, 2)*100;
+                $p9_10BarRate = round(count($p9_10Bar)/$RawSurveyNum, 2)*100;
+                $p0_6LineRate = round(count($p0_6Line)/$RawSurveyNum, 2)*100;
+                $p9_10LineRate = round(count($p9_10Line)/$RawSurveyNum, 2)*100;
             } catch (\Throwable $th) {
                 //throw $th;
             }
@@ -709,7 +709,7 @@ class StatisticsController extends Controller
             $RawSurveyNum = count($QsAll);
             $QRate = 0;
             try {
-                $QRate = round($QNum/$RawSurveyNum, 1)*100;
+                $QRate = round($QNum/$RawSurveyNum, 2)*100;
             } catch (\Throwable $th) {}
             
             array_push($QRateVec, $QRate);
@@ -766,7 +766,7 @@ class StatisticsController extends Controller
             $RawSurveyNum = count($QsAll);
             $QRate = 0;
             try {
-                $QRate = round($QNum/$RawSurveyNum, 1)*100;
+                $QRate = round($QNum/$RawSurveyNum, 2)*100;
             } catch (\Throwable $th) {}
             
             array_push($QRateVec, $QRate);
@@ -823,7 +823,7 @@ class StatisticsController extends Controller
             $RawSurveyNum = count($QsAll);
             $QRate = 0;
             try {
-                $QRate = round($QNum/$RawSurveyNum, 1)*100;
+                $QRate = round($QNum/$RawSurveyNum, 2)*100;
             } catch (\Throwable $th) {}
             
             array_push($QRateVec, $QRate);
@@ -864,7 +864,7 @@ class StatisticsController extends Controller
         $RawSurveyNum = count($Qs);
         $Q1Rate = 0;
         try {
-            $Q1Rate = round($Q1Num/$RawSurveyNum, 1)*100;
+            $Q1Rate = round($Q1Num/$RawSurveyNum, 2)*100;
         } catch (\Throwable $th) {}
         return $Q1Rate;
     }
@@ -889,7 +889,7 @@ class StatisticsController extends Controller
         $RawSurveyNum = count($Qs);
         $Q1Rate = 0;
         try {
-            $Q1Rate = round($Q1Num/$RawSurveyNum, 1)*100;
+            $Q1Rate = round($Q1Num/$RawSurveyNum, 2)*100;
         } catch (\Throwable $th) {}
         return $Q1Rate;
     }
@@ -951,11 +951,11 @@ class StatisticsController extends Controller
         $p0_6LineRate = 0;
         $p9_10LineRate = 0;
         try {
-            $p0_6BarRate = round(count($p0_6Bar)/$RawSurveyNum, 1)*100;
-            $p7_8BarRate = round(count($p7_8Bar)/$RawSurveyNum, 1)*100;
-            $p9_10BarRate = round(count($p9_10Bar)/$RawSurveyNum, 1)*100;
-            $p0_6LineRate = round(count($p0_6Line)/$RawSurveyNum, 1)*100;
-            $p9_10LineRate = round(count($p9_10Line)/$RawSurveyNum, 1)*100;
+            $p0_6BarRate = round(count($p0_6Bar)/$RawSurveyNum, 2)*100;
+            $p7_8BarRate = round(count($p7_8Bar)/$RawSurveyNum, 2)*100;
+            $p9_10BarRate = round(count($p9_10Bar)/$RawSurveyNum, 2)*100;
+            $p0_6LineRate = round(count($p0_6Line)/$RawSurveyNum, 2)*100;
+            $p9_10LineRate = round(count($p9_10Line)/$RawSurveyNum, 2)*100;
         } catch (\Throwable $th) {}
         $NPSLine = abs($p0_6LineRate - $p9_10LineRate);
 
@@ -1150,7 +1150,7 @@ class StatisticsController extends Controller
         $RawSurveyNum = count($QsAll);
         $QRate = 0;
         try {
-            $QRate = round($QNum/$RawSurveyNum, 1)*100;
+            $QRate = round($QNum/$RawSurveyNum, 2)*100;
         } catch (\Throwable $th) {}
         return $QRate;
     }
@@ -1176,7 +1176,7 @@ class StatisticsController extends Controller
         $RawSurveyNum = count($QsAll);
         $QRate = 0;
         try {
-            $QRate = round($QNum/$RawSurveyNum, 1)*100;
+            $QRate = round($QNum/$RawSurveyNum, 2)*100;
         } catch (\Throwable $th) {}
         return $QRate;
     }
@@ -1201,7 +1201,7 @@ class StatisticsController extends Controller
         $RawSurveyNum = count($QsAll);
         $QRate = 0;
         try {
-            $QRate = round($QNum/$RawSurveyNum, 1)*100;
+            $QRate = round($QNum/$RawSurveyNum, 2)*100;
         } catch (\Throwable $th) {}
         return $QRate;
     }
