@@ -572,9 +572,10 @@ class APIController extends Controller
     {
         $NowYear = date('Y', strtotime($req->StartTime));
         $NowMonth = date('m', strtotime($req->StartTime));
+        $EndMonth = date('m', strtotime($req->EndTime));
 
         $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
-        $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
+        $D2 = date('Y-m-d', strtotime($NowYear.'-'.($EndMonth).'-01 00:00:00'));
 
         $Qs = $this->FormulaService->getAllQSet(
             $D1, 
