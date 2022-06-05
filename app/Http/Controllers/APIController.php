@@ -281,7 +281,15 @@ class APIController extends Controller
             $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
             $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
             
-            $Qs = $this->FormulaService->getQ13less6Set(
+            // $Qs = $this->FormulaService->getQ13less6Set(
+            //     $D1, 
+            //     $D2, 
+            //     $req->Region,
+            //     $req->Category,
+            //     $req->Person
+            // );
+
+            $Qs = $this->FormulaService->getAllQSet(
                 $D1, 
                 $D2, 
                 $req->Region,
