@@ -1043,7 +1043,7 @@ class FormulaService
             ROUND(RAW.STATISFY_NUM/RAW.SUM_CASE, 2) AS STATISFY_RATE,
             ROUND(RAW.MOVING_NUM/RAW.SUM_CASE, 2) AS MOVING_RATE,
             (
-                ROUND(RAW.Q13_0_6_NUM/RAW.SUM_CASE, 2) - ROUND(RAW.Q13Big9_NUM/RAW.SUM_CASE, 2)
+                ROUND(RAW.Q13Big9_NUM/RAW.SUM_CASE, 2) - ROUND(RAW.Q13_0_6_NUM/RAW.SUM_CASE, 2)
             ) AS NPS_RATE
         FROM
         (
@@ -1305,7 +1305,7 @@ class FormulaService
             ROUND(RAW.STATISFY_NUM/RAW.SUM_CASE, 2) AS STATISFY_RATE,
             ROUND(RAW.MOVING_NUM/RAW.SUM_CASE, 2) AS MOVING_RATE,
             (
-                ROUND(RAW.Q13_0_6_NUM/RAW.SUM_CASE, 2) - ROUND(RAW.Q13Big9_NUM/RAW.SUM_CASE, 2)
+                ROUND(RAW.Q13Big9_NUM/RAW.SUM_CASE, 2) - ROUND(RAW.Q13_0_6_NUM/RAW.SUM_CASE, 2)
             ) AS NPS_RATE
         FROM
         (
@@ -1544,7 +1544,7 @@ class FormulaService
             ROUND(RAW.STATISFY_NUM/RAW.SUM_CASE, 2) AS STATISFY_RATE,
             ROUND(RAW.MOVING_NUM/RAW.SUM_CASE, 2) AS MOVING_RATE,
             (
-                ROUND(RAW.Q13_0_6_NUM/RAW.SUM_CASE, 2) - ROUND(RAW.Q13Big9_NUM/RAW.SUM_CASE, 2)
+                ROUND(RAW.Q13Big9_NUM/RAW.SUM_CASE, 2) - ROUND(RAW.Q13_0_6_NUM/RAW.SUM_CASE, 2)
             ) AS NPS_RATE
         FROM
         (
