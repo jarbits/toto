@@ -614,9 +614,9 @@ class APIController extends Controller
         $p9_10BarRate = 0;
 
         try {
-            $p0_6BarRate = round(count($p0_6Bar)/$RawSurveyNum, 1)*100;
-            $p7_8BarRate = round(count($p7_8Bar)/$RawSurveyNum, 1)*100;
-            $p9_10BarRate = round(count($p9_10Bar)/$RawSurveyNum, 1)*100;
+            $p0_6BarRate = round(count($p0_6Bar)/$RawSurveyNum, 2)*100;
+            $p7_8BarRate = round(count($p7_8Bar)/$RawSurveyNum, 2)*100;
+            $p9_10BarRate = round(count($p9_10Bar)/$RawSurveyNum, 2)*100;
         } catch (\Throwable $th) {
             //throw $th;
         }
