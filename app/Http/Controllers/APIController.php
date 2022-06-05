@@ -621,7 +621,7 @@ class APIController extends Controller
             //throw $th;
         }
 
-        $NPS = $p0_6BarRate - $p9_10BarRate;
+        $NPS = $p9_10BarRate - $p0_6BarRate;
 
         $Data = [
             'datasets' => [
