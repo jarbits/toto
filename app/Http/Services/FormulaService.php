@@ -765,15 +765,15 @@ class FormulaService
         $Set = DB::select("
             SELECT * FROM rawsurvey AS T
             WHERE 1=1
-            AND (T.cklow_score IS NOT LIKE '%Q1%'
-            OR T.cklow_score IS NOT LIKE '%Q2%'
-            OR T.cklow_score IS NOT LIKE '%Q3%'
-            OR T.cklow_score IS NOT LIKE '%Q5%'
-            OR T.cklow_score IS NOT LIKE '%Q9%'
-            OR T.cklow_score IS NOT LIKE '%Q10%'
-            OR T.cklow_score IS NOT LIKE '%Q11%'
-            OR T.cklow_score IS NOT LIKE '%Q12%'
-            OR T.cklow_score IS NOT LIKE '%Q13%')
+            AND (T.cklow_score NOT LIKE '%Q1%'
+            OR T.cklow_score NOT LIKE '%Q2%'
+            OR T.cklow_score NOT LIKE '%Q3%'
+            OR T.cklow_score NOT LIKE '%Q5%'
+            OR T.cklow_score NOT LIKE '%Q9%'
+            OR T.cklow_score NOT LIKE '%Q10%'
+            OR T.cklow_score NOT LIKE '%Q11%'
+            OR T.cklow_score NOT LIKE '%Q12%'
+            OR T.cklow_score NOT LIKE '%Q13%')
             AND (T.rq14 >= 1000
             OR T.rq14 < 9999)
             ".$this->advanceSearch($Region, $Category, $Person)."
@@ -792,15 +792,15 @@ class FormulaService
         $Set = DB::select("
             SELECT * FROM rawsurvey AS T
             WHERE 1=1
-            AND (T.cklow_score IS NOT LIKE '%Q1%'
-            OR T.cklow_score IS NOT LIKE '%Q2%'
-            OR T.cklow_score IS NOT LIKE '%Q3%'
-            OR T.cklow_score IS NOT LIKE '%Q5%'
-            OR T.cklow_score IS NOT LIKE '%Q9%'
-            OR T.cklow_score IS NOT LIKE '%Q10%'
-            OR T.cklow_score IS NOT LIKE '%Q11%'
-            OR T.cklow_score IS NOT LIKE '%Q12%'
-            OR T.cklow_score IS NOT LIKE '%Q13%')
+            AND (T.cklow_score NOT LIKE '%Q1%'
+            OR T.cklow_score NOT LIKE '%Q2%'
+            OR T.cklow_score NOT LIKE '%Q3%'
+            OR T.cklow_score NOT LIKE '%Q5%'
+            OR T.cklow_score NOT LIKE '%Q9%'
+            OR T.cklow_score NOT LIKE '%Q10%'
+            OR T.cklow_score NOT LIKE '%Q11%'
+            OR T.cklow_score NOT LIKE '%Q12%'
+            OR T.cklow_score NOT LIKE '%Q13%')
             AND T.rq14 >= 9999
             ".$this->advanceSearch($Region, $Category, $Person)."
             AND T.start_time >= '".$StartTime."' 
@@ -818,15 +818,15 @@ class FormulaService
         $Set = DB::select("
             SELECT * FROM rawsurvey AS T
             WHERE 1=1
-            AND (T.cklow_score IS NOT LIKE '%Q1%'
-            OR T.cklow_score IS NOT LIKE '%Q2%'
-            OR T.cklow_score IS NOT LIKE '%Q3%'
-            OR T.cklow_score IS NOT LIKE '%Q5%'
-            OR T.cklow_score IS NOT LIKE '%Q9%'
-            OR T.cklow_score IS NOT LIKE '%Q10%'
-            OR T.cklow_score IS NOT LIKE '%Q11%'
-            OR T.cklow_score IS NOT LIKE '%Q12%'
-            OR T.cklow_score IS NOT LIKE '%Q13%')
+            AND (T.cklow_score NOT LIKE '%Q1%'
+            OR T.cklow_score NOT LIKE '%Q2%'
+            OR T.cklow_score NOT LIKE '%Q3%'
+            OR T.cklow_score NOT LIKE '%Q5%'
+            OR T.cklow_score NOT LIKE '%Q9%'
+            OR T.cklow_score NOT LIKE '%Q10%'
+            OR T.cklow_score NOT LIKE '%Q11%'
+            OR T.cklow_score NOT LIKE '%Q12%'
+            OR T.cklow_score NOT LIKE '%Q13%')
             AND T.rq14 <= 999
             ".$this->advanceSearch($Region, $Category, $Person)."
             AND T.start_time >= '".$StartTime."' 
