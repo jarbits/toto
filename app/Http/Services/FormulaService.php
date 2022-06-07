@@ -13,12 +13,15 @@ class FormulaService
     {
         $qStr = "";
 
-        if ($Region != null) {
+        if ($Region != null && $Category != null && $Person == null) {
+            // $qStr = "
+            //     AND T.s_region = '".$Region."'
+            //     ";
             $qStr = "
-                AND T.s_region = '".$Region."'
+                AND T.s_region = '".$Category."'
                 ";
         }
-        if ($Category != null) {
+        if ($Category != null && $Region == null) {
             $qStr = "
                 AND T.s_person LIKE '%".$Category."%'
                 ";
