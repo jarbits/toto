@@ -760,12 +760,34 @@ class FormulaService
     /**
      * RQ14 >= 1000 && < 9999
      */
+    public function getNotLowSet($StartTime, $EndTime, $Region=null, $Category=null, $Person=null)
+    {
+        $Set = DB::select("
+            SELECT * FROM rawsurvey AS T
+            WHERE 1=1
+            AND NOT (T.cklow_score NOT LIKE '%Q1%'
+            OR T.cklow_score NOT LIKE '%Q2%'
+            OR T.cklow_score NOT LIKE '%Q3%'
+            OR T.cklow_score NOT LIKE '%Q5%'
+            OR T.cklow_score NOT LIKE '%Q9%'
+            OR T.cklow_score NOT LIKE '%Q10%'
+            OR T.cklow_score NOT LIKE '%Q11%'
+            OR T.cklow_score NOT LIKE '%Q12%'
+            OR T.cklow_score NOT LIKE '%Q13%')
+            ".$this->advanceSearch($Region, $Category, $Person)."
+            AND T.start_time >= '".$StartTime."' 
+            AND T.end_time < '".$EndTime."'
+        ");
+
+        return $Set;
+    }
+
     public function getRQ14_1000_9999Set($StartTime, $EndTime, $Region=null, $Category=null, $Person=null)
     {
         $Set = DB::select("
             SELECT * FROM rawsurvey AS T
             WHERE 1=1
-            AND (T.cklow_score NOT LIKE '%Q1%'
+            AND NOT (T.cklow_score NOT LIKE '%Q1%'
             OR T.cklow_score NOT LIKE '%Q2%'
             OR T.cklow_score NOT LIKE '%Q3%'
             OR T.cklow_score NOT LIKE '%Q5%'
@@ -792,7 +814,7 @@ class FormulaService
         $Set = DB::select("
             SELECT * FROM rawsurvey AS T
             WHERE 1=1
-            AND (T.cklow_score NOT LIKE '%Q1%'
+            AND NOT (T.cklow_score NOT LIKE '%Q1%'
             OR T.cklow_score NOT LIKE '%Q2%'
             OR T.cklow_score NOT LIKE '%Q3%'
             OR T.cklow_score NOT LIKE '%Q5%'
@@ -818,7 +840,7 @@ class FormulaService
         $Set = DB::select("
             SELECT * FROM rawsurvey AS T
             WHERE 1=1
-            AND (T.cklow_score NOT LIKE '%Q1%'
+            AND NOT (T.cklow_score NOT LIKE '%Q1%'
             OR T.cklow_score NOT LIKE '%Q2%'
             OR T.cklow_score NOT LIKE '%Q3%'
             OR T.cklow_score NOT LIKE '%Q5%'

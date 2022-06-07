@@ -409,6 +409,7 @@ class APIController extends Controller
                 $req->Person
             );
             
+            /*
             $Comments = $this->FormulaService->getRQ14_1000_9999Set(
                 $D1, 
                 $D2, 
@@ -432,11 +433,46 @@ class APIController extends Controller
                 $req->Category,
                 $req->Person
             );
+            */
+
+            $NotLowScoreSet = $this->FormulaService->getNotLowSet(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
+
+            $CommentsNum = 0;   //1000 ~ 9999
+            $NoCommentsNum = 0;    //is 9999
+            $HighScoreNum = 0;     //less then 999
+
+            foreach($NotLowScoreSet as $item)
+            {
+                $rq14Set = $item->rq14;
+                try {
+                    $rq14Set = explode(',', $rq14Set);
+                } catch (\Throwable $th) {}
+                
+                $theMaxVal = max($rq14Set);
+                if ($theMaxVal < 9999 && $theMaxVal >= 1000) {
+                    $CommentsNum++;
+                }
+                if ($theMaxVal = 9999) {
+                    $NoCommentsNum++;
+                }
+                if ($theMaxVal <= 999) {
+                    $HighScoreNum++;
+                }
+            }
 
             array_push($LowScoreVec, count($LowScore) );
-            array_push($CommentsVec, count($Comments) );
-            array_push($NoCommentsVec, count($NoComments) );
-            array_push($HighScoreVec, count($HighScore) );
+            // array_push($CommentsVec, count($Comments) );
+            // array_push($NoCommentsVec, count($NoComments) );
+            // array_push($HighScoreVec, count($HighScore) );
+            array_push($CommentsVec, $CommentsNum );
+            array_push($NoCommentsVec, $NoCommentsNum );
+            array_push($HighScoreVec, $$HighScoreNum );
             array_push($Calender, date('Y/m', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00')));
             $NowMonth++;
         }
