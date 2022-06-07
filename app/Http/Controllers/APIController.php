@@ -472,7 +472,7 @@ class APIController extends Controller
             // array_push($HighScoreVec, count($HighScore) );
             array_push($CommentsVec, $CommentsNum );
             array_push($NoCommentsVec, $NoCommentsNum );
-            array_push($HighScoreVec, $$HighScoreNum );
+            array_push($HighScoreVec, $HighScoreNum );
             array_push($Calender, date('Y/m', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00')));
             $NowMonth++;
         }
