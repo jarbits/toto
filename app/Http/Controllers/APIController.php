@@ -443,8 +443,6 @@ class APIController extends Controller
                 $req->Person
             );
 
-            dd($NotLowScoreSet);
-
             $CommentsNum = 0;   //1000 ~ 9999
             $NoCommentsNum = 0;    //is 9999
             $HighScoreNum = 0;     //less then 999
