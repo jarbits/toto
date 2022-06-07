@@ -460,6 +460,8 @@ class APIController extends Controller
                     array_push($rq14IntSet, intval($rq14));
                 }
 
+                dd($rq14IntSet);
+
                 $theMaxVal = max($rq14IntSet);
                 if ($theMaxVal < 9999 && $theMaxVal >= 1000) {
                     $CommentsNum++;

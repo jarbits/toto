@@ -28,7 +28,7 @@ Route::group([
     Route::post('/get-q1-rate-chart', 'APIController@getQ1RateChart'); //滿意度Chart
     Route::post('/get-q1-five-rate-chart', 'APIController@getQ1FiveRateChart'); //感動率Chart
     Route::post('/get-nps-bar-chart', 'APIController@getNPSBarChart'); //NPS
-    Route::post('/get-comments-bar-chart', 'APIController@getCommentsChart'); //取得正負評價數
+    Route::get('/get-comments-bar-chart', 'APIController@getCommentsChart'); //取得正負評價數
     Route::post('/get-lowscore-bar-chart', 'APIController@getLowScoreChart'); //低分示警件數
     Route::post('/get-sms-bar-chart', 'APIController@getSMSChart'); //簡訊數相關
     Route::post('/get-nps-pie-chart', 'APIController@getNPSPieChart'); //NPS圓餅
