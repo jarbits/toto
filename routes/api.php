@@ -89,7 +89,7 @@ Route::group([
     Route::post('/summary/receive-category/getChart2', 'SummaryController@getChart2');
     Route::post('/summary/receive-category/getChart3', 'SummaryController@getChart3');
     Route::post('/summary/receive-category/getChart4', 'SummaryController@getChart4');
-    Route::get('/summary/receive-category/getChart5', 'SummaryController@getChart5');
+    Route::post('/summary/receive-category/getChart5', 'SummaryController@getChart5');
     Route::post('/summary/receive-category/getChart6', 'SummaryController@getChart6');
 
     Route::post('/summary/receive-category/getTable1', 'SummaryController@getTable1');
