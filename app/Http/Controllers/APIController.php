@@ -454,15 +454,19 @@ class APIController extends Controller
                     $rq14Set = explode(',', $rq14Set);
                 } catch (\Throwable $th) {}
                 
-                $theMaxVal = max($rq14Set);
-                if ($theMaxVal < 9999 && $theMaxVal >= 1000) {
-                    $CommentsNum++;
-                }
-                if ($theMaxVal = 9999) {
-                    $NoCommentsNum++;
-                }
-                if ($theMaxVal <= 999) {
-                    $HighScoreNum++;
+                foreach ($rq14Set as $rq14) 
+                {
+                    $theMaxVal = max(intval($rq14));
+
+                    if ($theMaxVal < 9999 && $theMaxVal >= 1000) {
+                        $CommentsNum++;
+                    }
+                    if ($theMaxVal = 9999) {
+                        $NoCommentsNum++;
+                    }
+                    if ($theMaxVal <= 999) {
+                        $HighScoreNum++;
+                    }
                 }
             }
 
