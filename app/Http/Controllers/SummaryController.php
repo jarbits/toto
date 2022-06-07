@@ -482,6 +482,7 @@ class SummaryController extends Controller
             $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
             $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
 
+            /*
             $Comments = $this->FormulaService->getRQ14_1000_9999Set(
                 $D1, 
                 $D2, 
@@ -489,8 +490,39 @@ class SummaryController extends Controller
                 $req->Category,
                 $req->Person
             );
+            */
 
-            array_push($CommentsVec, count($Comments) );
+            $NotLowScoreSet = $this->FormulaService->getNotLowSet(
+                $D1, 
+                $D2, 
+                $req->Region,
+                $req->Category,
+                $req->Person
+            );
+
+            $CommentsNum = 0;   //1000 ~ 9999
+
+            foreach($NotLowScoreSet as $item)
+            {
+                $rq14Set = $item->rq14;
+                try {
+                    $rq14Set = explode(',', $rq14Set);
+                } catch (\Throwable $th) {}
+                
+                $rq14IntSet = array();
+                foreach ($rq14Set as $rq14) 
+                {
+                    array_push($rq14IntSet, intval($rq14));
+                }
+
+                $theMaxVal = max($rq14IntSet);
+                if ($theMaxVal < 9999 && $theMaxVal >= 1000) {
+                    $CommentsNum++;
+                }
+            }
+
+            // array_push($CommentsVec, count($Comments) );
+            array_push($CommentsVec, $CommentsNum );
             array_push($Calender, date('Y/m', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00')));
             $NowMonth++;
         }
