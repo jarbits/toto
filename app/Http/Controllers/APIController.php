@@ -22,7 +22,7 @@ class APIController extends Controller
         $row = DB::table('rawsurvey')->orderBy('start_time', 'desc')->first();
         $lastTime = $row->start_time;
 
-        json_encode('123321', JSON_UNESCAPED_UNICODE);
+        return json_encode($lastTime, JSON_UNESCAPED_UNICODE);
     }
 
     /**
