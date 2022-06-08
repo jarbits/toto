@@ -17,6 +17,14 @@ class APIController extends Controller
         $this->FormulaService = new FormulaService();
     }
 
+    public function getLastTime()
+    {
+        $row = DB::table('rawsurvey')->orderBy('start_time', 'desc')->first();
+        $lastTime = $row->start_time;
+
+        json_encode($lastTime, JSON_UNESCAPED_UNICODE);
+    }
+
     /**
      * 取得發送數
      * endpoint: /api/get-post-num?StartTime=2022-02-11&EndTime=2022-02-22

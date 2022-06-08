@@ -21,6 +21,7 @@ Route::group([
     'middleware' => ['api', 'cors'],
 ], function ($router) {
     ###首頁API###
+    Route::get('/get-last-time', 'APIController@getLastTime');
     Route::post('/get-post-num', 'APIController@getPostNum'); //取得發送數
     Route::post('/get-resp-num', 'APIController@getRespNum'); //取得回覆數
     Route::post('/get-low-score-num', 'APIController@getLScoreNum'); //取得低分數量
@@ -102,4 +103,5 @@ Route::group([
 
     Route::post('/lowscore/alarm/getTable1', 'LowScoreController@getTable1');
     Route::post('/lowscore/alarm/getTable2', 'LowScoreController@getTable2');
+
 });
