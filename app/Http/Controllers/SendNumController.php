@@ -43,7 +43,6 @@ class SendNumController extends Controller
 
             if($snedNum != null)
             {
-                $snedNum->num = $req->num;
                 return json_encode(['value' => $snedNum->num], JSON_UNESCAPED_UNICODE);
             }
             else 
