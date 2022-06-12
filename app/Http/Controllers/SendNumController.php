@@ -26,5 +26,7 @@ class SendNumController extends Controller
 
             $snedNum->save();
         }
+
+        dd(123);
     }
 }
