@@ -16,7 +16,7 @@ class CreateSendnumTable extends Migration
         Schema::create('sendnum', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('num');
-            $table->datatime('yearmonth');
+            $table->datetime('yearmonth');
             $table->timestamps();
         });
     }
