@@ -1731,7 +1731,8 @@ class FormulaService
         Result.Bad_Score,
         Result.Q1_Score AS Q1_Score,
         Result.Q13_Score AS Q13_Score,
-        Result.Customer_Comment AS Customer_Comment
+        Result.Customer_Comment AS Customer_Comment,
+        Result.Sir_Commend AS Sir_Commend
         FROM
         (
         SELECT 
@@ -1807,7 +1808,8 @@ class FormulaService
         LEAST(T.q1,T.q2,T.q3) AS Bad_Score,
         T.q1 AS Q1_Score,
         T.q13 AS Q13_Score,
-        T.q14 AS Customer_Comment
+        T.q14 AS Customer_Comment,
+        T.sircommend AS Sir_Commend
 
         FROM toto.rawsurvey as T
         WHERE 1=1
