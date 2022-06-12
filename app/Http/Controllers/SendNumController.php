@@ -13,19 +13,19 @@ class SendNumController extends Controller
         $_num = $req->num;
         $snedNum = SendNum::where('yearmonth', $_yearMonth)->first();
 
-        // if($snedNum != null)
-        // {
-        //     $snedNum->num = $req->num;
-        //     $snedNum->save();
-        // }
-        // else 
-        // {
-        //     $snedNum = new SendNum();
-        //     $snedNum->yearMonth = $_yearMonth;
-        //     $snedNum->num = $_num;
+        if($snedNum != null)
+        {
+            $snedNum->num = $req->num;
+            $snedNum->save();
+        }
+        else 
+        {
+            $snedNum = new SendNum();
+            $snedNum->yearMonth = $_yearMonth;
+            $snedNum->num = $_num;
 
-        //     $snedNum->save();
-        // }
+            $snedNum->save();
+        }
 
         dd($_yearMonth);
     }
