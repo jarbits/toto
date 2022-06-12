@@ -11,7 +11,7 @@ class SendNumController extends Controller
     {
         $_yearMonth = $req->yearmonth;
         $_num = $req->num;
-        //$snedNum = SendNum::where('yearmonth', $_yearMonth)->firstOrFail();
+        $snedNum = SendNum::where('yearmonth', $_yearMonth)->first();
 
         // if($snedNum != null)
         // {
