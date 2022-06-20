@@ -30,7 +30,7 @@ class RawSurveyController extends Controller
             $_respondentId = $req->respondent_id;
             $survey = RawSurvey::where('respondent_id', $_respondentId)->first();
 
-            return json_encode([$survey], JSON_UNESCAPED_UNICODE);
+            return json_encode($survey, JSON_UNESCAPED_UNICODE);
         } catch (\Throwable $th) {
             return json_encode($th, JSON_UNESCAPED_UNICODE);
         }
