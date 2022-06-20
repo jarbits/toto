@@ -10,9 +10,9 @@ class RawSurveyController extends Controller
     public function update(Request $req)
     {
         try {
-            $_respondentId = $req->respondent_id;
+            $_acceptanceCode = $req->acceptance_code;
             $_sircommend = $req->sircommend;
-            $survey = RawSurvey::where('respondent_id', $_respondentId)->first();
+            $survey = RawSurvey::where('acceptance_code', $_acceptanceCode)->first();
             
             $survey->sircommend = $_sircommend;
             $survey->save();
@@ -27,8 +27,8 @@ class RawSurveyController extends Controller
     public function get(Request $req)
     {
         try {
-            $_respondentId = $req->respondent_id;
-            $survey = RawSurvey::where('respondent_id', $_respondentId)->first();
+            $_acceptanceCode = $req->acceptance_code;
+            $survey = RawSurvey::where('acceptance_code', $_acceptanceCode)->first();
 
             return json_encode($survey, JSON_UNESCAPED_UNICODE);
         } catch (\Throwable $th) {
