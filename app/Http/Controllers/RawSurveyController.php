@@ -17,7 +17,9 @@ class RawSurveyController extends Controller
             $survey->sircommend = $_sircommend;
             $survey->save();
 
-            return json_encode('success', JSON_UNESCAPED_UNICODE);
+            $survey = RawSurvey::where('acceptance_code', $_acceptanceCode)->first();
+
+            return json_encode($survey, JSON_UNESCAPED_UNICODE);
         } catch (\Throwable $th) {
             return json_encode($th, JSON_UNESCAPED_UNICODE);
         }
