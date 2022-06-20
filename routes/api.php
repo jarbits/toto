@@ -106,6 +106,6 @@ Route::group([
     Route::post('/lowscore/alarm/getTable1', 'LowScoreController@getTable1');
     Route::post('/lowscore/alarm/getTable2', 'LowScoreController@getTable2');
 
-    Route::post('/update-sircommend', 'RawSurveyController@update'); 
-
+    Route::PUT('/lowscore/alarm/update-sircommend', 'RawSurveyController@update'); 
+    Route::GET('/lowscore/alarm/get-sircommend', 'RawSurveyController@get'); 
 });
