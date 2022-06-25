@@ -355,7 +355,8 @@ class FormulaService
         $Set = DB::select("
             SELECT * FROM rawsurvey AS T
             WHERE 1=1
-            AND T.q8 IS NOT NULL
+            AND (T.q8 IS NOT NULL
+            OR T.q8 != '')
             ".$this->advanceSearch($Region, $Category, $Person)."
             AND T.start_time >= '".$StartTime."' 
             AND T.end_time < '".$EndTime."'
@@ -371,7 +372,10 @@ class FormulaService
         $Set = DB::select("
             SELECT * FROM rawsurvey AS T
             WHERE 1=1
-            AND T.q8 like '%1%'
+            AND T.q8 like '1'
+            OR T.q8 like '1,%'
+            OR T.q8 like '%,1'
+            OR T.q8 like '%,1,%'
             ".$this->advanceSearch($Region, $Category, $Person)."
             AND T.start_time >= '".$StartTime."' 
             AND T.end_time < '".$EndTime."'
@@ -387,7 +391,10 @@ class FormulaService
         $Set = DB::select("
             SELECT * FROM rawsurvey AS T
             WHERE 1=1
-            AND T.q8 like '%2%'
+            AND T.q8 like '2'
+            OR T.q8 like '2,%'
+            OR T.q8 like '%,2'
+            OR T.q8 like '%,2,%'
             ".$this->advanceSearch($Region, $Category, $Person)."
             AND T.start_time >= '".$StartTime."' 
             AND T.end_time < '".$EndTime."'
@@ -403,7 +410,10 @@ class FormulaService
         $Set = DB::select("
             SELECT * FROM rawsurvey AS T
             WHERE 1=1
-            AND T.q8 like '%3%'
+            AND T.q8 like '3'
+            OR T.q8 like '3,%'
+            OR T.q8 like '%,3'
+            OR T.q8 like '%,3,%'
             ".$this->advanceSearch($Region, $Category, $Person)."
             AND T.start_time >= '".$StartTime."'
             AND T.end_time < '".$EndTime."'
@@ -419,7 +429,10 @@ class FormulaService
         $Set = DB::select("
             SELECT * FROM rawsurvey AS T
             WHERE 1=1
-            AND T.q8 like '%4%'
+            AND T.q8 like '4'
+            OR T.q8 like '4,%'
+            OR T.q8 like '%,4'
+            OR T.q8 like '%,4,%'
             ".$this->advanceSearch($Region, $Category, $Person)."
             AND T.start_time >= '".$StartTime."'
             AND T.end_time < '".$EndTime."'
@@ -435,7 +448,10 @@ class FormulaService
         $Set = DB::select("
             SELECT * FROM rawsurvey AS T
             WHERE 1=1
-            AND T.q8 like '%5%'
+            AND T.q8 like '5'
+            OR T.q8 like '5,%'
+            OR T.q8 like '%,5'
+            OR T.q8 like '%,5,%'
             ".$this->advanceSearch($Region, $Category, $Person)."
             AND T.start_time >= '".$StartTime."'
             AND T.end_time < '".$EndTime."'
@@ -451,7 +467,10 @@ class FormulaService
         $Set = DB::select("
             SELECT * FROM rawsurvey AS T
             WHERE 1=1
-            AND T.q8 like '%6%'
+            AND T.q8 like '6'
+            OR T.q8 like '6,%'
+            OR T.q8 like '%,6'
+            OR T.q8 like '%,6,%'
             ".$this->advanceSearch($Region, $Category, $Person)."
             AND T.start_time >= '".$StartTime."'
             AND T.end_time < '".$EndTime."'
@@ -467,7 +486,10 @@ class FormulaService
         $Set = DB::select("
             SELECT * FROM rawsurvey AS T
             WHERE 1=1
-            AND T.q8 like '%7%'
+            AND T.q8 like '7'
+            OR T.q8 like '7,%'
+            OR T.q8 like '%,7'
+            OR T.q8 like '%,7,%'
             ".$this->advanceSearch($Region, $Category, $Person)."
             AND T.start_time >= '".$StartTime."'
             AND T.end_time < '".$EndTime."'
@@ -483,7 +505,10 @@ class FormulaService
         $Set = DB::select("
             SELECT * FROM rawsurvey AS T
             WHERE 1=1
-            AND T.q8 like '%8%'
+            AND T.q8 like '8'
+            OR T.q8 like '8,%'
+            OR T.q8 like '%,8'
+            OR T.q8 like '%,8,%'
             ".$this->advanceSearch($Region, $Category, $Person)."
             AND T.start_time >= '".$StartTime."'
             AND T.end_time < '".$EndTime."'
@@ -499,7 +524,10 @@ class FormulaService
         $Set = DB::select("
             SELECT * FROM rawsurvey AS T
             WHERE 1=1
-            AND T.q8 like '%10%'
+            AND T.q8 like '10'
+            OR T.q8 like '10,%'
+            OR T.q8 like '%,10'
+            OR T.q8 like '%,10,%'
             ".$this->advanceSearch($Region, $Category, $Person)."
             AND T.start_time >= '".$StartTime."'
             AND T.end_time < '".$EndTime."'
@@ -515,7 +543,10 @@ class FormulaService
         $Set = DB::select("
             SELECT * FROM rawsurvey AS T
             WHERE 1=1
-            AND T.q8 like '%11%'
+            AND T.q8 like '11'
+            OR T.q8 like '11,%'
+            OR T.q8 like '%,11'
+            OR T.q8 like '%,11,%'
             ".$this->advanceSearch($Region, $Category, $Person)."
             AND T.start_time >= '".$StartTime."'
             AND T.end_time < '".$EndTime."'
@@ -531,7 +562,10 @@ class FormulaService
         $Set = DB::select("
             SELECT * FROM rawsurvey AS T
             WHERE 1=1
-            AND T.q8 like '%12%'
+            AND T.q8 like '12'
+            OR T.q8 like '12,%'
+            OR T.q8 like '%,12'
+            OR T.q8 like '%,12,%'
             ".$this->advanceSearch($Region, $Category, $Person)."
             AND T.start_time >= '".$StartTime."'
             AND T.end_time < '".$EndTime."'
@@ -547,7 +581,10 @@ class FormulaService
         $Set = DB::select("
             SELECT * FROM rawsurvey AS T
             WHERE 1=1
-            AND T.q8 like '%13%'
+            AND T.q8 like '13'
+            OR T.q8 like '13,%'
+            OR T.q8 like '%,13'
+            OR T.q8 like '%,13,%'
             ".$this->advanceSearch($Region, $Category, $Person)."
             AND T.start_time >= '".$StartTime."'
             AND T.end_time < '".$EndTime."'
@@ -563,7 +600,10 @@ class FormulaService
         $Set = DB::select("
             SELECT * FROM rawsurvey AS T
             WHERE 1=1
-            AND T.q8 like '%14%'
+            AND T.q8 like '14'
+            OR T.q8 like '14,%'
+            OR T.q8 like '%,14'
+            OR T.q8 like '%,14,%'
             ".$this->advanceSearch($Region, $Category, $Person)."
             AND T.start_time >= '".$StartTime."'
             AND T.end_time < '".$EndTime."'
@@ -579,7 +619,10 @@ class FormulaService
         $Set = DB::select("
             SELECT * FROM rawsurvey AS T
             WHERE 1=1
-            AND T.q8 like '%15%'
+            AND T.q8 like '15'
+            OR T.q8 like '15,%'
+            OR T.q8 like '%,15'
+            OR T.q8 like '%,15,%'
             ".$this->advanceSearch($Region, $Category, $Person)."
             AND T.start_time >= '".$StartTime."'
             AND T.end_time < '".$EndTime."'
@@ -595,7 +638,10 @@ class FormulaService
         $Set = DB::select("
             SELECT * FROM rawsurvey AS T
             WHERE 1=1
-            AND T.q8 like '%16%'
+            AND T.q8 like '16'
+            OR T.q8 like '16,%'
+            OR T.q8 like '%,16'
+            OR T.q8 like '%,16,%'
             ".$this->advanceSearch($Region, $Category, $Person)."
             AND T.start_time >= '".$StartTime."'
             AND T.end_time < '".$EndTime."'
@@ -611,7 +657,10 @@ class FormulaService
         $Set = DB::select("
             SELECT * FROM rawsurvey AS T
             WHERE 1=1
-            AND T.q8 like '%17%'
+            AND T.q8 like '17'
+            OR T.q8 like '17,%'
+            OR T.q8 like '%,17'
+            OR T.q8 like '%,17,%'
             ".$this->advanceSearch($Region, $Category, $Person)."
             AND T.start_time >= '".$StartTime."'
             AND T.end_time < '".$EndTime."'
@@ -627,7 +676,10 @@ class FormulaService
         $Set = DB::select("
             SELECT * FROM rawsurvey AS T
             WHERE 1=1
-            AND T.q8 like '%18%'
+            AND T.q8 like '18'
+            OR T.q8 like '18,%'
+            OR T.q8 like '%,18'
+            OR T.q8 like '%,18,%'
             ".$this->advanceSearch($Region, $Category, $Person)."
             AND T.start_time >= '".$StartTime."'
             AND T.end_time < '".$EndTime."'
@@ -643,8 +695,8 @@ class FormulaService
         $Set = DB::select("
             SELECT * FROM rawsurvey AS T
             WHERE 1=1
-            AND T.q8 like '%9%'
-            AND T.q8 like '%97%'
+            AND T.q8 like '9'
+            AND T.q8 like '97'
             ".$this->advanceSearch($Region, $Category, $Person)."
             AND T.start_time >= '".$StartTime."'
             AND T.end_time < '".$EndTime."'
@@ -660,7 +712,10 @@ class FormulaService
         $Set = DB::select("
             SELECT * FROM rawsurvey AS T
             WHERE 1=1
-            AND T.q8 like '%98%'
+            AND T.q8 like '98'
+            OR T.q8 like '98,%'
+            OR T.q8 like '%,98'
+            OR T.q8 like '%,98,%'
             ".$this->advanceSearch($Region, $Category, $Person)."
             AND T.start_time >= '".$StartTime."'
             AND T.end_time < '".$EndTime."'
