@@ -18,7 +18,7 @@ class FormulaService
             //     AND T.s_region = '".$Region."'
             //     ";
             $qStr = "
-                AND T.s_region = '".$Category."'
+                AND T.s_person LIKE '%".$Category."%'
                 ";
         }
         if ($Category != null && $Region == null) {
