@@ -174,8 +174,6 @@ class FormulaService
             AND T.end_time < '".$EndTime."'
         ");
 
-        dd($this->advanceSearch($Region, $Category, $Person));
-
         return $Set;
     }
 
