@@ -39,6 +39,8 @@ Route::group([
     Route::post('/get-nps-pie-chart', 'APIController@getNPSPieChart'); //NPS圓餅
     Route::post('/get-q1-five-rate-pie-chart', 'APIController@getQ1FiveRatePieChart'); //感動率Pie Chart
 
+    Route::get('/get-q1-five-rate-pie-chart', 'APIController@getQ1FiveRatePieChart'); //感動率Pie Chart
+
     ###統計頁API###
     Route::post('/statistics/getChart1', 'StatisticsController@getChart1');      //滿意度 Line Chart
     Route::post('/statistics/getChart2', 'StatisticsController@getChart2');      //感動率 Line Chart
