@@ -710,8 +710,6 @@ class APIController extends Controller
 
         $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
         $D2 = date('Y-m-d', strtotime($NowYear.'-'.($EndMonth+1).'-01 00:00:00'));
-        
-        dd($req->Region);
 
         $Q1s = $this->FormulaService->getQ1is5Set(
             $D1, 
@@ -720,6 +718,8 @@ class APIController extends Controller
             $req->Category,
             $req->Person
         );
+
+        dd($Q1s);
 
         $Qs = $this->FormulaService->getAllQSet(
             $D1, 
