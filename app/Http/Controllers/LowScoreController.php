@@ -26,6 +26,8 @@ class LowScoreController extends Controller
         $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
         $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
 
+        dd($D1);
+
         $Table = $this->FormulaService->getLowScoreTable01(
             // $D1, 
             // $D2, 
