@@ -14,12 +14,12 @@ class FormulaService
         $qStr = "";
 
         if ($Region != null && $Category != null && $Person == null) {
-            // $qStr = "
-            //     AND T.s_region = '".$Region."'
-            //     ";
             $qStr = "
-                AND T.s_region = '".$Category."'
+                AND T.s_region = '".$Region."'
                 ";
+            // $qStr = "
+            //     AND T.s_region = '".$Category."'
+            //     ";
         }
         if ($Category != null && $Region == null) {
             $qStr = "
@@ -1878,6 +1878,8 @@ class FormulaService
             OR T.q13 < 4
         )
         ".$this->advanceSearch($Region, $Category, $Person)."
+        AND T.start_time >= '".$StartTime."' 
+        AND T.end_time < '".$EndTime."'
         ) AS Result, (select @i := 0) temp
         ");
 
