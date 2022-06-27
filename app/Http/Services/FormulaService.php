@@ -169,7 +169,6 @@ class FormulaService
             SELECT * FROM rawsurvey AS T
             WHERE 1=1
             AND T.q1 = 5
-            ".$this->advanceSearch($Region, $Category, $Person)."
             AND T.start_time >= '".$StartTime."' 
             AND T.end_time < '".$EndTime."'
         ");
