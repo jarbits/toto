@@ -1878,8 +1878,6 @@ class FormulaService
             OR T.q13 < 4
         )
         ".$this->advanceSearch($Region, $Category, $Person)."
-        AND T.start_time >= '".$StartTime."' 
-        AND T.end_time < '".$EndTime."'
         ) AS Result, (select @i := 0) temp
         ");
 
