@@ -13,25 +13,39 @@ class FormulaService
     {
         $qStr = "";
 
-        if ($Region != null && $Category != null && $Person == null) {
-            // $qStr = "
-            //     AND T.s_region = '".$Region."'
-            //     ";
-            $qStr = "
-                AND T.s_person LIKE '%".$Category."%'
-                ";
+        if ($Region == '經銷') {
+            if ($Region != null && $Category != null && $Person == null) {
+                // $qStr = "
+                //     AND T.s_region = '".$Region."'
+                //     ";
+                $qStr = "
+                    AND T.s_person LIKE '%".$Category."%'
+                    ";
+            }
         }
-        if ($Category != null && $Region == null) {
-            $qStr = "
-                AND T.s_person LIKE '%".$Category."%'
-                ";
+        else if (str_contains($Region, '區')) {
+            if ($Region != null && $Category != null && $Person == null) {
+                $qStr = "
+                    AND T.s_region = '".$Region."'
+                    ";
+            }
         }
-        if ($Category != null && $Person != null) {
-            $qStr = "
-                AND T.s_person LIKE '%".$Category."%'
-                AND T.s_person LIKE '%".$Person."%'
-                ";
-        }
+        else
+        {
+
+            if ($Category != null && $Region == null) {
+                $qStr = "
+                    AND T.s_person LIKE '%".$Category."%'
+                    ";
+            }
+            if ($Category != null && $Person != null) {
+                $qStr = "
+                    AND T.s_person LIKE '%".$Category."%'
+                    AND T.s_person LIKE '%".$Person."%'
+                    ";
+            }
+
+        }        
         return $qStr;
     }
     /**
