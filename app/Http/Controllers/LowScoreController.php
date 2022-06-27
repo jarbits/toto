@@ -24,13 +24,11 @@ class LowScoreController extends Controller
         $EndMonth = date('m', strtotime($req->EndTime));
 
         $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
-        $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
-
-        dd($D2);
+        $D2 = date('Y-m-d', strtotime($NowYear.'-'.($EndMonth).'-01 00:00:00'));
 
         $Table = $this->FormulaService->getLowScoreTable01(
-            // $D1, 
-            // $D2, 
+            $D1, 
+            $D2, 
             '2022-01-01 00:00:00',
             '2022-06-01 00:00:00',
             $req->Region,
