@@ -26,7 +26,7 @@ class FormulaService
         else if (str_contains($Region, '區')) {
             if ($Region != null && $Category != null && $Person == null) {
                 $qStr = "
-                    AND T.s_region = '".$Region."'
+                    AND T.s_region = '".$Category."'
                     ";
             }
         }
