@@ -1904,6 +1904,15 @@ class FormulaService
 
         FROM toto.rawsurvey as T
         WHERE 1=1
+        AND ( T.q1 < 2
+            OR T.q2 < 2
+            OR T.q3 < 2
+            OR T.q5 < 2
+            OR T.q9 < 2
+            OR T.q11 < 2
+            OR T.q12 < 2
+            OR T.q13 < 4
+        )
         ".$this->advanceSearch($Region, $Category, $Person)."
         AND T.start_time >= '".$StartTime."' 
         AND T.end_time < '".$EndTime."'
