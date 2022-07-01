@@ -400,6 +400,18 @@ class FormulaService
             AND T.start_time >= '".$StartTime."' 
             AND T.end_time < '".$EndTime."'
         ");
+
+        dd("
+        SELECT * FROM rawsurvey AS T
+            WHERE 1=1
+            AND (T.q8 like '1'
+            OR T.q8 like '1,%'
+            OR T.q8 like '%,1'
+            OR T.q8 like '%,1,%')
+            ".$this->advanceSearch($Region, $Category, $Person)."
+            AND T.start_time >= '".$StartTime."' 
+            AND T.end_time < '".$EndTime."'
+            ");
         return $Set;
     }
 
