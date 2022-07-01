@@ -393,7 +393,7 @@ class FormulaService
             OR T.q8 like '1,%'
             OR T.q8 like '%,1'
             OR T.q8 like '%,1,%')
-            ".$this->advanceSearch($Region, $Category, $Person)."
+            
             AND T.start_time >= '".$StartTime."' 
             AND T.end_time < '".$EndTime."'
         ");
