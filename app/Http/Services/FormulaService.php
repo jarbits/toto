@@ -14,6 +14,8 @@ class FormulaService
         $qStr = "";
 
         if ($Region == "" && $Category == "" && $Person == "") {
+
+            dd($Region);
             return $qStr;
         }
         else {
