@@ -385,7 +385,7 @@ class FormulaService
         $Set = DB::select("
             SELECT * FROM rawsurvey AS T
             WHERE 1=1
-            AND (T.q8 = '1'
+            AND (T.q8 like '1'
             OR T.q8 like '1,%'
             OR T.q8 like '%,1'
             OR T.q8 like '%,1,%')
