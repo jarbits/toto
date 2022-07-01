@@ -60,7 +60,10 @@ Route::group([
 
     ###缺失情形分析### //unsuccessful chart20隻，table1隻 //person 6隻 //timeout 1隻
     Route::post('/deficiency/unsuccessful/getChart1', 'DeficiencyController@getChart1');      
-    Route::post('/deficiency/unsuccessful/getChart2', 'DeficiencyController@getChart2');      
+    Route::post('/deficiency/unsuccessful/getChart2', 'DeficiencyController@getChart2');    
+    
+    Route::get('/deficiency/unsuccessful/getChart2Test', 'DeficiencyController@getChart2Test'); 
+
     Route::post('/deficiency/unsuccessful/getChart3', 'DeficiencyController@getChart3');      
     Route::post('/deficiency/unsuccessful/getChart4', 'DeficiencyController@getChart4');      
     Route::post('/deficiency/unsuccessful/getChart5', 'DeficiencyController@getChart5');      
