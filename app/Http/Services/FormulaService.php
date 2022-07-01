@@ -404,7 +404,7 @@ class FormulaService
         $Set = DB::select("
             SELECT * FROM rawsurvey AS T
             WHERE 1=1
-            AND (T.q8 = '2'
+            AND (T.q8 like '2'
             OR T.q8 like '2,%'
             OR T.q8 like '%,2'
             OR T.q8 like '%,2,%')
@@ -416,14 +416,14 @@ class FormulaService
     }
 
     /**
-     * 零件有瑕疵：[Q8]=3的總數
+     * 零件需調貨：[Q8]=3的總數
      */
     public function getQ8is3Set($StartTime, $EndTime, $Region=null, $Category=null, $Person=null)
     {
         $Set = DB::select("
             SELECT * FROM rawsurvey AS T
             WHERE 1=1
-            AND (T.q8 = '3'
+            AND (T.q8 like '3'
             OR T.q8 like '3,%'
             OR T.q8 like '%,3'
             OR T.q8 like '%,3,%')
@@ -442,7 +442,7 @@ class FormulaService
         $Set = DB::select("
             SELECT * FROM rawsurvey AS T
             WHERE 1=1
-            AND (T.q8 = '4'
+            AND (T.q8 like '4'
             OR T.q8 like '4,%'
             OR T.q8 like '%,4'
             OR T.q8 like '%,4,%')
@@ -461,7 +461,7 @@ class FormulaService
         $Set = DB::select("
             SELECT * FROM rawsurvey AS T
             WHERE 1=1
-            AND (T.q8 = '5'
+            AND (T.q8 like '5'
             OR T.q8 like '5,%'
             OR T.q8 like '%,5'
             OR T.q8 like '%,5,%')
@@ -480,7 +480,7 @@ class FormulaService
         $Set = DB::select("
             SELECT * FROM rawsurvey AS T
             WHERE 1=1
-            AND (T.q8 = '6'
+            AND (T.q8 like '6'
             OR T.q8 like '6,%'
             OR T.q8 like '%,6'
             OR T.q8 like '%,6,%')
@@ -499,7 +499,7 @@ class FormulaService
         $Set = DB::select("
             SELECT * FROM rawsurvey AS T
             WHERE 1=1
-            AND (T.q8 = '7'
+            AND (T.q8 like '7'
             OR T.q8 like '7,%'
             OR T.q8 like '%,7'
             OR T.q8 like '%,7,%')
@@ -518,7 +518,7 @@ class FormulaService
         $Set = DB::select("
             SELECT * FROM rawsurvey AS T
             WHERE 1=1
-            AND (T.q8 = '8'
+            AND (T.q8 like '8'
             OR T.q8 like '8,%'
             OR T.q8 like '%,8'
             OR T.q8 like '%,8,%')
@@ -537,7 +537,7 @@ class FormulaService
         $Set = DB::select("
             SELECT * FROM rawsurvey AS T
             WHERE 1=1
-            AND (T.q8 = '10'
+            AND (T.q8 like '10'
             OR T.q8 like '10,%'
             OR T.q8 like '%,10'
             OR T.q8 like '%,10,%')
@@ -556,7 +556,7 @@ class FormulaService
         $Set = DB::select("
             SELECT * FROM rawsurvey AS T
             WHERE 1=1
-            AND (T.q8 = '11'
+            AND (T.q8 like '11'
             OR T.q8 like '11,%'
             OR T.q8 like '%,11'
             OR T.q8 like '%,11,%')
@@ -575,7 +575,7 @@ class FormulaService
         $Set = DB::select("
             SELECT * FROM rawsurvey AS T
             WHERE 1=1
-            AND (T.q8 = '12'
+            AND (T.q8 like '12'
             OR T.q8 like '12,%'
             OR T.q8 like '%,12'
             OR T.q8 like '%,12,%')
@@ -594,7 +594,7 @@ class FormulaService
         $Set = DB::select("
             SELECT * FROM rawsurvey AS T
             WHERE 1=1
-            AND (T.q8 = '13'
+            AND (T.q8 like '13'
             OR T.q8 like '13,%'
             OR T.q8 like '%,13'
             OR T.q8 like '%,13,%')
@@ -613,7 +613,7 @@ class FormulaService
         $Set = DB::select("
             SELECT * FROM rawsurvey AS T
             WHERE 1=1
-            AND (T.q8 = '14'
+            AND (T.q8 like '14'
             OR T.q8 like '14,%'
             OR T.q8 like '%,14'
             OR T.q8 like '%,14,%')
@@ -632,7 +632,7 @@ class FormulaService
         $Set = DB::select("
             SELECT * FROM rawsurvey AS T
             WHERE 1=1
-            AND (T.q8 = '15'
+            AND (T.q8 like '15'
             OR T.q8 like '15,%'
             OR T.q8 like '%,15'
             OR T.q8 like '%,15,%')
@@ -651,7 +651,7 @@ class FormulaService
         $Set = DB::select("
             SELECT * FROM rawsurvey AS T
             WHERE 1=1
-            AND (T.q8 = '16'
+            AND (T.q8 like '16'
             OR T.q8 like '16,%'
             OR T.q8 like '%,16'
             OR T.q8 like '%,16,%')
@@ -670,7 +670,7 @@ class FormulaService
         $Set = DB::select("
             SELECT * FROM rawsurvey AS T
             WHERE 1=1
-            AND (T.q8 = '17'
+            AND (T.q8 like '17'
             OR T.q8 like '17,%'
             OR T.q8 like '%,17'
             OR T.q8 like '%,17,%')
@@ -689,7 +689,7 @@ class FormulaService
         $Set = DB::select("
             SELECT * FROM rawsurvey AS T
             WHERE 1=1
-            AND (T.q8 = '18'
+            AND (T.q8 like '18'
             OR T.q8 like '18,%'
             OR T.q8 like '%,18'
             OR T.q8 like '%,18,%')
@@ -708,8 +708,8 @@ class FormulaService
         $Set = DB::select("
             SELECT * FROM rawsurvey AS T
             WHERE 1=1
-            AND (T.q8 = '9'
-            OR T.q8 = '97')
+            AND (T.q8 like '9'
+            OR T.q8 like '97')
             ".$this->advanceSearch($Region, $Category, $Person)."
             AND T.start_time >= '".$StartTime."'
             AND T.end_time < '".$EndTime."'
@@ -725,7 +725,7 @@ class FormulaService
         $Set = DB::select("
             SELECT * FROM rawsurvey AS T
             WHERE 1=1
-            AND (T.q8 = '98'
+            AND (T.q8 like '98'
             OR T.q8 like '98,%'
             OR T.q8 like '%,98'
             OR T.q8 like '%,98,%')
