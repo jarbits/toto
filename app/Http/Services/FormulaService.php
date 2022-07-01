@@ -13,7 +13,7 @@ class FormulaService
     {
         $qStr = "";
 
-        if ($Region == null && $Category == null && $Person == null) {
+        if ($Region == "" && $Category == "" && $Person == "") {
             return $qStr;
         }
         else {
