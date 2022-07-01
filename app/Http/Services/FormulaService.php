@@ -13,6 +13,10 @@ class FormulaService
     {
         $qStr = "";
 
+        if ($Region == "" && $Category == "" && $Person == "") {
+            return $qStr;
+        }
+
         if ($Region == '經銷') {
             if ($Region != null && $Category != null && $Person == null) {
                 // $qStr = "
@@ -45,7 +49,7 @@ class FormulaService
                     ";
             }
 
-        }        
+        }
         return $qStr;
     }
     /**
