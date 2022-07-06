@@ -37,7 +37,7 @@ class APIController extends Controller
         
         $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
         $D2 = date('Y-m-d', strtotime($NowYear.'-'.($EndMonth+1).'-01 00:00:00'));
-        if ($EndMonth == '12') {
+        if ($EndMonth == 12) {
             $D2 = date('Y-m-d', strtotime($NowYear.'-'.($EndMonth).'-31 00:00:00'));
         }        
 
@@ -66,7 +66,7 @@ class APIController extends Controller
         
         $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
         $D2 = date('Y-m-d', strtotime($NowYear.'-'.($EndMonth+1).'-01 00:00:00'));
-        if ($EndMonth == '12') {
+        if ($EndMonth == 12) {
             $D2 = date('Y-m-d', strtotime($NowYear.'-'.($EndMonth).'-31 00:00:00'));
         }
 
@@ -95,7 +95,7 @@ class APIController extends Controller
         
         $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
         $D2 = date('Y-m-d', strtotime($NowYear.'-'.($EndMonth+1).'-01 00:00:00'));
-        if ($EndMonth == '12') {
+        if ($EndMonth == 12) {
             $D2 = date('Y-m-d', strtotime($NowYear.'-'.($EndMonth).'-31 00:00:00'));
         }        
 
@@ -124,7 +124,7 @@ class APIController extends Controller
         
         $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
         $D2 = date('Y-m-d', strtotime($NowYear.'-'.($EndMonth+1).'-01 00:00:00'));
-        if ($EndMonth == '12') {
+        if ($EndMonth == 12) {
             $D2 = date('Y-m-d', strtotime($NowYear.'-'.($EndMonth).'-31 00:00:00'));
         }
 
@@ -638,7 +638,7 @@ class APIController extends Controller
 
         $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
         $D2 = date('Y-m-d', strtotime($NowYear.'-'.($EndMonth+1).'-01 00:00:00'));
-        if ($EndMonth == '12') {
+        if ($EndMonth == 12) {
             $D2 = date('Y-m-d', strtotime($NowYear.'-'.($EndMonth).'-31 00:00:00'));
         }
 
@@ -725,7 +725,7 @@ class APIController extends Controller
 
         $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
         $D2 = date('Y-m-d', strtotime($NowYear.'-'.($EndMonth+1).'-01 00:00:00'));
-        if ($EndMonth == '12') {
+        if ($EndMonth == 12) {
             $D2 = date('Y-m-d', strtotime($NowYear.'-'.($EndMonth).'-31 00:00:00'));
         }
 
