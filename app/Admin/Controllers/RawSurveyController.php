@@ -30,13 +30,6 @@ class RawSurveyController extends AdminController
             $tools->append(new ImportTenant());
         });
 
-        // $grid->filter(function($filter){
-        //     $filter->disableIdFilter();
-        //     $filter->like('respondent_serial', 'respondent_serial');
-        //     $filter->like('respondent_id', 'respondent_id');
-        //     $filter->like('acceptance_code', 'acceptance_code');
-        // });
-
         $grid->column('respondent_serial', __('Respondent serial'));
         $grid->column('respondent_id', __('Respondent id'));
         $grid->column('datacollection_status', __('Datacollection status'));
