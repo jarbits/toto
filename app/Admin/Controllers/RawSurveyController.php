@@ -30,6 +30,8 @@ class RawSurveyController extends AdminController
         $grid->filter(function($filter){
             $filter->disableIdFilter();
             $filter->like('respondent_serial', 'respondent_serial');
+            $filter->like('respondent_id', 'respondent_id');
+            $filter->like('acceptance_code', 'acceptance_code');
         });
 
         $grid->tools(function (Grid\Tools $tools) {
