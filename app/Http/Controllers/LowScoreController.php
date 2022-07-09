@@ -24,10 +24,8 @@ class LowScoreController extends Controller
         $EndMonth = date('m', strtotime($req->EndTime));
 
         $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
-        $D2 = date('Y-m-d', strtotime($NowYear.'-'.($EndMonth+1).'-01 00:00:00'));
-        if ($EndMonth == 12) {
-            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($EndMonth).'-31 00:00:00'));
-        }
+        $D2 = date('Y-m-t', strtotime($NowYear.'-'.($EndMonth).'-01 00:00:00'));
+        $D2 = date('Y-m-d', strtotime($D2. ' + 1 days'));
 
         $Table = $this->FormulaService->getLowScoreTable01(
             $D1, 
@@ -47,10 +45,8 @@ class LowScoreController extends Controller
         $EndMonth = date('m', strtotime($req->EndTime));
 
         $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
-        $D2 = date('Y-m-d', strtotime($NowYear.'-'.($EndMonth+1).'-01 00:00:00'));
-        if ($EndMonth == 12) {
-            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($EndMonth).'-31 00:00:00'));
-        }
+        $D2 = date('Y-m-t', strtotime($NowYear.'-'.($EndMonth).'-01 00:00:00'));
+        $D2 = date('Y-m-d', strtotime($D2. ' + 1 days'));
 
         $Table = $this->FormulaService->getLowScoreTable02(
             $D1, 
