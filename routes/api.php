@@ -39,6 +39,22 @@ Route::group([
     Route::post('/get-nps-pie-chart', 'APIController@getNPSPieChart'); //NPS圓餅
     Route::post('/get-q1-five-rate-pie-chart', 'APIController@getQ1FiveRatePieChart'); //感動率Pie Chart
 
+    Route::get('/update-sendnum', 'SendNumController@update');
+    Route::get('/get-sendnum', 'SendNumController@get');
+    Route::get('/update-fixnum', 'FixNumController@update');
+    Route::get('/get-fixnum', 'FixNumController@get');
+    Route::get('/get-last-time', 'APIController@getLastTime'); //取得最新一筆DATA的日期
+    Route::get('/get-post-num', 'APIController@getPostNum'); //取得發送數
+    Route::get('/get-resp-num', 'APIController@getRespNum'); //取得回覆數
+    Route::get('/get-low-score-num', 'APIController@getLScoreNum'); //取得低分數量
+    Route::get('/get-q1-rate', 'APIController@getQ1Rate'); //取得滿意度(Q1)百分比Chart
+    Route::get('/get-q1-rate-chart', 'APIController@getQ1RateChart'); //滿意度Chart
+    Route::get('/get-q1-five-rate-chart', 'APIController@getQ1FiveRateChart'); //感動率Chart
+    Route::get('/get-nps-bar-chart', 'APIController@getNPSBarChart'); //NPS
+    Route::get('/get-comments-bar-chart', 'APIController@getCommentsChart'); //取得正負評價數
+    Route::get('/get-lowscore-bar-chart', 'APIController@getLowScoreChart'); //低分示警件數
+    Route::get('/get-sms-bar-chart', 'APIController@getSMSChart'); //簡訊數相關
+    Route::get('/get-nps-pie-chart', 'APIController@getNPSPieChart'); //NPS圓餅
     Route::get('/get-q1-five-rate-pie-chart', 'APIController@getQ1FiveRatePieChart'); //感動率Pie Chart
 
     ###統計頁API###
