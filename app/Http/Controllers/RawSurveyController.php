@@ -45,6 +45,6 @@ class RawSurveyController extends Controller
     {
         $request->file('file');
         Excel::import(new TenantsImport, $request->file('file'));
-        return $this->response()->success('匯入完成！')->refresh();
+        //return $this->response()->success('匯入完成！')->refresh();
     }
 }
