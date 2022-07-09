@@ -26,6 +26,12 @@ class RawSurveyController extends AdminController
     protected function grid()
     {
         $grid = new Grid(new RawSurvey());
+
+        $grid->filter(function($filter){
+            $filter->disableIdFilter();
+            $filter->like('respondent_serial', 'respondent_serial');
+        });
+
         $grid->tools(function (Grid\Tools $tools) {
             $tools->append(new ImportTenant());
         });
