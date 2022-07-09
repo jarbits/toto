@@ -174,6 +174,8 @@ class APIController extends Controller
             $D2 = date('Y-m-t', strtotime($NowYear.'-'.($i).'-01 00:00:00'));
             $D2 = date('Y-m-d', strtotime($D2. ' + 1 days'));
 
+            dd($D2);
+
             $Q1s = $this->FormulaService->getQ1big4Set(
                 $D1, 
                 $D2, 
