@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\RawSurvey;
+use App\Imports\TenantsImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class RawSurveyController extends Controller
 {
@@ -37,5 +39,12 @@ class RawSurveyController extends Controller
             return json_encode($th, JSON_UNESCAPED_UNICODE);
         }
         
+    }
+
+    public function import(Request $request) 
+    {
+        $request->file('file');
+        Excel::import(new TenantsImport, $request->file('file'));
+        return $this->response()->success('匯入完成！')->refresh();
     }
 }

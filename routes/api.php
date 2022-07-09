@@ -161,5 +161,8 @@ Route::group([
     Route::post('/lowscore/alarm/getTable2', 'LowScoreController@getTable2');
 
     Route::post('/lowscore/alarm/update-sircommend', 'RawSurveyController@update'); 
-    Route::GET('/lowscore/alarm/get-sircommend', 'RawSurveyController@get'); 
+    Route::get('/lowscore/alarm/get-sircommend', 'RawSurveyController@get'); 
+
+    Route::get('/import-excel', 'RawSurveyController@import');
+    Route::post('/import-excel', 'RawSurveyController@import');
 });
