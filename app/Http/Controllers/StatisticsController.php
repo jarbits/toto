@@ -42,10 +42,8 @@ class StatisticsController extends Controller
         for($i=$i_start; $i<=$EndMonth; $i++)
         {
             $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
-            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($EndMonth+1).'-01 00:00:00'));
-            if ($EndMonth == 12) {
-                $D2 = date('Y-m-d', strtotime($NowYear.'-'.($EndMonth).'-31 00:00:00'));
-            } 
+            $D2 = date('Y-m-t', strtotime($NowYear.'-'.($i).'-01 00:00:00'));
+            $D2 = date('Y-m-d', strtotime($D2. ' + 1 days'));
 
             $Q1s = $this->FormulaService->getQ1big4Set(
                 $D1, 
@@ -104,10 +102,8 @@ class StatisticsController extends Controller
         for($i=$i_start; $i<=$EndMonth; $i++)
         {
             $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
-            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($EndMonth+1).'-01 00:00:00'));
-            if ($EndMonth == 12) {
-                $D2 = date('Y-m-d', strtotime($NowYear.'-'.($EndMonth).'-31 00:00:00'));
-            } 
+            $D2 = date('Y-m-t', strtotime($NowYear.'-'.($i).'-01 00:00:00'));
+            $D2 = date('Y-m-d', strtotime($D2. ' + 1 days'));
 
             $Q1s = $this->FormulaService->getQ1is5Set(
                 $D1, 
@@ -169,10 +165,8 @@ class StatisticsController extends Controller
         for($i=$i_start; $i<=$EndMonth; $i++)
         {
             $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
-            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($EndMonth+1).'-01 00:00:00'));
-            if ($EndMonth == 12) {
-                $D2 = date('Y-m-d', strtotime($NowYear.'-'.($EndMonth).'-31 00:00:00'));
-            } 
+            $D2 = date('Y-m-t', strtotime($NowYear.'-'.($i).'-01 00:00:00'));
+            $D2 = date('Y-m-d', strtotime($D2. ' + 1 days'));
             
             $Qs = $this->FormulaService->getAllQSet(
                 $D1, 
@@ -283,10 +277,8 @@ class StatisticsController extends Controller
         for($i=$i_start; $i<=$EndMonth; $i++)
         {
             $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
-            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($EndMonth+1).'-01 00:00:00'));
-            if ($EndMonth == 12) {
-                $D2 = date('Y-m-d', strtotime($NowYear.'-'.($EndMonth).'-31 00:00:00'));
-            } 
+            $D2 = date('Y-m-t', strtotime($NowYear.'-'.($i).'-01 00:00:00'));
+            $D2 = date('Y-m-d', strtotime($D2. ' + 1 days'));
             
             $Q1s = $this->FormulaService->getAllQSet(
                 $D1, 
@@ -339,10 +331,8 @@ class StatisticsController extends Controller
         for($i=$i_start; $i<=$EndMonth; $i++)
         {
             $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
-            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($EndMonth+1).'-01 00:00:00'));
-            if ($EndMonth == 12) {
-                $D2 = date('Y-m-d', strtotime($NowYear.'-'.($EndMonth).'-31 00:00:00'));
-            } 
+            $D2 = date('Y-m-t', strtotime($NowYear.'-'.($i).'-01 00:00:00'));
+            $D2 = date('Y-m-d', strtotime($D2. ' + 1 days'));
             
             $Q2s = $this->FormulaService->getAllQSet(
                 $D1, 
@@ -395,10 +385,8 @@ class StatisticsController extends Controller
         for($i=$i_start; $i<=$EndMonth; $i++)
         {
             $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
-            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($EndMonth+1).'-01 00:00:00'));
-            if ($EndMonth == 12) {
-                $D2 = date('Y-m-d', strtotime($NowYear.'-'.($EndMonth).'-31 00:00:00'));
-            } 
+            $D2 = date('Y-m-t', strtotime($NowYear.'-'.($i).'-01 00:00:00'));
+            $D2 = date('Y-m-d', strtotime($D2. ' + 1 days'));
             
             $Q3s = $this->FormulaService->getAllQSet(
                 $D1, 
@@ -451,10 +439,8 @@ class StatisticsController extends Controller
         for($i=$i_start; $i<=$EndMonth; $i++)
         {
             $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
-            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($EndMonth+1).'-01 00:00:00'));
-            if ($EndMonth == 12) {
-                $D2 = date('Y-m-d', strtotime($NowYear.'-'.($EndMonth).'-31 00:00:00'));
-            } 
+            $D2 = date('Y-m-t', strtotime($NowYear.'-'.($i).'-01 00:00:00'));
+            $D2 = date('Y-m-d', strtotime($D2. ' + 1 days'));
             
             $Q5s = $this->FormulaService->getAllQSet(
                 $D1, 
@@ -507,10 +493,8 @@ class StatisticsController extends Controller
         for($i=$i_start; $i<=$EndMonth; $i++)
         {
             $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
-            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($EndMonth+1).'-01 00:00:00'));
-            if ($EndMonth == 12) {
-                $D2 = date('Y-m-d', strtotime($NowYear.'-'.($EndMonth).'-31 00:00:00'));
-            } 
+            $D2 = date('Y-m-t', strtotime($NowYear.'-'.($i).'-01 00:00:00'));
+            $D2 = date('Y-m-d', strtotime($D2. ' + 1 days'));
             
             $Q9s = $this->FormulaService->getAllQSet(
                 $D1, 
@@ -563,10 +547,8 @@ class StatisticsController extends Controller
         for($i=$i_start; $i<=$EndMonth; $i++)
         {
             $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
-            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($EndMonth+1).'-01 00:00:00'));
-            if ($EndMonth == 12) {
-                $D2 = date('Y-m-d', strtotime($NowYear.'-'.($EndMonth).'-31 00:00:00'));
-            } 
+            $D2 = date('Y-m-t', strtotime($NowYear.'-'.($i).'-01 00:00:00'));
+            $D2 = date('Y-m-d', strtotime($D2. ' + 1 days'));
             
             $Q10s = $this->FormulaService->getAllQSet(
                 $D1, 
@@ -619,10 +601,8 @@ class StatisticsController extends Controller
         for($i=$i_start; $i<=$EndMonth; $i++)
         {
             $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
-            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($EndMonth+1).'-01 00:00:00'));
-            if ($EndMonth == 12) {
-                $D2 = date('Y-m-d', strtotime($NowYear.'-'.($EndMonth).'-31 00:00:00'));
-            } 
+            $D2 = date('Y-m-t', strtotime($NowYear.'-'.($i).'-01 00:00:00'));
+            $D2 = date('Y-m-d', strtotime($D2. ' + 1 days'));
             
             $Q11s = $this->FormulaService->getAllQSet(
                 $D1, 
@@ -675,10 +655,8 @@ class StatisticsController extends Controller
         for($i=$i_start; $i<=$EndMonth; $i++)
         {
             $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
-            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($EndMonth+1).'-01 00:00:00'));
-            if ($EndMonth == 12) {
-                $D2 = date('Y-m-d', strtotime($NowYear.'-'.($EndMonth).'-31 00:00:00'));
-            } 
+            $D2 = date('Y-m-t', strtotime($NowYear.'-'.($i).'-01 00:00:00'));
+            $D2 = date('Y-m-d', strtotime($D2. ' + 1 days'));
             
             $Q12s = $this->FormulaService->getAllQSet(
                 $D1, 
@@ -731,10 +709,8 @@ class StatisticsController extends Controller
         for($i=$i_start; $i<=$EndMonth; $i++)
         {
             $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
-            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($EndMonth+1).'-01 00:00:00'));
-            if ($EndMonth == 12) {
-                $D2 = date('Y-m-d', strtotime($NowYear.'-'.($EndMonth).'-31 00:00:00'));
-            } 
+            $D2 = date('Y-m-t', strtotime($NowYear.'-'.($i).'-01 00:00:00'));
+            $D2 = date('Y-m-d', strtotime($D2. ' + 1 days'));
             
             $Qs = $this->FormulaService->getQ4is1Set(
                 $D1, 
@@ -792,10 +768,8 @@ class StatisticsController extends Controller
         for($i=$i_start; $i<=$EndMonth; $i++)
         {
             $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
-            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($EndMonth+1).'-01 00:00:00'));
-            if ($EndMonth == 12) {
-                $D2 = date('Y-m-d', strtotime($NowYear.'-'.($EndMonth).'-31 00:00:00'));
-            } 
+            $D2 = date('Y-m-t', strtotime($NowYear.'-'.($i).'-01 00:00:00'));
+            $D2 = date('Y-m-d', strtotime($D2. ' + 1 days'));
             
             $Qs = $this->FormulaService->getQ6is9Set(
                 $D1, 
@@ -853,10 +827,8 @@ class StatisticsController extends Controller
         for($i=$i_start; $i<=$EndMonth; $i++)
         {
             $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
-            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($EndMonth+1).'-01 00:00:00'));
-            if ($EndMonth == 12) {
-                $D2 = date('Y-m-d', strtotime($NowYear.'-'.($EndMonth).'-31 00:00:00'));
-            } 
+            $D2 = date('Y-m-t', strtotime($NowYear.'-'.($i).'-01 00:00:00'));
+            $D2 = date('Y-m-d', strtotime($D2. ' + 1 days'));
             
             $Qs = $this->FormulaService->getQ7is1Set(
                 $D1, 

@@ -51,7 +51,8 @@ class SummaryController extends Controller
         for($i=$i_start; $i<=$EndMonth; $i++)
         {
             $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
-            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
+            $D2 = date('Y-m-t', strtotime($NowYear.'-'.($i).'-01 00:00:00'));
+            $D2 = date('Y-m-d', strtotime($D2. ' + 1 days'));
 
             $LowScore = $this->FormulaService->getLScoreSet(
                 $D1, 
@@ -60,31 +61,6 @@ class SummaryController extends Controller
                 $req->Category,
                 $req->Person
             );
-            /*
-            $Comments = $this->FormulaService->getRQ14_1000_9999Set(
-                $D1, 
-                $D2, 
-                $req->Region,
-                $req->Category,
-                $req->Person
-            );
-
-            $NoComments = $this->FormulaService->getRQ14is9999Set(
-                $D1, 
-                $D2, 
-                $req->Region,
-                $req->Category,
-                $req->Person
-            );
-
-            $HighScore = $this->FormulaService->getRQ14less999Set(
-                $D1, 
-                $D2, 
-                $req->Region,
-                $req->Category,
-                $req->Person
-            );
-            */
 
             $NotLowScoreSet = $this->FormulaService->getNotLowSet(
                 $D1, 
@@ -182,7 +158,8 @@ class SummaryController extends Controller
         for($i=$i_start; $i<=$EndMonth; $i++)
         {
             $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
-            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
+            $D2 = date('Y-m-t', strtotime($NowYear.'-'.($i).'-01 00:00:00'));
+            $D2 = date('Y-m-d', strtotime($D2. ' + 1 days'));
 
             $LowScore = $this->FormulaService->getLScoreSet(
                 $D1, 
@@ -299,7 +276,8 @@ class SummaryController extends Controller
         for($i=$i_start; $i<=$EndMonth; $i++)
         {
             $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
-            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
+            $D2 = date('Y-m-t', strtotime($NowYear.'-'.($i).'-01 00:00:00'));
+            $D2 = date('Y-m-d', strtotime($D2. ' + 1 days'));
 
             $LowScore = $this->FormulaService->getLScoreSet(
                 $D1, 
@@ -336,7 +314,8 @@ class SummaryController extends Controller
         $EndMonth = date('m', strtotime($req->EndTime));
 
         $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
-        $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
+        $D2 = date('Y-m-t', strtotime($NowYear.'-'.($EndMonth).'-01 00:00:00'));
+        $D2 = date('Y-m-d', strtotime($D2. ' + 1 days'));
 
         $Table = $this->FormulaService->getSummaryTable01(
             $D1, 
@@ -360,7 +339,8 @@ class SummaryController extends Controller
         $EndMonth = date('m', strtotime($req->EndTime));
 
         $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
-        $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
+        $D2 = date('Y-m-t', strtotime($NowYear.'-'.($EndMonth).'-01 00:00:00'));
+        $D2 = date('Y-m-d', strtotime($D2. ' + 1 days'));
 
         $Table = $this->FormulaService->getSummaryTable02(
             $D1, 
@@ -390,7 +370,8 @@ class SummaryController extends Controller
         for($i=$i_start; $i<=$EndMonth; $i++)
         {
             $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
-            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
+            $D2 = date('Y-m-t', strtotime($NowYear.'-'.($i).'-01 00:00:00'));
+            $D2 = date('Y-m-d', strtotime($D2. ' + 1 days'));
 
             $HighScore = $this->FormulaService->getRQ14less999Set(
                 $D1, 
@@ -426,7 +407,8 @@ class SummaryController extends Controller
         $EndMonth = date('m', strtotime($req->EndTime));
 
         $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
-        $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
+        $D2 = date('Y-m-t', strtotime($NowYear.'-'.($EndMonth).'-01 00:00:00'));
+        $D2 = date('Y-m-d', strtotime($D2. ' + 1 days'));
 
         $Table = $this->FormulaService->getSummaryTable03(
             $D1, 
@@ -450,7 +432,8 @@ class SummaryController extends Controller
         $EndMonth = date('m', strtotime($req->EndTime));
 
         $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
-        $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
+        $D2 = date('Y-m-t', strtotime($NowYear.'-'.($EndMonth).'-01 00:00:00'));
+        $D2 = date('Y-m-d', strtotime($D2. ' + 1 days'));
 
         $Table = $this->FormulaService->getSummaryTable04(
             $D1, 
@@ -480,17 +463,8 @@ class SummaryController extends Controller
         for($i=$i_start; $i<=$EndMonth; $i++)
         {
             $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
-            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
-
-            /*
-            $Comments = $this->FormulaService->getRQ14_1000_9999Set(
-                $D1, 
-                $D2, 
-                $req->Region,
-                $req->Category,
-                $req->Person
-            );
-            */
+            $D2 = date('Y-m-t', strtotime($NowYear.'-'.($i).'-01 00:00:00'));
+            $D2 = date('Y-m-d', strtotime($D2. ' + 1 days'));
 
             $NotLowScoreSet = $this->FormulaService->getNotLowSet(
                 $D1, 
@@ -549,7 +523,8 @@ class SummaryController extends Controller
         $EndMonth = date('m', strtotime($req->EndTime));
 
         $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
-        $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
+        $D2 = date('Y-m-t', strtotime($NowYear.'-'.($EndMonth).'-01 00:00:00'));
+        $D2 = date('Y-m-d', strtotime($D2. ' + 1 days'));
 
         $Table = $this->FormulaService->getSummaryTable05(
             $D1, 
@@ -573,7 +548,8 @@ class SummaryController extends Controller
         $EndMonth = date('m', strtotime($req->EndTime));
 
         $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
-        $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
+        $D2 = date('Y-m-t', strtotime($NowYear.'-'.($EndMonth).'-01 00:00:00'));
+        $D2 = date('Y-m-d', strtotime($D2. ' + 1 days'));
 
         $Table = $this->FormulaService->getSummaryTable06(
             $D1, 
@@ -603,7 +579,8 @@ class SummaryController extends Controller
         for($i=$i_start; $i<=$EndMonth; $i++)
         {
             $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
-            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
+            $D2 = date('Y-m-t', strtotime($NowYear.'-'.($i).'-01 00:00:00'));
+            $D2 = date('Y-m-d', strtotime($D2. ' + 1 days'));
 
             $NoComments = $this->FormulaService->getRQ14is9999Set(
                 $D1, 
@@ -649,7 +626,8 @@ class SummaryController extends Controller
         for($i=$i_start; $i<=$EndMonth; $i++)
         {
             $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
-            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
+            $D2 = date('Y-m-t', strtotime($NowYear.'-'.($i).'-01 00:00:00'));
+            $D2 = date('Y-m-d', strtotime($D2. ' + 1 days'));
 
             $Qs = $this->FormulaService->getAllQSet(
                 $D1, 
