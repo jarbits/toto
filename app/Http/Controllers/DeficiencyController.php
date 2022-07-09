@@ -40,7 +40,8 @@ class DeficiencyController extends Controller
         for($i=$i_start; $i<=$EndMonth; $i++)
         {
             $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
-            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
+            $D2 = date('Y-m-t', strtotime($NowYear.'-'.($i).'-01 00:00:00'));
+            $D2 = date('Y-m-d', strtotime($D2. ' + 1 days'));
 
             $Q8s = $this->FormulaService->getQ8isNotNullSet(
                 $D1, 
@@ -83,7 +84,8 @@ class DeficiencyController extends Controller
         for($i=$i_start; $i<=$EndMonth; $i++)
         {
             $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
-            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
+            $D2 = date('Y-m-t', strtotime($NowYear.'-'.($i).'-01 00:00:00'));
+            $D2 = date('Y-m-d', strtotime($D2. ' + 1 days'));
 
             $Q8s = $this->FormulaService->getQ8is1Set(
                 $D1, 
@@ -126,7 +128,8 @@ class DeficiencyController extends Controller
         for($i=$i_start; $i<=$EndMonth; $i++)
         {
             $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
-            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
+            $D2 = date('Y-m-t', strtotime($NowYear.'-'.($i).'-01 00:00:00'));
+            $D2 = date('Y-m-d', strtotime($D2. ' + 1 days'));
 
             $Q8s = $this->FormulaService->getQ8is2Set(
                 $D1, 
@@ -169,7 +172,8 @@ class DeficiencyController extends Controller
         for($i=$i_start; $i<=$EndMonth; $i++)
         {
             $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
-            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
+            $D2 = date('Y-m-t', strtotime($NowYear.'-'.($i).'-01 00:00:00'));
+            $D2 = date('Y-m-d', strtotime($D2. ' + 1 days'));
 
             $Q8s = $this->FormulaService->getQ8is3Set(
                 $D1, 
@@ -212,7 +216,8 @@ class DeficiencyController extends Controller
         for($i=$i_start; $i<=$EndMonth; $i++)
         {
             $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
-            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
+            $D2 = date('Y-m-t', strtotime($NowYear.'-'.($i).'-01 00:00:00'));
+            $D2 = date('Y-m-d', strtotime($D2. ' + 1 days'));
 
             $Q8s = $this->FormulaService->getQ8is4Set(
                 $D1, 
@@ -255,7 +260,8 @@ class DeficiencyController extends Controller
         for($i=$i_start; $i<=$EndMonth; $i++)
         {
             $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
-            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
+            $D2 = date('Y-m-t', strtotime($NowYear.'-'.($i).'-01 00:00:00'));
+            $D2 = date('Y-m-d', strtotime($D2. ' + 1 days'));
 
             $Q8s = $this->FormulaService->getQ8is5Set(
                 $D1, 
@@ -298,7 +304,8 @@ class DeficiencyController extends Controller
         for($i=$i_start; $i<=$EndMonth; $i++)
         {
             $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
-            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
+            $D2 = date('Y-m-t', strtotime($NowYear.'-'.($i).'-01 00:00:00'));
+            $D2 = date('Y-m-d', strtotime($D2. ' + 1 days'));
 
             $Q8s = $this->FormulaService->getQ8is6Set(
                 $D1, 
@@ -341,7 +348,8 @@ class DeficiencyController extends Controller
         for($i=$i_start; $i<=$EndMonth; $i++)
         {
             $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
-            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
+            $D2 = date('Y-m-t', strtotime($NowYear.'-'.($i).'-01 00:00:00'));
+            $D2 = date('Y-m-d', strtotime($D2. ' + 1 days'));
 
             $Q8s = $this->FormulaService->getQ8is7Set(
                 $D1, 
@@ -384,7 +392,8 @@ class DeficiencyController extends Controller
         for($i=$i_start; $i<=$EndMonth; $i++)
         {
             $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
-            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
+            $D2 = date('Y-m-t', strtotime($NowYear.'-'.($i).'-01 00:00:00'));
+            $D2 = date('Y-m-d', strtotime($D2. ' + 1 days'));
 
             $Q8s = $this->FormulaService->getQ8is8Set(
                 $D1, 
@@ -427,7 +436,8 @@ class DeficiencyController extends Controller
         for($i=$i_start; $i<=$EndMonth; $i++)
         {
             $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
-            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
+            $D2 = date('Y-m-t', strtotime($NowYear.'-'.($i).'-01 00:00:00'));
+            $D2 = date('Y-m-d', strtotime($D2. ' + 1 days'));
 
             $Q8s = $this->FormulaService->getQ8is10Set(
                 $D1, 
@@ -470,7 +480,8 @@ class DeficiencyController extends Controller
         for($i=$i_start; $i<=$EndMonth; $i++)
         {
             $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
-            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
+            $D2 = date('Y-m-t', strtotime($NowYear.'-'.($i).'-01 00:00:00'));
+            $D2 = date('Y-m-d', strtotime($D2. ' + 1 days'));
 
             $Q8s = $this->FormulaService->getQ8is11Set(
                 $D1, 
@@ -513,7 +524,8 @@ class DeficiencyController extends Controller
         for($i=$i_start; $i<=$EndMonth; $i++)
         {
             $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
-            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
+            $D2 = date('Y-m-t', strtotime($NowYear.'-'.($i).'-01 00:00:00'));
+            $D2 = date('Y-m-d', strtotime($D2. ' + 1 days'));
 
             $Q8s = $this->FormulaService->getQ8is12Set(
                 $D1, 
@@ -556,7 +568,8 @@ class DeficiencyController extends Controller
         for($i=$i_start; $i<=$EndMonth; $i++)
         {
             $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
-            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
+            $D2 = date('Y-m-t', strtotime($NowYear.'-'.($i).'-01 00:00:00'));
+            $D2 = date('Y-m-d', strtotime($D2. ' + 1 days'));
 
             $Q8s = $this->FormulaService->getQ8is13Set(
                 $D1, 
@@ -599,7 +612,8 @@ class DeficiencyController extends Controller
         for($i=$i_start; $i<=$EndMonth; $i++)
         {
             $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
-            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
+            $D2 = date('Y-m-t', strtotime($NowYear.'-'.($i).'-01 00:00:00'));
+            $D2 = date('Y-m-d', strtotime($D2. ' + 1 days'));
 
             $Q8s = $this->FormulaService->getQ8is14Set(
                 $D1, 
@@ -642,7 +656,8 @@ class DeficiencyController extends Controller
         for($i=$i_start; $i<=$EndMonth; $i++)
         {
             $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
-            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
+            $D2 = date('Y-m-t', strtotime($NowYear.'-'.($i).'-01 00:00:00'));
+            $D2 = date('Y-m-d', strtotime($D2. ' + 1 days'));
 
             $Q8s = $this->FormulaService->getQ8is15Set(
                 $D1, 
@@ -685,7 +700,8 @@ class DeficiencyController extends Controller
         for($i=$i_start; $i<=$EndMonth; $i++)
         {
             $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
-            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
+            $D2 = date('Y-m-t', strtotime($NowYear.'-'.($i).'-01 00:00:00'));
+            $D2 = date('Y-m-d', strtotime($D2. ' + 1 days'));
 
             $Q8s = $this->FormulaService->getQ8is16Set(
                 $D1, 
@@ -728,7 +744,8 @@ class DeficiencyController extends Controller
         for($i=$i_start; $i<=$EndMonth; $i++)
         {
             $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
-            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
+            $D2 = date('Y-m-t', strtotime($NowYear.'-'.($i).'-01 00:00:00'));
+            $D2 = date('Y-m-d', strtotime($D2. ' + 1 days'));
 
             $Q8s = $this->FormulaService->getQ8is17Set(
                 $D1, 
@@ -771,7 +788,8 @@ class DeficiencyController extends Controller
         for($i=$i_start; $i<=$EndMonth; $i++)
         {
             $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
-            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
+            $D2 = date('Y-m-t', strtotime($NowYear.'-'.($i).'-01 00:00:00'));
+            $D2 = date('Y-m-d', strtotime($D2. ' + 1 days'));
 
             $Q8s = $this->FormulaService->getQ8is18Set(
                 $D1, 
@@ -814,7 +832,8 @@ class DeficiencyController extends Controller
         for($i=$i_start; $i<=$EndMonth; $i++)
         {
             $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
-            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
+            $D2 = date('Y-m-t', strtotime($NowYear.'-'.($i).'-01 00:00:00'));
+            $D2 = date('Y-m-d', strtotime($D2. ' + 1 days'));
 
             $Q8s = $this->FormulaService->getQ8is9And97Set(
                 $D1, 
@@ -857,7 +876,8 @@ class DeficiencyController extends Controller
         for($i=$i_start; $i<=$EndMonth; $i++)
         {
             $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
-            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
+            $D2 = date('Y-m-t', strtotime($NowYear.'-'.($i).'-01 00:00:00'));
+            $D2 = date('Y-m-d', strtotime($D2. ' + 1 days'));
 
             $Q8s = $this->FormulaService->getQ8is98Set(
                 $D1, 
@@ -901,7 +921,8 @@ class DeficiencyController extends Controller
         for($i=$i_start; $i<=$EndMonth; $i++)
         {
             $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
-            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
+            $D2 = date('Y-m-t', strtotime($NowYear.'-'.($i).'-01 00:00:00'));
+            $D2 = date('Y-m-d', strtotime($D2. ' + 1 days'));
 
             $Q8s = $this->FormulaService->getQ6isNot9Set(
                 $D1, 
@@ -944,7 +965,8 @@ class DeficiencyController extends Controller
         for($i=$i_start; $i<=$EndMonth; $i++)
         {
             $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
-            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
+            $D2 = date('Y-m-t', strtotime($NowYear.'-'.($i).'-01 00:00:00'));
+            $D2 = date('Y-m-d', strtotime($D2. ' + 1 days'));
 
             $Q8s = $this->FormulaService->getQ6isLike5Set(
                 $D1, 
@@ -987,7 +1009,8 @@ class DeficiencyController extends Controller
         for($i=$i_start; $i<=$EndMonth; $i++)
         {
             $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
-            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
+            $D2 = date('Y-m-t', strtotime($NowYear.'-'.($i).'-01 00:00:00'));
+            $D2 = date('Y-m-d', strtotime($D2. ' + 1 days'));
 
             $Q8s = $this->FormulaService->getQ6isLike2Set(
                 $D1, 
@@ -1030,7 +1053,8 @@ class DeficiencyController extends Controller
         for($i=$i_start; $i<=$EndMonth; $i++)
         {
             $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
-            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
+            $D2 = date('Y-m-t', strtotime($NowYear.'-'.($i).'-01 00:00:00'));
+            $D2 = date('Y-m-d', strtotime($D2. ' + 1 days'));
 
             $Q8s = $this->FormulaService->getQ6isLike3Set(
                 $D1, 
@@ -1073,7 +1097,8 @@ class DeficiencyController extends Controller
         for($i=$i_start; $i<=$EndMonth; $i++)
         {
             $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
-            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
+            $D2 = date('Y-m-t', strtotime($NowYear.'-'.($i).'-01 00:00:00'));
+            $D2 = date('Y-m-d', strtotime($D2. ' + 1 days'));
 
             $Q8s = $this->FormulaService->getQ6isLike1Set(
                 $D1, 
@@ -1116,7 +1141,8 @@ class DeficiencyController extends Controller
         for($i=$i_start; $i<=$EndMonth; $i++)
         {
             $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
-            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
+            $D2 = date('Y-m-t', strtotime($NowYear.'-'.($i).'-01 00:00:00'));
+            $D2 = date('Y-m-d', strtotime($D2. ' + 1 days'));
 
             $Q8s = $this->FormulaService->getQ6isLike4Set(
                 $D1, 
@@ -1160,7 +1186,8 @@ class DeficiencyController extends Controller
         for($i=$i_start; $i<=$EndMonth; $i++)
         {
             $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
-            $D2 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth+1).'-01 00:00:00'));
+            $D2 = date('Y-m-t', strtotime($NowYear.'-'.($i).'-01 00:00:00'));
+            $D2 = date('Y-m-d', strtotime($D2. ' + 1 days'));
 
             $Q8s = $this->FormulaService->getQ4is2Or3Set(
                 $D1, 
@@ -1202,7 +1229,8 @@ class DeficiencyController extends Controller
         $EndMonth = date('m', strtotime($req->EndTime));
 
         $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
-        $D2 = date('Y-m-d', strtotime($EndYear.'-'.($EndMonth+1).'-01 00:00:00'));
+        $D2 = date('Y-m-t', strtotime($NowYear.'-'.($EndMonth).'-01 00:00:00'));
+        $D2 = date('Y-m-d', strtotime($D2. ' + 1 days'));
 
         $Result = $this->FormulaService->getQ8_9NotNullSet(
             $D1, 
