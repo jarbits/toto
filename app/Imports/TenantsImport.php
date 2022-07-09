@@ -22,6 +22,7 @@ class TenantsImport implements ToModel,WithStartRow
     */
     public function model(array $row)
     {
+        dd($row);
         return new RawSurvey([
             'respondent_serial' => $row[0],
             'respondent_id' => $row[1],
