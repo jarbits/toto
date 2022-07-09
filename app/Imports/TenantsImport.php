@@ -22,7 +22,7 @@ class TenantsImport implements ToModel,WithStartRow
     */
     public function model(array $row)
     {
-        $rawData = RawSurvey::where('respondent_id', $row[1])->first();
+        // $rawData = RawSurvey::where('respondent_id', $row[1])->first();
 
         return new RawSurvey([
             'respondent_serial' => $row[0],
