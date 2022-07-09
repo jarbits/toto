@@ -38,7 +38,7 @@ class APIController extends Controller
         $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
         $D2 = date('Y-m-t', strtotime($NowYear.'-'.($EndMonth).'-01 00:00:00'));
 
-        dd($D2);
+        dd(date('Y-m-d', strtotime($D2. ' + 1 days')));
 
         // $D2 = date('Y-m-d', strtotime($NowYear.'-'.($EndMonth+1).'-01 00:00:00'));
         // if ($EndMonth == 12) {
