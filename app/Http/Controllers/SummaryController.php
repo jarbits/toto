@@ -808,7 +808,7 @@ class SummaryController extends Controller
             $C8->item = 'NPS淨推薦值%';
             $p0_6Rate = round(count($C8_01_value)/$RawSurveyNum, 2)*100;
             $p9_10Rate = round(count($C8_02_value)/$RawSurveyNum, 2)*100;
-            $C8->value = $p0_6Rate - $p9_10Rate;
+            $C8->value = abs($p0_6Rate - $p9_10Rate);
             // $C8->value = count($C8_01_value) - count($C8_02_value);
             $C8->date = date('Y/m', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
             ### End NPS ###
