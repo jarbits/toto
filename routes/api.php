@@ -162,7 +162,6 @@ Route::group([
     Route::post('/summary/receive-category/getChart4', 'SummaryController@getChart4');
     Route::post('/summary/receive-category/getChart5', 'SummaryController@getChart5');
     Route::post('/summary/receive-category/getChart6', 'SummaryController@getChart6');
-
     Route::post('/summary/receive-category/getTable1', 'SummaryController@getTable1');
     Route::post('/summary/receive-category/getTable2', 'SummaryController@getTable2');
     Route::post('/summary/receive-category/getTable3', 'SummaryController@getTable3');
@@ -170,6 +169,21 @@ Route::group([
     Route::post('/summary/receive-category/getTable5', 'SummaryController@getTable5');
     Route::post('/summary/receive-category/getTable6', 'SummaryController@getTable6');
     Route::post('/summary/receive-category/getTable7', 'SummaryController@getTable7');
+
+    Route::get('/summary/receive-category/getChart1', 'SummaryController@getChart1');
+    Route::get('/summary/receive-category/getChart2', 'SummaryController@getChart2');
+    Route::get('/summary/receive-category/getChart3', 'SummaryController@getChart3');
+    Route::get('/summary/receive-category/getChart4', 'SummaryController@getChart4');
+    Route::get('/summary/receive-category/getChart5', 'SummaryController@getChart5');
+    Route::get('/summary/receive-category/getChart6', 'SummaryController@getChart6');
+    Route::get('/summary/receive-category/getTable1', 'SummaryController@getTable1');
+    Route::get('/summary/receive-category/getTable2', 'SummaryController@getTable2');
+    Route::get('/summary/receive-category/getTable3', 'SummaryController@getTable3');
+    Route::get('/summary/receive-category/getTable4', 'SummaryController@getTable4');
+    Route::get('/summary/receive-category/getTable5', 'SummaryController@getTable5');
+    Route::get('/summary/receive-category/getTable6', 'SummaryController@getTable6');
+    Route::get('/summary/receive-category/getTable7', 'SummaryController@getTable7');
+
 
     Route::get('/lowscore/alarm/getTable1', 'LowScoreController@getTable1');
     Route::get('/lowscore/alarm/getTable2', 'LowScoreController@getTable2');
