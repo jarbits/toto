@@ -74,6 +74,23 @@ Route::group([
     Route::post('/statistics/getChart14', 'StatisticsController@getChart14');    //Q7 回答1的比例
     Route::post('/statistics/getTable1', 'StatisticsController@getTable1');
 
+    ###統計頁API###
+    Route::get('/statistics/getChart1', 'StatisticsController@getChart1');      //滿意度 Line Chart
+    Route::get('/statistics/getChart2', 'StatisticsController@getChart2');      //感動率 Line Chart
+    Route::get('/statistics/getChart3', 'StatisticsController@getChart3');      //NPS Line Chart
+    Route::get('/statistics/getChart4', 'StatisticsController@getChart4');      //Q1 分數平均
+    Route::get('/statistics/getChart5', 'StatisticsController@getChart5');      //Q2 分數平均
+    Route::get('/statistics/getChart6', 'StatisticsController@getChart6');      //Q3 分數平均
+    Route::get('/statistics/getChart7', 'StatisticsController@getChart7');      //Q5 分數平均
+    Route::get('/statistics/getChart8', 'StatisticsController@getChart8');      //Q9 分數平均
+    Route::get('/statistics/getChart9', 'StatisticsController@getChart9');      //Q10 分數平均
+    Route::get('/statistics/getChart10', 'StatisticsController@getChart10');    //Q11 分數平均
+    Route::get('/statistics/getChart11', 'StatisticsController@getChart11');    //Q12 分數平均
+    Route::get('/statistics/getChart12', 'StatisticsController@getChart12');    //Q4 回答1的比例
+    Route::get('/statistics/getChart13', 'StatisticsController@getChart13');    //Q6 回答9的比例
+    Route::get('/statistics/getChart14', 'StatisticsController@getChart14');    //Q7 回答1的比例
+    Route::get('/statistics/getTable1', 'StatisticsController@getTable1');
+
     ###缺失情形分析### //unsuccessful chart20隻，table1隻 //person 6隻 //timeout 1隻
     Route::post('/deficiency/unsuccessful/getChart1', 'DeficiencyController@getChart1');      
     Route::post('/deficiency/unsuccessful/getChart2', 'DeficiencyController@getChart2');    
