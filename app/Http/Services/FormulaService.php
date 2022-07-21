@@ -1880,7 +1880,7 @@ class FormulaService
                     ' '
                 END
         ) AS Q13,
-        LEAST(T.q1,T.q2,T.q3) AS Bad_Score,
+        LEAST(T.q1,T.q2,T.q3,T.q5,T.q9,T.q11,T.q12,T.q13) AS Bad_Score,
         T.q1 AS Q1_Score,
         T.q13 AS Q13_Score,
         T.q14 AS Customer_Comment,
