@@ -1818,7 +1818,7 @@ class FormulaService
         SUBSTRING(T.s_person, LOCATE('-', T.s_person)+1, LENGTH(T.s_person) ) AS Sell,
         (
             CASE
-                WHEN T.q1 < 2 THEN
+                WHEN T.q1 <= 2 THEN
                     CONCAT(CONCAT('Q1.請問您對本次TOTO「售後維修服務」的整體滿意程度為何？(', T.q1),')<br>')
                 ELSE
                     ' '
@@ -1826,7 +1826,7 @@ class FormulaService
         ) AS Q1,
         (
             CASE
-                WHEN T.q2 < 2 THEN
+                WHEN T.q2 <= 2 THEN
                     CONCAT(CONCAT('Q2.請問您對本次0800接聽及應對服務品質的滿意程度為何？(', T.q2),')<br>')
                 ELSE
                     ' '
@@ -1834,7 +1834,7 @@ class FormulaService
         ) AS Q2,
         (
             CASE
-                WHEN T.q3 < 2 THEN
+                WHEN T.q3 <= 2 THEN
                     CONCAT(CONCAT('Q3.請問您對於本次維修安排速度的滿意程度為何？(', T.q3),')<br>')
                 ELSE
                     ' '
@@ -1842,7 +1842,7 @@ class FormulaService
         ) AS Q3,
         (
             CASE
-                WHEN T.q5 < 2 THEN
+                WHEN T.q5 <= 2 THEN
                     CONCAT(CONCAT('Q5.請問您對維修人員服務態度的滿意程度為何？(', T.q5),')<br>')
                 ELSE
                     ' '
@@ -1850,7 +1850,7 @@ class FormulaService
         ) AS Q5,
         (
             CASE
-                WHEN T.q9 < 2 THEN
+                WHEN T.q9 <= 2 THEN
                     CONCAT(CONCAT('Q9.請問您對維修人員說明講解故障的原因滿意程度為何？(', T.q9),')<br>')
                 ELSE
                     ' '
@@ -1858,7 +1858,7 @@ class FormulaService
         ) AS Q9,
         (
             CASE
-                WHEN T.q11 < 2 THEN
+                WHEN T.q11 <= 2 THEN
                     CONCAT(CONCAT('Q11.請問您對維修人員在維修完成後拆換下的零件處理的滿意程度為何？(', T.q11),')<br>')
                 ELSE
                     ' '
@@ -1866,7 +1866,7 @@ class FormulaService
         ) AS Q11,
         (
             CASE
-                WHEN T.q12 < 2 THEN
+                WHEN T.q12 <= 2 THEN
                     CONCAT(CONCAT('Q12.請問您對維修人員在維修完成後現場清潔的滿意程度為何？(', T.q12),')<br>')
                 ELSE
                     ' '
@@ -1874,7 +1874,7 @@ class FormulaService
         ) AS Q12,
         (
             CASE
-                WHEN T.q13 < 4 THEN
+                WHEN T.q13 <= 4 THEN
                     CONCAT(CONCAT('Q13.請問您未來會向您的親朋好友推薦TOTO的意願程度為何呢？(', T.q13),')<br>')
                 ELSE
                     ' '
@@ -1888,14 +1888,14 @@ class FormulaService
 
         FROM toto.rawsurvey as T
         WHERE 1=1
-        AND ( T.q1 < 2
-            OR T.q2 < 2
-            OR T.q3 < 2
-            OR T.q5 < 2
-            OR T.q9 < 2
-            OR T.q11 < 2
-            OR T.q12 < 2
-            OR T.q13 < 4
+        AND ( T.q1 <= 2
+            OR T.q2 <= 2
+            OR T.q3 <= 2
+            OR T.q5 <= 2
+            OR T.q9 <= 2
+            OR T.q11 <= 2
+            OR T.q12 <= 2
+            OR T.q13 <= 4
         )
         ".$this->advanceSearch($Region, $Category, $Person)."
         AND T.start_time >= '".$StartTime."' 
