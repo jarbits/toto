@@ -1262,6 +1262,17 @@ class FormulaService
         ON T.s_person = Q.s_person
 
         WHERE 1=1
+
+        AND (T.cklow_score LIKE '%Q1%'
+        OR T.cklow_score LIKE '%Q2%'
+        OR T.cklow_score LIKE '%Q3%'
+        OR T.cklow_score LIKE '%Q5%'
+        OR T.cklow_score LIKE '%Q9%'
+        OR T.cklow_score LIKE '%Q10%'
+        OR T.cklow_score LIKE '%Q11%'
+        OR T.cklow_score LIKE '%Q12%'
+        OR T.cklow_score LIKE '%Q13%')
+
         ".$this->advanceSearch($Region, $Category, $Person)."
         AND T.start_time >= '".$StartTime."' 
         AND T.end_time < '".$EndTime."'
@@ -1408,6 +1419,17 @@ class FormulaService
 
         FROM toto.rawsurvey AS T
         WHERE 1=1
+
+        AND (T.cklow_score LIKE '%Q1%'
+        OR T.cklow_score LIKE '%Q2%'
+        OR T.cklow_score LIKE '%Q3%'
+        OR T.cklow_score LIKE '%Q5%'
+        OR T.cklow_score LIKE '%Q9%'
+        OR T.cklow_score LIKE '%Q10%'
+        OR T.cklow_score LIKE '%Q11%'
+        OR T.cklow_score LIKE '%Q12%'
+        OR T.cklow_score LIKE '%Q13%')
+        
         ".$this->advanceSearch($Region, $Category, $Person)."
         AND T.start_time >= '".$Year."-01-01 00:00:00'
         AND T.end_time <= '".$Year."-12-31 23:59:59'
