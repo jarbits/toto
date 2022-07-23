@@ -438,6 +438,12 @@ class SummaryController extends Controller
             $Q13_0_6_NUM = 0;
             $Q13_7_8_NUM = 0;
             $Q13Big9_NUM = 0;
+
+            $PersonDataAll = RawSurvey::where('s_person', $RawData->s_person)
+            ->where('start_time','>=',$D1)
+            ->where('end_time','<',$D2)
+            ->get();
+
             $PersonData = RawSurvey::where('s_person', $RawData->s_person)
             ->where('rq14','!=',null)
             ->where('start_time','>=',$D1)
@@ -486,9 +492,9 @@ class SummaryController extends Controller
             $SPersonCasesObj->Distribution = $RawData->Distribution;
             $SPersonCasesObj->Sell = $RawData->Sell;
             $SPersonCasesObj->SUM_CASE = $HighScoreNum;
-            $SPersonCasesObj->STATISFY_RATE = round($STATISFY_NUM/count($PersonData), 2);
-            $SPersonCasesObj->MOVING_RATE = round($MovingNum/count($PersonData), 2);
-            $SPersonCasesObj->NPS_RATE = abs(round($Q13Big9_NUM/count($PersonData), 2) - round($Q13_0_6_NUM/count($PersonData), 2));
+            $SPersonCasesObj->STATISFY_RATE = round($STATISFY_NUM/count($PersonDataAll), 2);
+            $SPersonCasesObj->MOVING_RATE = round($MovingNum/count($PersonDataAll), 2);
+            $SPersonCasesObj->NPS_RATE = abs(round($Q13Big9_NUM/count($PersonDataAll), 2) - round($Q13_0_6_NUM/count($PersonDataAll), 2));
             array_push($S_PersonQueue, $SPersonCasesObj);
         }
 
