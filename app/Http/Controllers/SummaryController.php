@@ -457,27 +457,18 @@ class SummaryController extends Controller
                 $rq14Set = $item->rq14;
                 $rq14Set = explode(',', $rq14Set);
                 
-                // $rq14IntSet = array();
                 $flag = true;
                 foreach ($rq14Set as $rq14) 
                 {
-                    // array_push($rq14IntSet, intval($rq14));
                     if (intval($rq14) > 999) {
                         $flag = false;
-                    }
-                    else {
-                        echo($rq14.'<br>');
                     }
                 }
 
                 if ($flag == true) {
                     $HighScoreNum++;
+                    var_dump($item);
                 }
-
-                // $theMaxVal = max($rq14IntSet);
-                // if ($theMaxVal <= 999) {
-                //     $HighScoreNum++;
-                // }
 
                 if (intval($item->q1) > 4) {
                     $STATISFY_NUM++;
