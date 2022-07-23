@@ -447,7 +447,7 @@ class SummaryController extends Controller
             ->get();
 
             $PersonData = RawSurvey::where('s_person', $RawData->s_person)
-            //->where('rq14','!=',null)
+            ->where('rq14','!=',null)
             ->where('start_time','>=',$D1)
             ->where('end_time','<',$D2)
             ->get();
