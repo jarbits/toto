@@ -1557,7 +1557,6 @@ class FormulaService
         OR T.cklow_score LIKE '%Q11%'
         OR T.cklow_score LIKE '%Q12%'
         OR T.cklow_score LIKE '%Q13%')
-        AND rq14 != null
 
         ".$this->advanceSearch($Region, $Category, $Person)."
         AND T.start_time >= '".$StartTime."' 
