@@ -464,7 +464,9 @@ class SummaryController extends Controller
             array_push($S_PersonQueue, $SPersonCasesObj);
         }
 
-        dd($S_PersonQueue);
+        foreach ($S_PersonQueue as $CaseData) {
+            dd($CaseData);
+        }
 
         // $Table = $this->FormulaService->getSummaryTable03(
         //     $D1, 
