@@ -525,7 +525,7 @@ class SummaryController extends Controller
             }
         }
 
-        dd($S_PersonQueue);
+        // dd($S_PersonQueue);
                         
         return json_encode($Table, JSON_UNESCAPED_UNICODE);
     }
