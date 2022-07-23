@@ -428,17 +428,17 @@ class SummaryController extends Controller
 
         $S_PersonQueue = array();
 
-        foreach($DistinctSPersonTable as $s_person)
+        foreach($DistinctSPersonTable as $RawData)
         {
             $HighScoreNum = 0;
-            $RawData = RawSurvey::where('s_person', $s_person)
+            $RawData = RawSurvey::where('s_person', $RawData->s_person)
             ->where('start_time','>=',$D1)
             ->where('end_time','<',$D2)
             ->get();
 
             $needNew = true;
             foreach ($S_PersonQueue as $_SPersonCase) {
-                if ($_SPersonCase->SPerson == $s_person) {
+                if ($_SPersonCase->SPerson == $RawData->s_person) {
                     $needNew = false;
                 }
             }
@@ -464,7 +464,7 @@ class SummaryController extends Controller
 
             if ($needNew) {
                 $SPersonCasesObj = new SPersonCases();
-                $SPersonCasesObj->SPerson = $s_person;
+                $SPersonCasesObj->SPerson = $RawData->s_person;
                 $SPersonCasesObj->SUM_CASE = $HighScoreNum;
                 array_push($S_PersonQueue, $SPersonCasesObj);
             }
