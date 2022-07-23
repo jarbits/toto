@@ -1221,7 +1221,7 @@ class FormulaService
     }
 
     //讚美分析-彙總分析
-    public function getDistinctMemName($StartTime, $EndTime, $Region=null, $Category=null, $Person=null)
+    public function getDistinctSPerson($StartTime, $EndTime, $Region=null, $Category=null, $Person=null)
     {
         $Set = DB::select("
         SELECT
