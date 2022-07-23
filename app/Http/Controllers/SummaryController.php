@@ -461,10 +461,12 @@ class SummaryController extends Controller
                     $HighScoreNum++;
                 }
             }
-            
+
             if ($needNew) {
                 $SPersonCasesObj = new SPersonCases();
                 $SPersonCasesObj->SPerson = $RawData->s_person;
+                $SPersonCasesObj->Distribution = $RawData->Distribution;
+                $SPersonCasesObj->Sell = $RawData->Sell;
                 $SPersonCasesObj->SUM_CASE = $HighScoreNum;
                 array_push($S_PersonQueue, $SPersonCasesObj);
             }
