@@ -400,6 +400,35 @@ class SummaryController extends Controller
      * 讚美分析(彙總查詢)
      * endpoint: /api/summary/receive-category/getTable3
      */
+
+    public function array_groupby($array, $groups){
+        if (count($groups) > 0){
+            $fields = array();
+            foreach ($array as $key => $value){
+                $field = array();
+                $grouped = true;
+                foreach ($groups as $group){
+                    if (isset($value[$group])){
+                        $field[$group] = $value[$group];
+                    } else {
+                        $grouped = false;
+                        break;
+                    }
+                }
+                if ($grouped){
+                    if (in_array($field, $fields, true)){
+                        unset($array[$key]);
+                    } else {
+                        array_push($fields, $field);
+                    }
+                } else {
+                    unset($array[$key]);
+                }
+            }
+        }
+        return array_values($array);
+    }
+
     public function getTable3(Request $req)
     {
         $NowYear = date('Y', strtotime($req->StartTime));
@@ -438,8 +467,12 @@ class SummaryController extends Controller
                 array_push($PraiseData, $item);
             }
         }
+        $groups = array(
+            'Member',
+        );
+        // $this->array_groupby($PraiseData, $groups);
 
-        dd($PraiseData);
+        dd($this->array_groupby($PraiseData, $groups));
                         
         return json_encode($Table, JSON_UNESCAPED_UNICODE);
     }

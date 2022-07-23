@@ -1545,6 +1545,10 @@ class FormulaService
         SELECT
             SUBSTRING(T.s_person, 1, LOCATE('-', T.s_person)-1) AS Distribution,
             SUBSTRING(T.s_person, LOCATE('-', T.s_person)+1, LENGTH(T.s_person) ) AS Sell,
+            CONCAT(
+                SUBSTRING(T.s_person, 1, LOCATE('-', T.s_person)-1),
+                SUBSTRING(T.s_person, LOCATE('-', T.s_person)+1, LENGTH(T.s_person) )
+            ) AS Member,
             T.*
         FROM rawsurvey AS T
         WHERE 1=1
