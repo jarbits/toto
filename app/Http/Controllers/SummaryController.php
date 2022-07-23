@@ -380,7 +380,7 @@ class SummaryController extends Controller
                 }
             }
 
-            array_push($HighScoreVec, count($HighScoreNum) );
+            array_push($HighScoreVec, $HighScoreNum );
             array_push($Calender, date('Y/m', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00')));
             $NowMonth++;
         }
