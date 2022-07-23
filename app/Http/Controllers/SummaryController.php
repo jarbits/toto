@@ -423,21 +423,19 @@ class SummaryController extends Controller
         foreach($Table as $item)
         {
             $rq14Set = $item->rq14;
-            if ($rq14Set != null) {
-                try {
-                    $rq14Set = explode(',', $rq14Set);
-                } catch (\Throwable $th) {}
-                
-                $rq14IntSet = array();
-                foreach ($rq14Set as $rq14) 
-                {
-                    array_push($rq14IntSet, intval($rq14));
-                }
-    
-                $theMaxVal = max($rq14IntSet);
-                if ($theMaxVal <= 999) {
-                    array_push($PraiseData, $item);
-                }
+            try {
+                $rq14Set = explode(',', $rq14Set);
+            } catch (\Throwable $th) {}
+            
+            $rq14IntSet = array();
+            foreach ($rq14Set as $rq14) 
+            {
+                array_push($rq14IntSet, intval($rq14));
+            }
+
+            $theMaxVal = max($rq14IntSet);
+            if ($theMaxVal <= 999) {
+                array_push($PraiseData, $item);
             }
         }
 
