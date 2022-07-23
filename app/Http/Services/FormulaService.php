@@ -1541,6 +1541,29 @@ class FormulaService
 
         ");
 
+        $Set = DB::select("
+        SELECT
+            SUBSTRING(T.s_person, 1, LOCATE('-', T.s_person)-1) AS Distribution,
+            SUBSTRING(T.s_person, LOCATE('-', T.s_person)+1, LENGTH(T.s_person) ) AS Sell,
+            T.*
+        FROM rawsurvey AS T
+        WHERE 1=1
+        AND NOT (T.cklow_score LIKE '%Q1%'
+        OR T.cklow_score LIKE '%Q2%'
+        OR T.cklow_score LIKE '%Q3%'
+        OR T.cklow_score LIKE '%Q5%'
+        OR T.cklow_score LIKE '%Q9%'
+        OR T.cklow_score LIKE '%Q10%'
+        OR T.cklow_score LIKE '%Q11%'
+        OR T.cklow_score LIKE '%Q12%'
+        OR T.cklow_score LIKE '%Q13%')
+
+        WHERE 1=1
+        ".$this->advanceSearch($Region, $Category, $Person)."
+        AND T.start_time >= '".$StartTime."' 
+        AND T.end_time < '".$EndTime."'
+        ");
+
         return $Set;
     }
     //讚美分析-排名分析
