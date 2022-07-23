@@ -401,33 +401,29 @@ class SummaryController extends Controller
      * endpoint: /api/summary/receive-category/getTable3
      */
 
-    public function array_groupby($array, $groups){
-        if (count($groups) > 0){
-            $fields = array();
-            foreach ($array as $key => $value){
-                $field = array();
-                $grouped = true;
-                foreach ($groups as $group){
-                    if (isset($value[$group])){
-                        $field[$group] = $value[$group];
-                    } else {
-                        $grouped = false;
-                        break;
-                    }
-                }
-                if ($grouped){
-                    if (in_array($field, $fields, true)){
-                        unset($array[$key]);
-                    } else {
-                        array_push($fields, $field);
-                    }
-                } else {
-                    unset($array[$key]);
-                }
-            }
-        }
-        return array_values($array);
-    }
+    // public function array_groupby($array, $group){
+    //     $fields = array();
+    //     foreach ($array as $key => $value){
+    //         $field = array();
+    //         $grouped = true;
+    //         if (isset($value[$group])){
+    //             $field[$group] = $value[$group];
+    //         } else {
+    //             $grouped = false;
+    //             break;
+    //         }
+    //         if ($grouped){
+    //             if (in_array($field, $fields, true)){
+    //                 unset($array[$key]);
+    //             } else {
+    //                 array_push($fields, $field);
+    //             }
+    //         } else {
+    //             unset($array[$key]);
+    //         }
+    //     }
+    //     return array_values($array);
+    // }
 
     public function getTable3(Request $req)
     {
@@ -467,12 +463,14 @@ class SummaryController extends Controller
                 array_push($PraiseData, $item);
             }
         }
-        $groups = array(
-            'Member',
-        );
+        // $groups = array(
+        //     'Member',
+        // );
         // $this->array_groupby($PraiseData, $groups);
 
-        dd($this->array_groupby($PraiseData, $groups));
+        //$PraiseData::groupBy('department')->get();
+
+        dd($PraiseData::groupBy('department')->get());
                         
         return json_encode($Table, JSON_UNESCAPED_UNICODE);
     }
