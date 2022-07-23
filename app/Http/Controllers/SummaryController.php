@@ -461,8 +461,7 @@ class SummaryController extends Controller
                     $HighScoreNum++;
                 }
             }
-
-            dd($PersonData);
+            
             if ($needNew) {
                 $SPersonCasesObj = new SPersonCases();
                 $SPersonCasesObj->SPerson = $RawData->s_person;
