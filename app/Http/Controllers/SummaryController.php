@@ -417,6 +417,8 @@ class SummaryController extends Controller
             $req->Category,
             $req->Person
         );
+
+        dd($Table);
                         
         return json_encode($Table, JSON_UNESCAPED_UNICODE);
     }
