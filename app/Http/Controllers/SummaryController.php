@@ -468,7 +468,7 @@ class SummaryController extends Controller
         foreach ($S_PersonQueue as $CaseData) 
         {
             $_SPerson = $CaseData->SPerson;
-            $PersonDataACC = RawSurvey::where('s_person', $RawData->s_person)
+            $PersonDataACC = RawSurvey::where('s_person', $_SPerson)
             ->where('start_time','>=',$D0)
             ->where('end_time','<',$D2)
             ->get();
