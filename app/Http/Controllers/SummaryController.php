@@ -401,30 +401,6 @@ class SummaryController extends Controller
      * endpoint: /api/summary/receive-category/getTable3
      */
 
-    public function array_groupby($array, $group){
-        $fields = array();
-        foreach ($array as $key => $value){
-            $field = array();
-            $grouped = true;
-            if (isset($value[$group])){
-                $field[$group] = $value[$group];
-            } else {
-                $grouped = false;
-                break;
-            }
-            if ($grouped){
-                if (in_array($field, $fields, true)){
-                    unset($array[$key]);
-                } else {
-                    array_push($fields, $field);
-                }
-            } else {
-                unset($array[$key]);
-            }
-        }
-        return array_values($array);
-    }
-
     public function getTable3(Request $req)
     {
         $NowYear = date('Y', strtotime($req->StartTime));
@@ -443,8 +419,7 @@ class SummaryController extends Controller
             $req->Person
         );
 
-        $PraiseData = array();
-
+        $QRows = array();
         foreach($Table as $item)
         {
             $rq14Set = $item->rq14;
@@ -460,15 +435,11 @@ class SummaryController extends Controller
 
             $theMaxVal = max($rq14IntSet);
             if ($theMaxVal <= 999) {
-                array_push($PraiseData, $item);
+                array_push($QRows, $item);
             }
         }
-        $groups = array(
-            'Member',
-        );
-        // $this->array_groupby($PraiseData, $groups);
 
-        dd($this->array_groupby($PraiseData, $groups));
+        dd($QRows);
                         
         return json_encode($Table, JSON_UNESCAPED_UNICODE);
     }
