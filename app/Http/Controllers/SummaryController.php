@@ -414,6 +414,7 @@ class SummaryController extends Controller
         $NowMonth = date('m', strtotime($req->StartTime));
         $EndMonth = date('m', strtotime($req->EndTime));
 
+        $D0 = date('Y-m-d', strtotime($NowYear.'-01-01 00:00:00'));
         $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
         $D2 = date('Y-m-t', strtotime($NowYear.'-'.($EndMonth).'-01 00:00:00'));
         $D2 = date('Y-m-d', strtotime($D2. ' + 1 days'));
@@ -436,13 +437,6 @@ class SummaryController extends Controller
             ->where('end_time','<',$D2)
             ->get();
 
-            $needNew = true;
-            foreach ($S_PersonQueue as $_SPersonCase) {
-                if ($_SPersonCase->SPerson == $RawData->s_person) {
-                    $needNew = false;
-                }
-            }
-
             foreach($PersonData as $item)
             {
                 $rq14Set = $item->rq14;
@@ -462,14 +456,12 @@ class SummaryController extends Controller
                 }
             }
 
-            if ($needNew) {
-                $SPersonCasesObj = new SPersonCases();
-                $SPersonCasesObj->SPerson = $RawData->s_person;
-                $SPersonCasesObj->Distribution = $RawData->Distribution;
-                $SPersonCasesObj->Sell = $RawData->Sell;
-                $SPersonCasesObj->SUM_CASE = $HighScoreNum;
-                array_push($S_PersonQueue, $SPersonCasesObj);
-            }
+            $SPersonCasesObj = new SPersonCases();
+            $SPersonCasesObj->SPerson = $RawData->s_person;
+            $SPersonCasesObj->Distribution = $RawData->Distribution;
+            $SPersonCasesObj->Sell = $RawData->Sell;
+            $SPersonCasesObj->SUM_CASE = $HighScoreNum;
+            array_push($S_PersonQueue, $SPersonCasesObj);
         }
 
         dd($S_PersonQueue);
