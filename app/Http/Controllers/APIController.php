@@ -417,32 +417,6 @@ class APIController extends Controller
                 $req->Category,
                 $req->Person
             );
-            
-            /*
-            $Comments = $this->FormulaService->getRQ14_1000_9999Set(
-                $D1, 
-                $D2, 
-                $req->Region,
-                $req->Category,
-                $req->Person
-            );
-
-            $NoComments = $this->FormulaService->getRQ14is9999Set(
-                $D1, 
-                $D2, 
-                $req->Region,
-                $req->Category,
-                $req->Person
-            );
-
-            $HighScore = $this->FormulaService->getRQ14less999Set(
-                $D1, 
-                $D2, 
-                $req->Region,
-                $req->Category,
-                $req->Person
-            );
-            */
 
             $NotLowScoreSet = $this->FormulaService->getNotLowSet(
                 $D1, 

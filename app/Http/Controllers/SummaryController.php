@@ -168,32 +168,6 @@ class SummaryController extends Controller
                 $req->Category,
                 $req->Person
             );
-            
-            /*
-            $Comments = $this->FormulaService->getRQ14_1000_9999Set(
-                $D1, 
-                $D2, 
-                $req->Region,
-                $req->Category,
-                $req->Person
-            );
-
-            $NoComments = $this->FormulaService->getRQ14is9999Set(
-                $D1, 
-                $D2, 
-                $req->Region,
-                $req->Category,
-                $req->Person
-            );
-
-            $HighScore = $this->FormulaService->getRQ14less999Set(
-                $D1, 
-                $D2, 
-                $req->Region,
-                $req->Category,
-                $req->Person
-            );
-            */
 
             $NotLowScoreSet = $this->FormulaService->getNotLowSet(
                 $D1, 
@@ -233,9 +207,6 @@ class SummaryController extends Controller
             }
 
             array_push($LowScoreVec, count($LowScore) );
-            // array_push($CommentsVec, count($Comments) );
-            // array_push($NoCommentsVec, count($NoComments) );
-            // array_push($HighScoreVec, count($HighScore) );
             array_push($CommentsVec, $CommentsNum );
             array_push($NoCommentsVec, $NoCommentsNum );
             array_push($HighScoreVec, $HighScoreNum );
