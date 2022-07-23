@@ -1227,7 +1227,7 @@ class FormulaService
         SELECT
         DISTINCT(
             T.s_person
-        ) AS MemName
+        ) AS s_person
         FROM rawsurvey AS T
         WHERE 1=1
         AND NOT (T.cklow_score LIKE '%Q1%'
