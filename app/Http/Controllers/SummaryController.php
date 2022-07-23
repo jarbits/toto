@@ -432,6 +432,7 @@ class SummaryController extends Controller
         foreach($DistinctSPersonTable as $RawData)
         {
             $HighScoreNum = 0;
+            $HighScoreACCNum = 0;
             $PersonData = RawSurvey::where('s_person', $RawData->s_person)
             ->where('start_time','>=',$D1)
             ->where('end_time','<',$D2)
@@ -464,9 +465,37 @@ class SummaryController extends Controller
             array_push($S_PersonQueue, $SPersonCasesObj);
         }
 
-        foreach ($S_PersonQueue as $CaseData) {
-            dd($CaseData);
+        foreach ($S_PersonQueue as $CaseData) 
+        {
+            $_SPerson = $CaseData->SPerson;
+            $PersonDataACC = RawSurvey::where('s_person', $RawData->s_person)
+            ->where('start_time','>=',$D0)
+            ->where('end_time','<',$D2)
+            ->get();
+
+            foreach($PersonDataACC as $item)
+            {
+                $rq14Set = $item->rq14;
+                try {
+                    $rq14Set = explode(',', $rq14Set);
+                } catch (\Throwable $th) {}
+                
+                $rq14IntSet = array();
+                foreach ($rq14Set as $rq14) 
+                {
+                    array_push($rq14IntSet, intval($rq14));
+                }
+
+                $theMaxVal = max($rq14IntSet);
+                if ($theMaxVal <= 999) {
+                    $HighScoreACCNum++;
+                }
+            }
+
+            $CaseData->ACC_CASE = $HighScoreACCNum;
         }
+
+        dd($S_PersonQueue);
 
         // $Table = $this->FormulaService->getSummaryTable03(
         //     $D1, 
