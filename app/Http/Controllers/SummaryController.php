@@ -461,10 +461,10 @@ class SummaryController extends Controller
                 $flag = true;
                 foreach ($rq14Set as $rq14) 
                 {
-                    var_dump($rq14);
                     // array_push($rq14IntSet, intval($rq14));
                     if (intval($rq14) > 999) {
                         $flag = false;
+                        echo($rq14.'<br>');
                     }
                 }
 
