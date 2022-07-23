@@ -438,7 +438,7 @@ class SummaryController extends Controller
 
             $needNew = true;
             foreach ($S_PersonQueue as $_SPersonCase) {
-                if ($_SPersonCase->SPerson == $PersonData->s_person) {
+                if ($_SPersonCase->SPerson == $RawData->s_person) {
                     $needNew = false;
                 }
             }
@@ -465,7 +465,7 @@ class SummaryController extends Controller
             dd($PersonData);
             if ($needNew) {
                 $SPersonCasesObj = new SPersonCases();
-                $SPersonCasesObj->SPerson = $PersonData->s_person;
+                $SPersonCasesObj->SPerson = $RawData->s_person;
                 $SPersonCasesObj->SUM_CASE = $HighScoreNum;
                 array_push($S_PersonQueue, $SPersonCasesObj);
             }
