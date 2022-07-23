@@ -90,9 +90,9 @@ class SummaryController extends Controller
                 $req->Person
             );
 
-            $CommentsNum = 0;   //1000 ~ 9999
-            $NoCommentsNum = 0;    //is 9999
-            $HighScoreNum = 0;     //less then 999
+            $CommentsNum = 0;   // 1000 ~ 9999
+            $NoCommentsNum = 0; // is 9999
+            $HighScoreNum = 0;  // less then 999
 
             foreach($NotLowScoreSet as $item)
             {
@@ -459,16 +459,24 @@ class SummaryController extends Controller
                     $rq14Set = explode(',', $rq14Set);
                 } catch (\Throwable $th) {}
                 
-                $rq14IntSet = array();
+                // $rq14IntSet = array();
+                $flag = true;
                 foreach ($rq14Set as $rq14) 
                 {
-                    array_push($rq14IntSet, intval($rq14));
+                    // array_push($rq14IntSet, intval($rq14));
+                    if (intval($rq14) > 999) {
+                        $flag = false;
+                    }
                 }
 
-                $theMaxVal = max($rq14IntSet);
-                if ($theMaxVal <= 999) {
+                if ($flag == true) {
                     $HighScoreNum++;
                 }
+
+                // $theMaxVal = max($rq14IntSet);
+                // if ($theMaxVal <= 999) {
+                //     $HighScoreNum++;
+                // }
 
                 if (intval($item->q1) > 4) {
                     $STATISFY_NUM++;
