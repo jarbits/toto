@@ -433,6 +433,11 @@ class SummaryController extends Controller
         {
             $HighScoreNum = 0;
             $HighScoreACCNum = 0;
+            $STATISFY_NUM = 0;
+            $MovingNum = 0;
+            $Q13_0_6_NUM = 0;
+            $Q13_7_8_NUM = 0;
+            $Q13Big9_NUM = 0;
             $PersonData = RawSurvey::where('s_person', $RawData->s_person)
             ->where('start_time','>=',$D1)
             ->where('end_time','<',$D2)
@@ -455,13 +460,41 @@ class SummaryController extends Controller
                 if ($theMaxVal <= 999) {
                     $HighScoreNum++;
                 }
+
+                if (intval($item->q1) > 4) {
+                    $STATISFY_NUM++;
+                }
+                if (intval($item->q1) == 5) {
+                    $MovingNum++;
+                }
+                if (intval($item->q13) >= 0 && intval($item->q13) <= 6) {
+                    $Q13_0_6_NUM++;
+                }
+                if (intval($item->q13) >= 7 && intval($item->q13) <= 8) {
+                    $Q13_7_8_NUM++;
+                }
+                if (intval($item->q13) >= 9) {
+                    $Q13Big9_NUM++;
+                }
             }
+
+            // public $STATISFY_RATE = 0;
+            // public $MOVING_RATE = 0;
+            // public $NPS_RATE = 0;
+            // $STATISFY_NUM = 0;
+            // $MovingNum = 0;
+            // $Q13_0_6_NUM = 0;
+            // $Q13_7_8_NUM = 0;
+            // $Q13Big9_NUM = 0;
 
             $SPersonCasesObj = new SPersonCases();
             $SPersonCasesObj->SPerson = $RawData->s_person;
             $SPersonCasesObj->Distribution = $RawData->Distribution;
             $SPersonCasesObj->Sell = $RawData->Sell;
             $SPersonCasesObj->SUM_CASE = $HighScoreNum;
+            $SPersonCasesObj->STATISFY_RATE = round($STATISFY_NUM/$HighScoreNum, 2);
+            $SPersonCasesObj->MOVING_RATE = round($MovingNum/$HighScoreNum, 2);
+            $SPersonCasesObj->NPS_RATE = abs(round($Q13Big9_NUM/$HighScoreNum, 2) - round($Q13_0_6_NUM/$HighScoreNum, 2));
             array_push($S_PersonQueue, $SPersonCasesObj);
         }
 
@@ -496,14 +529,6 @@ class SummaryController extends Controller
         }
 
         dd($S_PersonQueue);
-
-        // $Table = $this->FormulaService->getSummaryTable03(
-        //     $D1, 
-        //     $D2, 
-        //     $req->Region,
-        //     $req->Category,
-        //     $req->Person
-        // );
                         
         return json_encode($Table, JSON_UNESCAPED_UNICODE);
     }
