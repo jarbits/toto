@@ -344,14 +344,43 @@ class SummaryController extends Controller
             $D2 = date('Y-m-t', strtotime($NowYear.'-'.($i).'-01 00:00:00'));
             $D2 = date('Y-m-d', strtotime($D2. ' + 1 days'));
 
-            $HighScore = $this->FormulaService->getRQ14less999Set(
+            // $HighScore = $this->FormulaService->getRQ14less999Set(
+            //     $D1, 
+            //     $D2, 
+            //     $req->Region,
+            //     $req->Category,
+            //     $req->Person
+            // );
+
+            $NotLowScoreSet = $this->FormulaService->getNotLowSet(
                 $D1, 
                 $D2, 
                 $req->Region,
                 $req->Category,
                 $req->Person
             );
-            array_push($HighScoreVec, count($HighScore) );
+
+            $HighScoreNum = 0;     //less then 999
+            foreach($NotLowScoreSet as $item)
+            {
+                $rq14Set = $item->rq14;
+                try {
+                    $rq14Set = explode(',', $rq14Set);
+                } catch (\Throwable $th) {}
+                
+                $rq14IntSet = array();
+                foreach ($rq14Set as $rq14) 
+                {
+                    array_push($rq14IntSet, intval($rq14));
+                }
+
+                $theMaxVal = max($rq14IntSet);
+                if ($theMaxVal <= 999) {
+                    $HighScoreNum++;
+                }
+            }
+
+            array_push($HighScoreVec, count($HighScoreNum) );
             array_push($Calender, date('Y/m', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00')));
             $NowMonth++;
         }
