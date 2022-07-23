@@ -429,6 +429,8 @@ class SummaryController extends Controller
 
         $S_PersonQueue = array();
 
+        $HighScoreNumSumCase = 0;
+
         foreach($DistinctSPersonTable as $RawData)
         {
             $HighScoreNum = 0;
@@ -485,6 +487,8 @@ class SummaryController extends Controller
                 }
             }
 
+            $HighScoreNumSumCase += $HighScoreNum;
+
             $SPersonCasesObj = new SPersonCases();
             $SPersonCasesObj->SPerson = $RawData->s_person;
             $SPersonCasesObj->Distribution = $RawData->Distribution;
@@ -532,7 +536,7 @@ class SummaryController extends Controller
             }
         }
 
-        // dd($S_PersonQueue);
+        dd($HighScoreNumSumCase);
                         
         return json_encode($S_PersonQueue, JSON_UNESCAPED_UNICODE);
     }
