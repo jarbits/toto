@@ -15,6 +15,26 @@ class Series {
     public $data = [];
 };
 
+class SPersonCases {
+    // RAW.Distribution,
+    // RAW.Sell,
+    // RAW.SUM_CASE,
+    // RAW.ACC_CASE,
+    // ROUND(RAW.STATISFY_NUM/RAW.SUM_CASE, 2) AS STATISFY_RATE,
+    // ROUND(RAW.MOVING_NUM/RAW.SUM_CASE, 2) AS MOVING_RATE,
+    // (
+    // ROUND(RAW.Q13Big9_NUM/RAW.SUM_CASE, 2) - ROUND(RAW.Q13_0_6_NUM/RAW.SUM_CASE, 2)
+    // ) AS NPS_RATE
+    public $SPerson = '';
+    public $Distribution = '';
+    public $Sell = '';
+    public $SUM_CASE = 0;
+    public $ACC_CASE = 0;
+    public $STATISFY_RATE = 0;
+    public $MOVING_RATE = 0;
+    public $NPS_RATE = 0;
+}
+
 class SmsRow {
     public $date = '';
     public $item = '';
@@ -398,7 +418,7 @@ class SummaryController extends Controller
         $D2 = date('Y-m-t', strtotime($NowYear.'-'.($EndMonth).'-01 00:00:00'));
         $D2 = date('Y-m-d', strtotime($D2. ' + 1 days'));
 
-        $DistinctTable = $this->FormulaService->getDistinctMemName(
+        $DistinctTable = $this->FormulaService->getDistinctSPerson(
             $D1, 
             $D2, 
             $req->Region,
@@ -406,7 +426,51 @@ class SummaryController extends Controller
             $req->Person
         );
 
-        dd($DistinctTable);
+        $S_PersonQueue = array();
+
+        foreach($DistinctSPersonTable as $s_person)
+        {
+            $HighScoreNum = 0;
+            $RawData = RawSurvey::where('s_person', $s_person)
+            ->where('start_time','>=',$D1)
+            ->where('end_time','<',$D2)
+            ->get();
+
+            $needNew = true;
+            foreach ($S_PersonQueue as $_SPersonCase) {
+                if ($_SPersonCase->SPerson == $s_person) {
+                    $needNew = false;
+                }
+            }
+
+            foreach($RawData as $item)
+            {
+                $rq14Set = $item->rq14;
+                try {
+                    $rq14Set = explode(',', $rq14Set);
+                } catch (\Throwable $th) {}
+                
+                $rq14IntSet = array();
+                foreach ($rq14Set as $rq14) 
+                {
+                    array_push($rq14IntSet, intval($rq14));
+                }
+
+                $theMaxVal = max($rq14IntSet);
+                if ($theMaxVal <= 999) {
+                    $HighScoreNum++;
+                }
+            }
+
+            if ($needNew) {
+                $SPersonCasesObj = new SPersonCases();
+                $SPersonCasesObj->SPerson = $s_person;
+                $SPersonCasesObj->SUM_CASE = $HighScoreNum;
+                array_push($S_PersonQueue, $SPersonCasesObj);
+            }
+        }
+
+        dd($S_PersonQueue);
 
         // $Table = $this->FormulaService->getSummaryTable03(
         //     $D1, 
