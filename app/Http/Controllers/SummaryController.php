@@ -418,7 +418,7 @@ class SummaryController extends Controller
         $D2 = date('Y-m-t', strtotime($NowYear.'-'.($EndMonth).'-01 00:00:00'));
         $D2 = date('Y-m-d', strtotime($D2. ' + 1 days'));
 
-        $DistinctTable = $this->FormulaService->getDistinctSPerson(
+        $DistinctSPersonTable = $this->FormulaService->getDistinctSPerson(
             $D1, 
             $D2, 
             $req->Region,
