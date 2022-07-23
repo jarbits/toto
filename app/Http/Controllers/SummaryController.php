@@ -472,9 +472,7 @@ class SummaryController extends Controller
             ->where('start_time','>=',$D0)
             ->where('end_time','<',$D2)
             ->get();
-
-            dd($PersonDataACC);
-
+            
             foreach($PersonDataACC as $item)
             {
                 $rq14Set = $item->rq14;
