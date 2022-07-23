@@ -462,6 +462,7 @@ class SummaryController extends Controller
                 }
             }
 
+            dd($PersonData);
             if ($needNew) {
                 $SPersonCasesObj = new SPersonCases();
                 $SPersonCasesObj->SPerson = $PersonData->s_person;
