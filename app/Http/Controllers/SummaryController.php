@@ -455,9 +455,7 @@ class SummaryController extends Controller
             foreach($PersonData as $item)
             {
                 $rq14Set = $item->rq14;
-                try {
-                    $rq14Set = explode(',', $rq14Set);
-                } catch (\Throwable $th) {}
+                $rq14Set = explode(',', $rq14Set);
                 
                 // $rq14IntSet = array();
                 $flag = true;
