@@ -52,8 +52,6 @@ class FormulaService
             }
             return $qStr;
         }
-
-        
     }
     /**
      * 取得低分數量SET

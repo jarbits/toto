@@ -99,11 +99,7 @@ class SummaryController extends Controller
                 }
             }
 
-
             array_push($LowScoreVec, count($LowScore) );
-            // array_push($CommentsVec, count($Comments) );
-            // array_push($NoCommentsVec, count($NoComments) );
-            // array_push($HighScoreVec, count($HighScore) );
             array_push($CommentsVec, $CommentsNum );
             array_push($NoCommentsVec, $NoCommentsNum );
             array_push($HighScoreVec, $HighScoreNum );
@@ -402,7 +398,7 @@ class SummaryController extends Controller
         $D2 = date('Y-m-t', strtotime($NowYear.'-'.($EndMonth).'-01 00:00:00'));
         $D2 = date('Y-m-d', strtotime($D2. ' + 1 days'));
 
-        $Table = $this->FormulaService->getSummaryTable03(
+        $DistinctTable = $this->FormulaService->getDistinctMemName(
             $D1, 
             $D2, 
             $req->Region,
@@ -410,27 +406,15 @@ class SummaryController extends Controller
             $req->Person
         );
 
-        $QRows = array();
-        foreach($Table as $item)
-        {
-            $rq14Set = $item->rq14;
-            try {
-                $rq14Set = explode(',', $rq14Set);
-            } catch (\Throwable $th) {}
-            
-            $rq14IntSet = array();
-            foreach ($rq14Set as $rq14) 
-            {
-                array_push($rq14IntSet, intval($rq14));
-            }
+        dd($DistinctTable);
 
-            $theMaxVal = max($rq14IntSet);
-            if ($theMaxVal <= 999) {
-                array_push($QRows, $item);
-            }
-        }
-
-        dd($QRows);
+        // $Table = $this->FormulaService->getSummaryTable03(
+        //     $D1, 
+        //     $D2, 
+        //     $req->Region,
+        //     $req->Category,
+        //     $req->Person
+        // );
                         
         return json_encode($Table, JSON_UNESCAPED_UNICODE);
     }
