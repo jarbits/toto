@@ -467,7 +467,7 @@ class SummaryController extends Controller
 
                 if ($flag == true) {
                     $HighScoreNum++;
-                    var_dump($item);
+                    var_dump($item->opinion_category);
                 }
 
                 if (intval($item->q1) > 4) {
