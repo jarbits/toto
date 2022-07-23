@@ -1558,7 +1558,6 @@ class FormulaService
         OR T.cklow_score LIKE '%Q12%'
         OR T.cklow_score LIKE '%Q13%')
 
-        WHERE 1=1
         ".$this->advanceSearch($Region, $Category, $Person)."
         AND T.start_time >= '".$StartTime."' 
         AND T.end_time < '".$EndTime."'
