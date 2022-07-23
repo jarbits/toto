@@ -1227,7 +1227,9 @@ class FormulaService
         SELECT
         DISTINCT(
             T.s_person
-        ) AS s_person
+        ) AS s_person,
+        SUBSTRING(T.s_person, 1, LOCATE('-', T.s_person)-1) AS Distribution,
+        SUBSTRING(T.s_person, LOCATE('-', T.s_person)+1, LENGTH(T.s_person) ) AS Sell
         FROM rawsurvey AS T
         WHERE 1=1
         AND NOT (T.cklow_score LIKE '%Q1%'
