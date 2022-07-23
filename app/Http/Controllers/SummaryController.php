@@ -478,23 +478,14 @@ class SummaryController extends Controller
                 }
             }
 
-            // public $STATISFY_RATE = 0;
-            // public $MOVING_RATE = 0;
-            // public $NPS_RATE = 0;
-            // $STATISFY_NUM = 0;
-            // $MovingNum = 0;
-            // $Q13_0_6_NUM = 0;
-            // $Q13_7_8_NUM = 0;
-            // $Q13Big9_NUM = 0;
-
             $SPersonCasesObj = new SPersonCases();
             $SPersonCasesObj->SPerson = $RawData->s_person;
             $SPersonCasesObj->Distribution = $RawData->Distribution;
             $SPersonCasesObj->Sell = $RawData->Sell;
             $SPersonCasesObj->SUM_CASE = $HighScoreNum;
-            $SPersonCasesObj->STATISFY_RATE = round($STATISFY_NUM/$HighScoreNum, 2);
-            $SPersonCasesObj->MOVING_RATE = round($MovingNum/$HighScoreNum, 2);
-            $SPersonCasesObj->NPS_RATE = abs(round($Q13Big9_NUM/$HighScoreNum, 2) - round($Q13_0_6_NUM/$HighScoreNum, 2));
+            $SPersonCasesObj->STATISFY_RATE = round($STATISFY_NUM/count($PersonData), 2);
+            $SPersonCasesObj->MOVING_RATE = round($MovingNum/count($PersonData), 2);
+            $SPersonCasesObj->NPS_RATE = abs(round($Q13Big9_NUM/count($PersonData), 2) - round($Q13_0_6_NUM/count($PersonData), 2));
             array_push($S_PersonQueue, $SPersonCasesObj);
         }
 
