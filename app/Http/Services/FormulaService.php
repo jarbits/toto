@@ -1444,102 +1444,102 @@ class FormulaService
     //讚美分析-彙總分析
     public function getSummaryTable03($StartTime, $EndTime, $Region=null, $Category=null, $Person=null)
     {
-        $Set = DB::select("
-        SELECT
-            @i := @i + 1 AS Row_NO,
-            RAW.Distribution,
-            RAW.Sell,
-            RAW.SUM_CASE,
-            RAW.ACC_CASE,
-            ROUND(RAW.STATISFY_NUM/RAW.SUM_CASE, 2) AS STATISFY_RATE,
-            ROUND(RAW.MOVING_NUM/RAW.SUM_CASE, 2) AS MOVING_RATE,
-            (
-                ROUND(RAW.Q13Big9_NUM/RAW.SUM_CASE, 2) - ROUND(RAW.Q13_0_6_NUM/RAW.SUM_CASE, 2)
-            ) AS NPS_RATE
-        FROM
-        (
-        SELECT  
-        SUBSTRING(T.s_person, 1, LOCATE('-', T.s_person)-1) AS Distribution,
-        SUBSTRING(T.s_person, LOCATE('-', T.s_person)+1, LENGTH(T.s_person) ) AS Sell,
-        SUM(
-            CASE 
-                WHEN T.rq14 < 999 THEN
-                    1
-                ELSE
-                    0
-            END
-        ) AS SUM_CASE,
-        Q.ACC_CASE,
-        SUM(
-            CASE 
-                WHEN T.q1 > 4 THEN
-                    1
-                ELSE
-                    0
-            END
-        ) AS STATISFY_NUM,
-        SUM(
-            CASE 
-                WHEN T.q1 = 5 THEN
-                    1
-                ELSE
-                    0
-            END
-        ) AS MOVING_NUM,
-        SUM(
-            CASE 
-                WHEN T.q13 >= 0 AND T.q13 <= 6 THEN
-                    1
-                ELSE
-                    0
-            END
-        ) AS Q13_0_6_NUM,
-        SUM(
-            CASE 
-                WHEN T.q13 >= 7 AND T.q13 <= 8 THEN
-                    1
-                ELSE
-                    0
-            END
-        ) AS Q13_7_8_NUM,
-        SUM(
-            CASE 
-                WHEN T.q13 >= 9 THEN
-                    1
-                ELSE
-                    0
-            END
-        ) AS Q13Big9_NUM
+        // $Set = DB::select("
+        // SELECT
+        //     @i := @i + 1 AS Row_NO,
+        //     RAW.Distribution,
+        //     RAW.Sell,
+        //     RAW.SUM_CASE,
+        //     RAW.ACC_CASE,
+        //     ROUND(RAW.STATISFY_NUM/RAW.SUM_CASE, 2) AS STATISFY_RATE,
+        //     ROUND(RAW.MOVING_NUM/RAW.SUM_CASE, 2) AS MOVING_RATE,
+        //     (
+        //         ROUND(RAW.Q13Big9_NUM/RAW.SUM_CASE, 2) - ROUND(RAW.Q13_0_6_NUM/RAW.SUM_CASE, 2)
+        //     ) AS NPS_RATE
+        // FROM
+        // (
+        // SELECT  
+        // SUBSTRING(T.s_person, 1, LOCATE('-', T.s_person)-1) AS Distribution,
+        // SUBSTRING(T.s_person, LOCATE('-', T.s_person)+1, LENGTH(T.s_person) ) AS Sell,
+        // SUM(
+        //     CASE 
+        //         WHEN T.rq14 < 999 THEN
+        //             1
+        //         ELSE
+        //             0
+        //     END
+        // ) AS SUM_CASE,
+        // Q.ACC_CASE,
+        // SUM(
+        //     CASE 
+        //         WHEN T.q1 > 4 THEN
+        //             1
+        //         ELSE
+        //             0
+        //     END
+        // ) AS STATISFY_NUM,
+        // SUM(
+        //     CASE 
+        //         WHEN T.q1 = 5 THEN
+        //             1
+        //         ELSE
+        //             0
+        //     END
+        // ) AS MOVING_NUM,
+        // SUM(
+        //     CASE 
+        //         WHEN T.q13 >= 0 AND T.q13 <= 6 THEN
+        //             1
+        //         ELSE
+        //             0
+        //     END
+        // ) AS Q13_0_6_NUM,
+        // SUM(
+        //     CASE 
+        //         WHEN T.q13 >= 7 AND T.q13 <= 8 THEN
+        //             1
+        //         ELSE
+        //             0
+        //     END
+        // ) AS Q13_7_8_NUM,
+        // SUM(
+        //     CASE 
+        //         WHEN T.q13 >= 9 THEN
+        //             1
+        //         ELSE
+        //             0
+        //     END
+        // ) AS Q13Big9_NUM
 
-        FROM toto.rawsurvey AS T
+        // FROM toto.rawsurvey AS T
 
-        LEFT JOIN (
-            SELECT 
-            Q.s_person,
-            SUM(
-                CASE 
-                    WHEN Q.rq14 < 999 THEN
-                        1
-                    ELSE
-                        0
-                END
-            ) AS ACC_CASE
-            FROM toto.rawsurvey AS Q
-            GROUP BY Q.s_person
-        ) AS Q
-        ON T.s_person = Q.s_person
+        // LEFT JOIN (
+        //     SELECT 
+        //     Q.s_person,
+        //     SUM(
+        //         CASE 
+        //             WHEN Q.rq14 < 999 THEN
+        //                 1
+        //             ELSE
+        //                 0
+        //         END
+        //     ) AS ACC_CASE
+        //     FROM toto.rawsurvey AS Q
+        //     GROUP BY Q.s_person
+        // ) AS Q
+        // ON T.s_person = Q.s_person
 
-        WHERE 1=1
-        ".$this->advanceSearch($Region, $Category, $Person)."
-        AND T.start_time >= '".$StartTime."' 
-        AND T.end_time < '".$EndTime."'
+        // WHERE 1=1
+        // ".$this->advanceSearch($Region, $Category, $Person)."
+        // AND T.start_time >= '".$StartTime."' 
+        // AND T.end_time < '".$EndTime."'
 
-        GROUP BY T.s_person, Q.ACC_CASE
-        ORDER BY SUM_CASE DESC
+        // GROUP BY T.s_person, Q.ACC_CASE
+        // ORDER BY SUM_CASE DESC
         
-        ) AS RAW, (select @i := 0) temp
+        // ) AS RAW, (select @i := 0) temp
 
-        ");
+        // ");
 
         $Set = DB::select("
         SELECT
