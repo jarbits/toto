@@ -430,6 +430,7 @@ class SummaryController extends Controller
 
         foreach($DistinctSPersonTable as $RawData)
         {
+            dd($RawData);
             $HighScoreNum = 0;
             $RawData = RawSurvey::where('s_person', $RawData->s_person)
             ->where('start_time','>=',$D1)
