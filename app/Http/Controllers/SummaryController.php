@@ -489,7 +489,6 @@ class SummaryController extends Controller
             );
 
             $CommentsNum = 0;   //1000 ~ 9999
-
             foreach($NotLowScoreSet as $item)
             {
                 $rq14Set = $item->rq14;
@@ -509,7 +508,6 @@ class SummaryController extends Controller
                 }
             }
 
-            // array_push($CommentsVec, count($Comments) );
             array_push($CommentsVec, $CommentsNum );
             array_push($Calender, date('Y/m', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00')));
             $NowMonth++;
@@ -635,7 +633,7 @@ class SummaryController extends Controller
             'datasets' => [
                 'type' => 'line',
                 'label' => '無意見',
-                'data' => $CommentsVec
+                'data' => $NoCommentsVec
             ]
         ];            
         return json_encode($Data, JSON_UNESCAPED_UNICODE);
