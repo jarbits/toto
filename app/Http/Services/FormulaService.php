@@ -1559,6 +1559,7 @@ class FormulaService
         Result.acceptance_code,
         Result.start_time,
         Result.created_at,
+        Result.s_person2,
         Result.Distribution,
         Result.Sell,
         CONCAT(Result.Q1,Result.Q2,
@@ -1571,6 +1572,7 @@ class FormulaService
         FROM
         (
         SELECT 
+        T.s_person2,
         T.acceptance_code,
         T.start_time,
         T.created_at,
