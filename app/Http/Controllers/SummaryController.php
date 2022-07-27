@@ -1010,11 +1010,18 @@ class SummaryController extends Controller
             
             array_push($ResultVec, $C1);
             array_push($ResultVec, $C2);
-            array_push($ResultVec, $C3);
-            array_push($ResultVec, $C4);
-            array_push($ResultVec, $C5);
-            array_push($ResultVec, $C6);
+            // array_push($ResultVec, $C3);
+            // array_push($ResultVec, $C4);
+            // array_push($ResultVec, $C5);
+            // array_push($ResultVec, $C6);
+            // array_push($ResultVec, $C7);
+
             array_push($ResultVec, $C7);
+            array_push($ResultVec, $C6);
+            array_push($ResultVec, $C5);
+            array_push($ResultVec, $C4);
+            array_push($ResultVec, $C3);
+
             array_push($ResultVec, $C8);
             array_push($ResultVec, $C9);
             array_push($ResultVec, $C10);
