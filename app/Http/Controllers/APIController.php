@@ -17,6 +17,20 @@ class APIController extends Controller
         $this->FormulaService = new FormulaService();
     }
 
+    public function getAllData4Excel(Request $req)
+    {
+        $NowYear = date('Y', strtotime($req->StartTime));
+        $NowMonth = date('m', strtotime($req->StartTime));
+        $EndMonth = date('m', strtotime($req->EndTime));
+        
+        $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
+        $D2 = date('Y-m-t', strtotime($NowYear.'-'.($EndMonth).'-01 00:00:00'));
+
+        $Data = RawSurvey::where('start_time', '>=', $D1)->where('end_time', '<=', $D2)->get();
+
+        return json_encode($Data, JSON_UNESCAPED_UNICODE);
+    }
+
     public function getLastTime()
     {
         $row = DB::table('rawsurvey')->orderBy('start_time', 'desc')->first();
