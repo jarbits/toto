@@ -1,6 +1,18 @@
 <?php
 
 return [
+    'driver'     => 'mailgun',
+    'host'       => 'smtp.mailgun.org',
+    'port'       => 587,
+    'from'       => ['address' => 'king810406@gmail.com', 'name' => 'Ben'],
+    'encryption' => 'tls',
+    'username'   => 'Emailking810406@gmail.com',
+    'password'   => 'cj;6jo6xup6',
+    'sendmail'   => '/usr/sbin/sendmail -bs',
+    'pretend'    => false,
+  ];
+
+return [
 
     /*
     |--------------------------------------------------------------------------
