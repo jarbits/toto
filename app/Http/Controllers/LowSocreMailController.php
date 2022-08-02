@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\LowScoreMail;
 
 class LowSocreMailController extends Controller
 {
@@ -21,6 +22,6 @@ class LowSocreMailController extends Controller
         // 若要直接檢視模板
         // echo (new Warning($data))->render();die;
  
-        Mail::to($to)->send("HI");
+        Mail::to($to)->send(new LowScoreMail($params));
     }
 }

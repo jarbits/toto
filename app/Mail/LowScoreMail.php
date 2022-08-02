@@ -11,14 +11,16 @@ class LowScoreMail extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $params;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($params)
     {
-        //
+        $this->params = $params;
     }
 
     /**
@@ -28,6 +30,11 @@ class LowScoreMail extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        // 透過 with 把參數指定給 view
+        return $this->subject("警告訊息")
+            ->view('emails.warning')
+            ->with([
+                'params' => $this->params,
+            ]);
     }
 }
