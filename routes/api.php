@@ -21,10 +21,14 @@ Route::group([
     'middleware' => ['api', 'cors'],
 ], function ($router) {
     ###首頁API###
+
     Route::post('/update-sendnum', 'SendNumController@update');
     Route::post('/get-sendnum', 'SendNumController@get');
     Route::post('/update-fixnum', 'FixNumController@update');
     Route::post('/get-fixnum', 'FixNumController@get');
+
+    Route::get('/getall4excel', 'APIController@getAllData4Excel');
+
     Route::post('/get-last-time', 'APIController@getLastTime'); //取得最新一筆DATA的日期
     Route::post('/get-post-num', 'APIController@getPostNum'); //取得發送數
     Route::post('/get-resp-num', 'APIController@getRespNum'); //取得回覆數
