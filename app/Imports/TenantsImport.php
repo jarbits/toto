@@ -50,16 +50,16 @@ class TenantsImport implements ToModel,WithStartRow
         //     Mail::to($to)->queue(new LowScoreMail($params));
         // }
 
-        $to = collect([
-            ['name' => 'Ben', 'email' => 'benhuang0857@gmail.com']
-        ]);
+        // $to = collect([
+        //     ['name' => 'Ben', 'email' => 'benhuang0857@gmail.com']
+        // ]);
     
-        // 提供給模板的參數
-        $params = [
-            'say' => '您好，這是一段測試訊息的內容'.$row[0]
-        ];
+        // // 提供給模板的參數
+        // $params = [
+        //     'say' => '您好，這是一段測試訊息的內容'.$row[0]
+        // ];
 
-        Mail::to($to)->queue(new LowScoreMail($params));
+        // Mail::to($to)->queue(new LowScoreMail($params));
 
         if ($rawData != null) {
             $rawData->respondent_serial = $row[0];
