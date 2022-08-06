@@ -15,7 +15,7 @@ class TenantsImport implements ToModel,WithStartRow
 
     public function startRow(): int
     {
-        return 2;
+        return 0;
     }
     /**
     * @param array $row
