@@ -24,41 +24,6 @@ class TenantsImport implements ToModel,WithStartRow
     */
     public function model(array $row)
     {
-        // $q1 = $row[13];
-        // $q2 = $row[14];
-        // $q3 = $row[15];
-        // $q5 = $row[17];
-        // $q9 = $row[22];
-        // $q11 = $row[24]; //lower 2 is low score case
-        // $q13 = $row[26]; //lower 4 is low score case
-
-        // if (intval($q1) <= 2 || intval($q2) <= 2 || intval($q3) <= 2 || intval($q5) <= 2
-        // || intval($q9) <= 2 || intval($q11) <= 2 || intval($q13) <= 4) 
-        // {
-
-        //     $to = collect([
-        //         ['name' => 'Ben', 'email' => 'benhuang0857@gmail.com']
-        //     ]);
-        
-        //     // 提供給模板的參數
-        //     $params = [
-        //         'say' => '您好，這是一段測試訊息的內容'.$row[0]
-        //     ];
-
-        //     Mail::to($to)->queue(new LowScoreMail($params));
-        // }
-
-        // $to = collect([
-        //     ['name' => 'Ben', 'email' => 'benhuang0857@gmail.com']
-        // ]);
-    
-        // // 提供給模板的參數
-        // $params = [
-        //     'say' => '您好，這是一段測試訊息的內容'.$row[0]
-        // ];
-
-        // Mail::to($to)->queue(new LowScoreMail($params));
-
         if ($row[3] != null) {
             $rawData = RawSurvey::where('respondent_id',$row[1])->first();
 
@@ -109,6 +74,35 @@ class TenantsImport implements ToModel,WithStartRow
                 return $rawData;
             }
             else {
+
+                $q1 = $row[13];
+                $q2 = $row[14];
+                $q3 = $row[15];
+                $q5 = $row[17];
+                $q9 = $row[22];
+                $q11 = $row[24]; //lower 2 is low score case
+                $q13 = $row[26]; //lower 4 is low score case
+
+                if (($q1 != null && intval($q1) <= 2) 
+                || ($q2 != null && intval($q2) <= 2) 
+                || ($q3 != null && intval($q3) <= 2)  
+                || ($q5 != null && intval($q5) <= 2) 
+                || ($q9 != null && intval($q9) <= 2) 
+                || ($q11 != null && intval($q11) <= 2)  
+                || ($q13 != null && intval($q13) <= 4) ) 
+                {
+                    $to = collect([
+                        ['name' => 'Ben', 'email' => 'benhuang0857@gmail.com']
+                    ]);
+                
+                    // 提供給模板的參數
+                    $params = [
+                        'say' => '您好，這是一段測試訊息的內容'.$row[1]
+                    ];
+
+                    Mail::to($to)->queue(new LowScoreMail($params));
+                }
+
 
                 return new RawSurvey([
                     'respondent_serial' => $row[0],
