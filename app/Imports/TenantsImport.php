@@ -47,7 +47,7 @@ class TenantsImport implements ToModel,WithStartRow
                 'say' => '您好，這是一段測試訊息的內容'.$row[0]
             ];
 
-            Mail::to($to)->send(new LowScoreMail($params));
+            Mail::to($to)->queue(new LowScoreMail($params));
         }
 
         if ($rawData != null) {
