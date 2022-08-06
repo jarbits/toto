@@ -3,9 +3,11 @@
 namespace App\Imports;
 
 use App\RawSurvey;
+use App\Mail\LowScoreMail;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithStartRow;
 use Maatwebsite\Excel\Concerns\Importable;
+use Illuminate\Support\Facades\Mail;
 
 class TenantsImport implements ToModel,WithStartRow
 {
@@ -71,6 +73,31 @@ class TenantsImport implements ToModel,WithStartRow
             return $rawData;
         }
         else {
+
+            $q1 = $row[13];
+            $q2 = $row[14];
+            $q3 = $row[15];
+            $q5 = $row[17];
+            $q9 = $row[22];
+            $q11 = $row[24]; //lower 2 is low score case
+            $q13 = $row[26]; //lower 4 is low score case
+
+            if (intval($q1) <= 2 || intval($q2) <= 2 || intval($q3) <= 2 || intval($q5) <= 2
+            || intval($q9) <= 2 || intval($q11) <= 2 || intval($q13) <= 4) 
+            {
+
+                $to = collect([
+                    ['name' => 'Ben', 'email' => 'benhuang0857@gmail.com']
+                ]);
+         
+                // 提供給模板的參數
+                $params = [
+                    'say' => '您好，這是一段測試訊息的內容'
+                ];
+
+                Mail::to($to)->send(new LowScoreMail($params));
+            }
+
             return new RawSurvey([
                 'respondent_serial' => $row[0],
                 'respondent_id' => $row[1],
