@@ -59,7 +59,7 @@ class TenantsImport implements ToModel,WithStartRow
 
         // Mail::to($to)->queue(new LowScoreMail($params));
 
-        if (!empty($row)) {
+        if ($row[3] != null) {
             $rawData = RawSurvey::where('respondent_id',$row[1])->first();
 
             if ($rawData != null) {
