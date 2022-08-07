@@ -1,4 +1,4 @@
-<table>
+<table border=1>
     <tr>
         <th>受理編號</th>
         <th>發送日期</th>

@@ -102,11 +102,11 @@ class TenantsImport implements ToModel,WithStartRow
                         't3' => now(),
                         't4' => $row[37],
                         't5' => $row[37],
-                        't6' => $row[31],
-                        't7' => '這不適合放這邊',
-                        't8' => '這不適合放這邊',
-                        't9' => $row[31],
-                        't10' => $row[31]
+                        't6' => '未知對應',
+                        't7' => '未知對應',
+                        't8' => '未知對應',
+                        't9' => $row[30],
+                        't10' => $row[27]
                     ];
 
                     Mail::to($to)->queue(new LowScoreMail($params));
