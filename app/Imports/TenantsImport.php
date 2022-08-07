@@ -105,6 +105,7 @@ class TenantsImport implements ToModel,WithStartRow
                         't6' => $row[31],
                         't7' => '這不適合放這邊',
                         't8' => '這不適合放這邊',
+                        't9' => $row[31],
                         't10' => $row[31]
                     ];
 
