@@ -1,6 +1,3 @@
-<p>
-    {{ $params['say'] }}
-</p>
 
 <table>
     <tr>
@@ -16,15 +13,15 @@
         <th>客戶意見</th>
     </tr>
     <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td>{{ $params['t1'] }}</td>
+        <td>{{ $params['t2'] }}</td>
+        <td>{{ $params['t3'] }}</td>
+        <td>{{ $params['t4'] }}</td>
+        <td>{{ $params['t5'] }}</td>
+        <td>{{ $params['t6'] }}</td>
+        <td>{{ $params['t7'] }}</td>
+        <td>{{ $params['t8'] }}</td>
+        <td>{{ $params['t9'] }}</td>
+        <td>{{ $params['t10'] }}</td>
     </tr>
 </table>
