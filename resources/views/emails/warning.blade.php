@@ -1,3 +1,30 @@
 <p>
     {{ $params['say'] }}
 </p>
+
+<table>
+    <tr>
+        <th>受理編號</th>
+        <th>發送日期</th>
+        <th>示警日期</th>
+        <th>客服中心</th>
+        <th>售服員</th>
+        <th>客訴項目</th>
+        <th>最低評分</th>
+        <th>整體評分</th>
+        <th>推薦意願</th>
+        <th>客戶意見</th>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+</table>

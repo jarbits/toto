@@ -97,7 +97,15 @@ class TenantsImport implements ToModel,WithStartRow
                 
                     // 提供給模板的參數
                     $params = [
-                        'say' => '您好，這是一段測試訊息的內容'.$row[1]
+                        't1' => $row[1],
+                        't2' => $row[3],
+                        't3' => now(),
+                        't4' => $row[37],
+                        't5' => $row[37],
+                        't6' => $row[31],
+                        't7' => '這不適合放這邊',
+                        't8' => '這不適合放這邊',
+                        't10' => $row[31]
                     ];
 
                     Mail::to($to)->queue(new LowScoreMail($params));
