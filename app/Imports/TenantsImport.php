@@ -128,7 +128,7 @@ class TenantsImport implements ToModel,WithStartRow
                     $user = Mail2User::where('s_region', $row[34])->first();
 
                     $to = collect([
-                        ['name' => "'".$user->name."'", 'email' => "'".$user->email."'"]
+                        ['name' => "'".$user->name."'", 'email' => $user->email]
                     ]);
                 
                     // 提供給模板的參數
