@@ -93,7 +93,10 @@ class TenantsImport implements ToModel,WithStartRow
                 || ($q13 != null && intval($q13) <= 4) ) 
                 {
 
-                    $users = Mail2User::where('s_region', '北區')->get();
+                    /*
+                    if ($row[34] != null) 
+                    {
+                        $users = Mail2User::where('s_region', $row[34])->get();
                         if ($users != null) {
                             foreach ($users as $user) {
                                 
@@ -119,6 +122,28 @@ class TenantsImport implements ToModel,WithStartRow
 
                             }
                         }
+                    }
+                    */
+
+                    $to = collect([
+                        ['name' => 'Ben', 'email' => 'benhuang0857@gmail.com']
+                    ]);
+                
+                    // 提供給模板的參數
+                    $params = [
+                        't1' => $row[1],
+                        't2' => $row[3],
+                        't3' => now(),
+                        't4' => $row[37],
+                        't5' => $row[37],
+                        't6' => '不建議放',
+                        't7' => $row[13],
+                        't8' => $row[26],
+                        't9' => $row[30],
+                        't10' => $row[27]
+                    ];
+
+                    Mail::to($to)->queue(new LowScoreMail($params));
 
                 }
 
