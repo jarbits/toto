@@ -110,9 +110,9 @@ class TenantsImport implements ToModel,WithStartRow
                                 't4' => $row[37],
                                 't5' => $row[37],
                                 't6' => '不建議放',
-                                't7' => $row[13],
-                                't8' => $row[26],
-                                't9' => $user->name,
+                                't7' => min(intval($q1), intval($q3), intval($q5), intval($q9), intval($q11), intval($q13)),
+                                't8' => $row[13],
+                                't9' => $row[26],
                                 't10' => $row[27]
                             ];
         
