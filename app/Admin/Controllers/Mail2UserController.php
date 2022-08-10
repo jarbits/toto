@@ -8,6 +8,8 @@ use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 
+use DB;
+
 class Mail2UserController extends AdminController
 {
     /**
