@@ -125,6 +125,8 @@ class TenantsImport implements ToModel,WithStartRow
                     }
                     */
 
+                    $user = Mail2User::where('s_region', $row[34])->first();
+
                     $to = collect([
                         ['name' => 'Ben', 'email' => 'benhuang0857@gmail.com']
                     ]);
@@ -139,7 +141,7 @@ class TenantsImport implements ToModel,WithStartRow
                         't6' => '不建議放',
                         't7' => $row[13],
                         't8' => $row[26],
-                        't9' => $row[34],
+                        't9' => $user->name,
                         't10' => $row[27]
                     ];
 
