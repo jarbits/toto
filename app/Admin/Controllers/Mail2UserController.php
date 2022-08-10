@@ -62,8 +62,14 @@ class Mail2UserController extends AdminController
     protected function form()
     {
         $form = new Form(new Mail2User());
+        $_users = DB::table('rawsurvey')->select('s_region')->distinct()->get();
 
-        $form->text('s_region', __('S region'));
+        $_s_regions = array();
+        foreach($_users as $item)
+        {
+            $_s_regions[$item->s_region] = $item->s_region;
+        }
+        $form->select('s_region', 'S region')->options($_s_regions);
         $form->text('name', __('Name'));
 
         return $form;
