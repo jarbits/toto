@@ -26,7 +26,11 @@ class Mail2UserController extends AdminController
     {
         $grid = new Grid(new Mail2User());
 
-
+        $grid->column('id', __('Id'));
+        $grid->column('s_region', __('S region'));
+        $grid->column('name', __('Name'));
+        $grid->column('created_at', __('Created at'));
+        $grid->column('updated_at', __('Updated at'));
 
         return $grid;
     }
@@ -41,7 +45,11 @@ class Mail2UserController extends AdminController
     {
         $show = new Show(Mail2User::findOrFail($id));
 
-
+        $show->field('id', __('Id'));
+        $show->field('s_region', __('S region'));
+        $show->field('name', __('Name'));
+        $show->field('created_at', __('Created at'));
+        $show->field('updated_at', __('Updated at'));
 
         return $show;
     }
@@ -55,7 +63,8 @@ class Mail2UserController extends AdminController
     {
         $form = new Form(new Mail2User());
 
-
+        $form->text('s_region', __('S region'));
+        $form->text('name', __('Name'));
 
         return $form;
     }
