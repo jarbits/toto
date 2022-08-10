@@ -103,8 +103,8 @@ class TenantsImport implements ToModel,WithStartRow
                         't4' => $row[37],
                         't5' => $row[37],
                         't6' => '未知對應',
-                        't7' => '未知對應',
-                        't8' => '未知對應',
+                        't7' => $row[13],
+                        't8' => $row[26],
                         't9' => $row[30],
                         't10' => $row[27]
                     ];

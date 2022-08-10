@@ -13,4 +13,5 @@ Route::group([
 
     $router->get('/', 'HomeController@index')->name('home');
     $router->resource('raw-surveys', RawSurveyController::class);
+    $router->resource('mail2-users', Mail2UserController::class);
 });
