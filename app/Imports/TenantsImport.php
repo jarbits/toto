@@ -126,7 +126,7 @@ class TenantsImport implements ToModel,WithStartRow
                     */
 
                     $to = collect([
-                        ['name' => 'Ben', 'email' => 'benhuang0857@gmail.com']
+                        ['name' => $row[34], 'email' => 'benhuang0857@gmail.com']
                     ]);
                 
                     // 提供給模板的參數
