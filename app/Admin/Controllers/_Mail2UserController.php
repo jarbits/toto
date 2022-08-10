@@ -31,7 +31,6 @@ class Mail2UserController extends AdminController
         $grid->column('id', __('Id'));
         $grid->column('s_region', __('S region'));
         $grid->column('name', __('Name'));
-        $grid->column('email', __('Email'));
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
 
@@ -51,7 +50,6 @@ class Mail2UserController extends AdminController
         $show->field('id', __('Id'));
         $show->field('s_region', __('S region'));
         $show->field('name', __('Name'));
-        $show->field('email', __('Email'));
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
 
@@ -75,7 +73,6 @@ class Mail2UserController extends AdminController
         }
         $form->select('s_region', 'S region')->options($_s_regions);
         $form->text('name', __('Name'));
-        $form->email('email', __('Email'));
 
         return $form;
     }
