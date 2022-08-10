@@ -93,60 +93,33 @@ class TenantsImport implements ToModel,WithStartRow
                 || ($q13 != null && intval($q13) <= 4) ) 
                 {
 
-                    /*
+                    $user = Mail2User::where('s_region', $row[34])->get();
                     if ($row[34] != null) 
                     {
-                        $users = Mail2User::where('s_region', $row[34])->get();
-                        if ($users != null) {
-                            foreach ($users as $user) {
+                        foreach ($users as $user) {
                                 
-                                $to = collect([
-                                    ['name' => $user->name, 'email' => $user->email]
-                                ]);
-                            
-                                // 提供給模板的參數
-                                $params = [
-                                    't1' => $row[1],
-                                    't2' => $row[3],
-                                    't3' => now(),
-                                    't4' => $row[37],
-                                    't5' => $row[37],
-                                    't6' => '不建議放',
-                                    't7' => $row[13],
-                                    't8' => $row[26],
-                                    't9' => $row[30],
-                                    't10' => $row[27]
-                                ];
-            
-                                Mail::to($to)->queue(new LowScoreMail($params));
+                            $to = collect([
+                                ['name' => "'".$user->name."'", 'email' => $user->email]
+                            ]);
+                        
+                            // 提供給模板的參數
+                            $params = [
+                                't1' => $row[1],
+                                't2' => $row[3],
+                                't3' => now(),
+                                't4' => $row[37],
+                                't5' => $row[37],
+                                't6' => '不建議放',
+                                't7' => $row[13],
+                                't8' => $row[26],
+                                't9' => $user->name,
+                                't10' => $row[27]
+                            ];
+        
+                            Mail::to($to)->queue(new LowScoreMail($params));
 
-                            }
                         }
                     }
-                    */
-
-                    $user = Mail2User::where('s_region', $row[34])->first();
-
-                    $to = collect([
-                        ['name' => "'".$user->name."'", 'email' => $user->email]
-                    ]);
-                
-                    // 提供給模板的參數
-                    $params = [
-                        't1' => $row[1],
-                        't2' => $row[3],
-                        't3' => now(),
-                        't4' => $row[37],
-                        't5' => $row[37],
-                        't6' => '不建議放',
-                        't7' => $row[13],
-                        't8' => $row[26],
-                        't9' => $user->name,
-                        't10' => $row[27]
-                    ];
-
-                    Mail::to($to)->queue(new LowScoreMail($params));
-
                 }
 
 
