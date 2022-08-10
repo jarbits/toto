@@ -93,9 +93,7 @@ class TenantsImport implements ToModel,WithStartRow
                 || ($q13 != null && intval($q13) <= 4) ) 
                 {
 
-                    if ($row[34] != null) 
-                    {
-                        $users = Mail2User::where('s_region', $row[34])->get();
+                    $users = Mail2User::where('s_region', $row[34])->get();
                         if ($users != null) {
                             foreach ($users as $user) {
                                 
@@ -121,7 +119,6 @@ class TenantsImport implements ToModel,WithStartRow
 
                             }
                         }
-                    }
 
                 }
 
