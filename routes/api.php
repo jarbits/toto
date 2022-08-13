@@ -26,7 +26,10 @@ Route::group([
     Route::post('/get-sendnum', 'SendNumController@get');
     Route::post('/update-fixnum', 'FixNumController@update');
     Route::post('/get-fixnum', 'FixNumController@get');
-    Route::post('/import-log', 'ImportLogController@getall');
+
+    Route::get('/get-sendnum', 'SendNumController@get');
+    Route::get('/get-fixnum', 'FixNumController@get');
+    Route::get('/import-log', 'ImportLogController@getall');
 
     Route::get('/getall4excel', 'APIController@getAllData4Excel');
 
