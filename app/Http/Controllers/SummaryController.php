@@ -535,10 +535,12 @@ class SummaryController extends Controller
             }
         }
                         
-        return json_encode([
-            'Num' => $HighScoreNumSumCase, 
-            'Data' => $S_PersonQueue
-        ], JSON_UNESCAPED_UNICODE);
+        // return json_encode([
+        //     'Num' => $HighScoreNumSumCase, 
+        //     'Data' => $S_PersonQueue
+        // ], JSON_UNESCAPED_UNICODE);
+
+        return json_encode($S_PersonQueue, JSON_UNESCAPED_UNICODE);
     }
 
     /**
