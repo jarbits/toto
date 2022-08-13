@@ -124,7 +124,8 @@ class TenantsImport implements ToModel,WithStartRow
                     }
                 }
 
-
+                ++$this->rows;
+                
                 return new RawSurvey([
                     'respondent_serial' => $row[0],
                     'respondent_id' => $row[1],
