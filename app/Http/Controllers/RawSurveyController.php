@@ -49,7 +49,7 @@ class RawSurveyController extends Controller
         $excelArray = Excel::toArray(new TenantsImport, $request->file('file'));
         $importLog = new ImportLog();
         $importLog->user = '系統人員'; // 尚未定義Request playload
-        $importLog->rawdata_num = sizeof($excelArray);
+        $importLog->rawdata_num = count($excelArray);
         $importLog->save();
 
         return json_encode('匯入完成！', JSON_UNESCAPED_UNICODE);
