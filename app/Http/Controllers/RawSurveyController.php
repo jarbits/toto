@@ -45,11 +45,13 @@ class RawSurveyController extends Controller
     public function import(Request $request) 
     {
         $request->file('file');
-        Excel::import(new TenantsImport, $request->file('file'));
-        $excelArray = Excel::toArray(new TenantsImport, $request->file('file'));
+        $import = new TenantsImport();
+        Excel::import($import, $request->file('file'));
+        // $excelArray = Excel::toArray(new TenantsImport, $request->file('file'));
+        
         $importLog = new ImportLog();
         $importLog->user = '系統人員'; // 尚未定義Request playload
-        $importLog->rawdata_num = count($excelArray);
+        $importLog->rawdata_num = count($import->getRowCount());
         $importLog->save();
 
         return json_encode('匯入完成！', JSON_UNESCAPED_UNICODE);
