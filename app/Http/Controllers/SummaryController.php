@@ -25,8 +25,9 @@ class SPersonCases {
     // (
     // ROUND(RAW.Q13Big9_NUM/RAW.SUM_CASE, 2) - ROUND(RAW.Q13_0_6_NUM/RAW.SUM_CASE, 2)
     // ) AS NPS_RATE
-    public $SPerson = '';
+    public $Row_NO = 0;
     public $Distribution = '';
+    public $SPerson = '';
     public $Sell = '';
     public $SUM_CASE = 0;
     public $ACC_CASE = 0;
@@ -499,7 +500,7 @@ class SummaryController extends Controller
             array_push($S_PersonQueue, $SPersonCasesObj);
         }
 
-        foreach ($S_PersonQueue as $CaseData) 
+        foreach ($S_PersonQueue as $key => $CaseData) 
         {
             $_SPerson = $CaseData->SPerson;
             $PersonDataACC = RawSurvey::where('s_person', $_SPerson)
@@ -526,6 +527,7 @@ class SummaryController extends Controller
                 }
             }
 
+            $CaseData->Row_NO = $key;
             $CaseData->ACC_CASE = $HighScoreACCNum;
         }
 
