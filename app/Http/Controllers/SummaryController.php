@@ -527,7 +527,7 @@ class SummaryController extends Controller
                 }
             }
 
-            $CaseData->Row_NO = $key;
+            $CaseData->Row_NO = $key + 1;
             $CaseData->ACC_CASE = $HighScoreACCNum;
         }
 
