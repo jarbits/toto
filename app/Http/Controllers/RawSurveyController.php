@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\RawSurvey;
+use App\ImportLog;
+use Illuminate\Http\Request;
 use App\Imports\TenantsImport;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -45,6 +46,12 @@ class RawSurveyController extends Controller
     {
         $request->file('file');
         Excel::import(new TenantsImport, $request->file('file'));
+        $excelArray = Excel::toArray(new TenantsImport, $request->file('file'));
+        $importLog = new ImportLog();
+        $importLog->user = '系統人員'; // 尚未定義Request playload
+        $importLog->rawdata_num = sizeof($excelArray);
+        $importLog->save();
+
         return json_encode('匯入完成！', JSON_UNESCAPED_UNICODE);
     }
 }

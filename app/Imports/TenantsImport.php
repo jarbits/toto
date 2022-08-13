@@ -4,6 +4,7 @@ namespace App\Imports;
 
 use App\RawSurvey;
 use App\Mail2User;
+use App\ImportLog;
 use App\Mail\LowScoreMail;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithStartRow;
