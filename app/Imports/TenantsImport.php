@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Mail;
 class TenantsImport implements ToModel,WithStartRow
 {
     use Importable;
+    private $rows = 0;
 
     public function startRow(): int
     {
@@ -169,5 +170,10 @@ class TenantsImport implements ToModel,WithStartRow
                 ]);
             }
         }
+    }
+
+    public function getRowCount(): int
+    {
+        return $this->rows;
     }
 }
