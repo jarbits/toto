@@ -116,7 +116,8 @@ class TenantsImport implements ToModel,WithStartRow
                                 't7' => min(intval($q1), intval($q3), intval($q5), intval($q9), intval($q11), intval($q13)),
                                 't8' => $row[13],
                                 't9' => $row[26],
-                                't10' => $row[27]
+                                't10' => $row[27],
+                                's_region' => $row[34],
                             ];
         
                             Mail::to($to)->queue(new LowScoreMail($params));
