@@ -51,7 +51,8 @@ class RawSurveyController extends Controller
 
         $importLog = new ImportLog();
         $importLog->user = '系統人員'; // 尚未定義Request playload
-        $importLog->rawdata_num = $import->getRowCount();
+        // $importLog->rawdata_num = $import->getRowCount();
+        $importLog->rawdata_num = 0;
         $importLog->save();
 
         return json_encode('匯入完成！', JSON_UNESCAPED_UNICODE);
