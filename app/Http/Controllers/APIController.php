@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Services\FormulaService;
 use App\RawSurvey;
+use App\FixNum;
 use DateTime;
 use Carbon\Carbon;
 use DB;
@@ -572,8 +573,10 @@ class APIController extends Controller
                 $req->Category,
                 $req->Person
             );
+
+            $SendNum = FixNum::where('yearmonth', '<=', $D1)->where('yearmonth', '<', $D2)->first();
             
-            $UselessNum = intval($req->SendNum) - count($RawData);
+            $UselessNum = intval($SendNum) - count($RawData);
 
             $LowScore = $this->FormulaService->getLScoreSet(
                 $D1, 
