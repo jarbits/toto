@@ -4,10 +4,10 @@ return [
     'driver'     => 'mailgun',
     'host'       => 'smtp.mailgun.org',
     'port'       => 587,
-    'from'       => ['address' => 'king810406@gmail.com', 'name' => 'Ben'],
+    'from'       => ['address' => 'noreply@mail.statistics-survey.com', 'name' => 'TOTO'],
     'encryption' => 'tls',
-    'username'   => 'Emailking810406@gmail.com',
-    'password'   => 'cj;6jo6xup6',
+    'username'   => 'keith.kuo@i-ewatch.com',
+    'password'   => 'Kuo_6121129',
     'sendmail'   => '/usr/sbin/sendmail -bs',
     'pretend'    => false,
   ];
