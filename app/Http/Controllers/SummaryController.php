@@ -881,15 +881,25 @@ class SummaryController extends Controller
             $FixNum = FixNum::where('yearmonth', '<=', $D1)->where('yearmonth', '<', $D2)->first();
             $SendNum = SendNum::where('yearmonth', '<=', $D1)->where('yearmonth', '<', $D2)->first();
 
-            $C12_value = $FixNum->num; //維修總件數 fixnum
-            $C13_value = $SendNum->num; //簡訊發送件數 smsnum
+            $C12_value = 0; //維修總件數 fixnum
+            $C13_value = 0; //簡訊發送件數 sendnum    
+            
+            $C15_value = 0; //訪問占比
+            $C16_value = 0; //回覆率
 
             $C14_value = $Qs;
 
             $RawSurveyNum = count($Qs);
 
-            $C15_value = round($RawSurveyNum/$FixNum->num, 2); //訪問占比
-            $C16_value = round($RawSurveyNum/$SendNum->num, 2); //回覆率
+            if ($FixNum != null) {
+                $C12_value = $FixNum->num; //維修總件數 fixnum
+                $C15_value = round($RawSurveyNum/$FixNum->num, 2); //訪問占比
+            }
+
+            if ($SendNum != null) {
+                $C13_value = $SendNum->num; //簡訊發送件數 SendNum
+                $C16_value = round($RawSurveyNum/$SendNum->num, 2); //回覆率
+            }
 
             $C1Rate = 0; //滿意度%
             $C2Rate = 0; //感動率%

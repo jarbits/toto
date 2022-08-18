@@ -64,7 +64,12 @@ class APIController extends Controller
         // );
 
         $SendNum = SendNum::where('yearmonth', '<=', $D1)->where('yearmonth', '<', $D2)->first();
-        $SendNum = intval($SendNum->num);
+        
+        $SendNum = 0;
+
+        if ($SendNum != null) {
+            $SendNum = intval($SendNum->num);
+        }
 
         $Data = [
             'value' => $SendNum
