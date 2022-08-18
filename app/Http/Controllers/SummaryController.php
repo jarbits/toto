@@ -544,7 +544,7 @@ class SummaryController extends Controller
         //     'Data' => $S_PersonQueue
         // ], JSON_UNESCAPED_UNICODE);
 
-        return json_encode($S_PersonQueue, JSON_UNESCAPED_UNICODE);
+        return json_encode((array)$S_PersonQueue, JSON_UNESCAPED_UNICODE);
     }
 
     /**
