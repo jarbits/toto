@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Services\FormulaService;
 use App\RawSurvey;
+use App\FixNum;
+use App\SendNum;
 use Carbon\Carbon;
 use DateTime;
 use DB;
