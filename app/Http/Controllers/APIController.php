@@ -576,7 +576,7 @@ class APIController extends Controller
 
             $SendNum = FixNum::where('yearmonth', '<=', $D1)->where('yearmonth', '<', $D2)->first();
             
-            $UselessNum = intval($SendNum) - count($RawData);
+            $UselessNum = intval($SendNum->num) - count($RawData);
 
             $LowScore = $this->FormulaService->getLScoreSet(
                 $D1, 
