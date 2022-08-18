@@ -54,15 +54,19 @@ class APIController extends Controller
         $D2 = date('Y-m-t', strtotime($NowYear.'-'.($EndMonth).'-01 00:00:00'));
         $D2 = date('Y-m-d', strtotime($D2. ' + 1 days'));
 
-        $Qs = $this->FormulaService->getAllQSet(
-            $D1, 
-            $D2, 
-            $req->Region,
-            $req->Category,
-            $req->Person
-        );
+        // $Qs = $this->FormulaService->getAllQSet(
+        //     $D1, 
+        //     $D2, 
+        //     $req->Region,
+        //     $req->Category,
+        //     $req->Person
+        // );
+
+        $SendNum = FixNum::where('yearmonth', '<=', $D1)->where('yearmonth', '<', $D2)->first();
+        $SendNum = intval($SendNum->num);
+
         $Data = [
-            'value' => count($Qs)
+            'value' => $SendNum
         ];
         return json_encode($Data, JSON_UNESCAPED_UNICODE);
     }
