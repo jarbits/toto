@@ -876,15 +876,18 @@ class SummaryController extends Controller
                 $req->Person
             );
 
-            $C12_value = 0; //維修總件數
-            $C13_value = 0; //簡訊發送件數
+            $FixNum = FixNum::where('yearmonth', '<=', $D1)->where('yearmonth', '<', $D2)->first();
+            $SendNum = SendNum::where('yearmonth', '<=', $D1)->where('yearmonth', '<', $D2)->first();
+
+            $C12_value = $FixNum->num; //維修總件數 fixnum
+            $C13_value = $SendNum->num; //簡訊發送件數 smsnum
 
             $C14_value = $Qs;
 
-            $C15_value = 0; //訪問占比
-            $C16_value = 0; //回覆率
-
             $RawSurveyNum = count($Qs);
+
+            $C15_value = round($RawSurveyNum/$FixNum->num, 2); //訪問占比
+            $C16_value = round($RawSurveyNum/$SendNum->num, 2); //回覆率
 
             $C1Rate = 0; //滿意度%
             $C2Rate = 0; //感動率%

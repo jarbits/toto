@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Services\FormulaService;
 use App\RawSurvey;
 use App\FixNum;
+use App\SendNum;
 use DateTime;
 use Carbon\Carbon;
 use DB;
@@ -62,7 +63,7 @@ class APIController extends Controller
         //     $req->Person
         // );
 
-        $SendNum = FixNum::where('yearmonth', '<=', $D1)->where('yearmonth', '<', $D2)->first();
+        $SendNum = SendNum::where('yearmonth', '<=', $D1)->where('yearmonth', '<', $D2)->first();
         $SendNum = intval($SendNum->num);
 
         $Data = [
@@ -578,7 +579,7 @@ class APIController extends Controller
                 $req->Person
             );
 
-            $SendNum = FixNum::where('yearmonth', '<=', $D1)->where('yearmonth', '<', $D2)->first();
+            $SendNum = SendNum::where('yearmonth', '<=', $D1)->where('yearmonth', '<', $D2)->first();
             
             $UselessNum = intval($SendNum->num) - count($RawData);
 
