@@ -31,7 +31,7 @@ class LowScoreMail extends Mailable
     public function build()
     {
         // 透過 with 把參數指定給 view
-        return $this->subject("警告訊息")
+        return $this->subject("低分示警通知")
             ->view('emails.warning')
             ->with([
                 'params' => $this->params,
