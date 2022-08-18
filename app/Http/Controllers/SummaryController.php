@@ -533,18 +533,20 @@ class SummaryController extends Controller
             $CaseData->ACC_CASE = $HighScoreACCNum;
         }
 
-        foreach ($S_PersonQueue as $key => $CaseData) {
-            if ($CaseData->SUM_CASE == 0) {
-                unset($S_PersonQueue[$key]);
-            }
-        }
+        // foreach ($S_PersonQueue as $key => $CaseData) {
+        //     if ($CaseData->SUM_CASE == 0) {
+        //         unset($S_PersonQueue[$key]);
+        //     }
+        // }
                         
         // return json_encode([
         //     'Num' => $HighScoreNumSumCase, 
         //     'Data' => $S_PersonQueue
         // ], JSON_UNESCAPED_UNICODE);
 
-        return json_encode((array)$S_PersonQueue, JSON_UNESCAPED_UNICODE);
+        // $reault
+
+        return json_encode($S_PersonQueue, JSON_UNESCAPED_UNICODE);
     }
 
     /**
