@@ -28,7 +28,7 @@ class APIController extends Controller
         $D1 = date('Y-m-d', strtotime($NowYear.'-'.($NowMonth).'-01 00:00:00'));
         $D2 = date('Y-m-t', strtotime($NowYear.'-'.($EndMonth).'-01 00:00:00'));
 
-        $Data = RawSurvey::where('start_time', '>=', $D1)->where('end_time', '<=', $D2)->get();
+        $Data = RawSurvey::where('start_time', '>=', $D1)->where('end_time', '<', $D2)->get();
 
         return json_encode($Data, JSON_UNESCAPED_UNICODE);
     }
