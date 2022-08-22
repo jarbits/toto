@@ -6,7 +6,7 @@ return [
     'port'       => 587,
     'from'       => ['address' => 'toto@toto.5yuangod.com', 'name' => 'TOTO'],
     'encryption' => 'tls',
-    'username'   => 'king810406',
+    'username'   => 'king810406@gmail.com',
     'password'   => 'cj;6jo6xup6',
     'sendmail'   => '/usr/sbin/sendmail -bs',
     'pretend'    => false,
